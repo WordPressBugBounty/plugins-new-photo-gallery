@@ -4,7 +4,7 @@
 Plugin Name: New Photo Gallery
 Plugin URI: https://awplife.com/wordpress-plugins/photo-gallery-premium/
 Description: new photo gallery plugin with lightbox preview for WordPress
-Version: 1.4.5
+Version: 1.4.6
 Author: A WP Life
 Author URI: https://awplife.com/
 License: GPLv2 or later
@@ -29,7 +29,7 @@ if ( ! class_exists( 'New_Photo_Gallery' ) ) {
 
 		protected function _constants() {
 			// Plugin Version
-			define( 'NPG_VER', '1.4.5' );
+			define( 'NPG_VER', '1.4.6' );
 
 			// Plugin Text Domain
 			define( 'NPG_TXTDM', 'new-photo-gallery' );
