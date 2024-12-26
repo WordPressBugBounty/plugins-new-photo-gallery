@@ -3,8 +3,8 @@ Contributors: awordpresslife, razipathhan, hanif0991, muhammadshahid, fkfaisalkh
 Donate link: https://paypal.me/awplife
 Tags: portfolio gallery, photo gallery, responsive gallery, album gallery, image gallery
 Requires at least: 4.0
-Tested up to: 6.6.2
-Stable tag: 1.4.6
+Tested up to: 6.7.1
+Stable tag: 1.4.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -82,16 +82,11 @@ The responsive photo gallery allows to upload unlimited number of pictures and c
 > #### Photo Gallery Premium Plugin Demo
 
 > * [Photo Gallery Premium](https://awplife.com/demo/photo-gallery-premium/ "Photo Gallery Premium")
-> * [Photo Gallery With Multiple Sizes](https://awplife.com/demo/photo-gallery-premium/sample-page/ "Photo Gallery With Multiple Sizes")
+> * [Load More Gallery](https://awplife.com/demo/photo-gallery-premium/load-more/ "Load More Gallery")
 > * [Column Layout Demo](https://awplife.com/demo/photo-gallery-premium/column-layout-demo/ "Column Layout Demo")
-> * [Fixed Size Light Box Demo](https://awplife.com/demo/photo-gallery-premium/fixed-size-light-box-demo/ "Fixed Size Light Box Demo")
-> * [Transition Effects](https://awplife.com/demo/photo-gallery-premium/transition-effects/ "Transition Effects")
-> * [2D Transitions Effects](https://awplife.com/demo/photo-gallery-premium/2d-transitions-effects/ "2D Transitions Effects")
 > * [Thumbnails Spacing](https://awplife.com/demo/photo-gallery-premium/thumbnails-spacing/ "Thumbnails Spacing")
-> * [Background Color Events](https://awplife.com/demo/photo-gallery-premium/backgroud-color-events/ "Backgroud Color Events")
 > * [Video Gallery](https://awplife.com/demo/photo-gallery-premium/video-gallery/ "Video Gallery")
-> * [Google Map Gallery](https://awplife.com/demo/photo-gallery-premium/google-map-gallery/ "Google Map Gallery")
-> * [Link Gallery](https://awplife.com/demo/photo-gallery-premium/link-gallery/ "Link Gallery")
+> * [Masonry Gallery](https://awplife.com/demo/photo-gallery-premium/masonry-gallery/ "Masonry Gallery")
 
 == Installation ==
 
@@ -180,6 +175,11 @@ https://WordPress.org/support/plugin/new-photo-gallery/
 13. Photo Gallery And Video Gallery Settings Page
 
 == Changelog ==
+
+= 1.4.7 =
+* Bug Fix: Fixed.
+* Testing plugin for wordpress 6.7.1
+* Vimeo video poster fatch
 
 = 1.4.6 =
 * Bug Fix: Fixed.

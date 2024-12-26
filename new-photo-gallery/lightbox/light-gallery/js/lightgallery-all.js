@@ -1,9 +1,9 @@
-/*! lightgallery - v1.6.12 - 2019-02-19
+/*! lightgallery - v1.6.11 - 2018-05-22
 * http://sachinchoolur.github.io/lightGallery/
-* Copyright (c) 2019 Sachin N; Licensed GPLv3 */
-/*! lightgallery - v1.6.12 - 2019-02-19
+* Copyright (c) 2018 Sachin N; Licensed GPLv3 */
+/*! lightgallery - v1.6.11 - 2018-05-22
 * http://sachinchoolur.github.io/lightGallery/
-* Copyright (c) 2019 Sachin N; Licensed GPLv3 */
+* Copyright (c) 2018 Sachin N; Licensed GPLv3 */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module unless amdModuleId is set
@@ -1570,9 +1570,9 @@
 
 }));
 
-/*! lg-fullscreen - v1.1.0 - 2019-02-19
+/*! lg-fullscreen - v1.0.1 - 2016-09-30
 * http://sachinchoolur.github.io/lightGallery
-* Copyright (c) 2019 Sachin N; Licensed GPLv3 */
+* Copyright (c) 2016 Sachin N; Licensed GPLv3 */
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -1580,13 +1580,13 @@
     define(['jquery'], function (a0) {
       return (factory(a0));
     });
-  } else if (typeof module === 'object' && module.exports) {
+  } else if (typeof exports === 'object') {
     // Node. Does not work with strict CommonJS, but
     // only CommonJS-like environments that support module.exports,
     // like Node.
     module.exports = factory(require('jquery'));
   } else {
-    factory(root["jQuery"]);
+    factory(jQuery);
   }
 }(this, function ($) {
 
@@ -1597,15 +1597,6 @@
     var defaults = {
         fullScreen: true
     };
-
-    function isFullScreen() {
-        return (
-            document.fullscreenElement ||
-            document.mozFullScreenElement ||
-            document.webkitFullscreenElement ||
-            document.msFullscreenElement
-        );
-    }
 
     var Fullscreen = function(element) {
 
@@ -1672,10 +1663,11 @@
         });
 
         this.core.$outer.find('.lg-fullscreen').on('click.lg', function() {
-            if (isFullScreen()) {
-                _this.exitFullscreen();
-            } else {
+            if (!document.fullscreenElement &&
+                !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
                 _this.requestFullscreen();
+            } else {
+                _this.exitFullscreen();
             }
         });
 
@@ -1684,9 +1676,7 @@
     Fullscreen.prototype.destroy = function() {
 
         // exit from fullscreen if activated
-        if(isFullScreen()) {
-            this.exitFullscreen();
-        }
+        this.exitFullscreen();
 
         $(document).off('fullscreenchange.lg webkitfullscreenchange.lg mozfullscreenchange.lg MSFullscreenChange.lg');
     };
@@ -1960,32 +1950,47 @@
             var vimeoId = '';
 
             if (isVideo.youtube || isVideo.vimeo || isVideo.dailymotion) {
-                if (isVideo.youtube) {
-                    if (_this.core.s.loadYoutubeThumbnail) {
-                        thumbImg = '//img.youtube.com/vi/' + isVideo.youtube[1] + '/' + _this.core.s.youtubeThumbSize + '.jpg';
-                    } else {
-                        thumbImg = thumb;
-                    }
-                } else if (isVideo.vimeo) {
-                    if (_this.core.s.loadVimeoThumbnail) {
-                        thumbImg = '//i.vimeocdn.com/video/error_' + vimeoErrorThumbSize + '.jpg';
-                        vimeoId = isVideo.vimeo[1];
-                    } else {
-                        thumbImg = thumb;
-                    }
-                } else if (isVideo.dailymotion) {
-                    if (_this.core.s.loadDailymotionThumbnail) {
-                        thumbImg = '//www.dailymotion.com/thumbnail/video/' + isVideo.dailymotion[1];
-                    } else {
-                        thumbImg = thumb;
-                    }
-                }
-            } else {
-                thumbImg = thumb;
-            }
+				if (isVideo.youtube) {
+					if (_this.core.s.loadYoutubeThumbnail) {
+						thumbImg = '//img.youtube.com/vi/' + isVideo.youtube[1] + '/' + _this.core.s.youtubeThumbSize + '.jpg';
+					} else {
+						thumbImg = thumb;
+					}
+				} else if (isVideo.vimeo) {
+					if (_this.core.s.loadVimeoThumbnail) {
+						// Fetch the Vimeo thumbnail dynamically using their API
+						vimeoId = isVideo.vimeo[1];
+						$.ajax({
+							url: `https://vimeo.com/api/v2/video/${vimeoId}.json`,
+							dataType: 'json',
+							async: false, // Wait for the thumbnail to load
+							success: function (data) {
+								if (data && data[0]) {
+									thumbImg = data[0].thumbnail_large; // Or thumbnail_small, thumbnail_medium
+								}
+							},
+							error: function () {
+								console.error('Failed to fetch Vimeo thumbnail');
+								thumbImg = thumb; // Fallback to the default thumbnail
+							}
+						});
+					} else {
+						thumbImg = thumb;
+					}
+				} else if (isVideo.dailymotion) {
+					if (_this.core.s.loadDailymotionThumbnail) {
+						thumbImg = '//www.dailymotion.com/thumbnail/video/' + isVideo.dailymotion[1];
+					} else {
+						thumbImg = thumb;
+					}
+				}
+			} else {
+				thumbImg = thumb;
+			}
 
-            thumbList += '<div data-vimeo-id="' + vimeoId + '" class="lg-thumb-item" style="width:' + _this.core.s.thumbWidth + 'px; height: ' + _this.core.s.thumbHeight + '; margin-right: ' + _this.core.s.thumbMargin + 'px"><img src="' + thumbImg + '" /></div>';
-            vimeoId = '';
+			thumbList += '<div data-vimeo-id="' + (vimeoId || '') + '" class="lg-thumb-item" style="width:' + _this.core.s.thumbWidth + 'px; height: ' + _this.core.s.thumbHeight + '; margin-right: ' + _this.core.s.thumbMargin + 'px"><img src="' + thumbImg + '" /></div>';
+			vimeoId = '';
+
         }
 
         if (_this.core.s.dynamic) {
