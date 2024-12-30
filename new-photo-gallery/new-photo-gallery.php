@@ -4,7 +4,7 @@
 Plugin Name: New Photo Gallery
 Plugin URI: https://awplife.com/wordpress-plugins/photo-gallery-premium/
 Description: new photo gallery plugin with lightbox preview for WordPress
-Version: 1.4.7
+Version: 1.4.8
 Author: A WP Life
 Author URI: https://awplife.com/
 License: GPLv2 or later
@@ -29,7 +29,7 @@ if ( ! class_exists( 'New_Photo_Gallery' ) ) {
 
 		protected function _constants() {
 			// Plugin Version
-			define( 'NPG_VER', '1.4.7' );
+			define( 'NPG_VER', '1.4.8' );
 
 			// Plugin Text Domain
 			define( 'NPG_TXTDM', 'new-photo-gallery' );
@@ -134,8 +134,6 @@ if ( ! class_exists( 'New_Photo_Gallery' ) ) {
 
 		// Adds the photo gallery menus
 		public function _npg_menus() {
-			$docs_menu            = add_submenu_page( 'edit.php?post_type=' . NPG_PLUGIN_SLUG, __( 'Docs', 'new-photo-gallery' ), __( 'Docs', 'new-photo-gallery' ), 'administrator', 'npg-doc-page', array( $this, '_npg_doc_page' ) );
-			$upgrade_premium_menu = add_submenu_page( 'edit.php?post_type=' . NPG_PLUGIN_SLUG, __( 'Upgrade Premium', 'new-photo-gallery' ), __( 'Upgrade Premium', 'new-photo-gallery' ), 'administrator', 'npg-upgrade-premium', array( $this, '_npg_upgrade_page' ) );
 			$themes_menu          = add_submenu_page( 'edit.php?post_type=' . NPG_PLUGIN_SLUG, __( 'Our Themes', 'new-photo-gallery' ), __( 'Our Themes', 'new-photo-gallery' ), 'administrator', 'npg-themes', array( $this, '_npg_theme_page' ) );
 			$plugins_menu         = add_submenu_page( 'edit.php?post_type=' . NPG_PLUGIN_SLUG, __( 'Our Plugins', 'new-photo-gallery' ), __( 'Our Plugins', 'new-photo-gallery' ), 'administrator', 'npg-plugins', array( $this, '_npg_featured_plugins' ) );
 		}
@@ -399,15 +397,6 @@ if ( ! class_exists( 'New_Photo_Gallery' ) ) {
 			}
 		}//end _lg_save_settings()
 
-		// doc page
-		public function _npg_doc_page() {
-			require_once 'docs.php';
-		}
-
-		// upgrade premium
-		public function _npg_upgrade_page() {
-			require_once 'upgrade-premium.php';
-		}
 
 		// a wp life plugins page
 		public function _npg_featured_plugins() {
