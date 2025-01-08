@@ -8,7 +8,7 @@ wp_enqueue_style( 'awplife-npg-light-gallery-css', NPG_PLUGIN_URL . 'lightbox/li
 if ( $transition_effects != 'none' ) {
 	wp_enqueue_style( 'awplife-npg-transitions-css', NPG_PLUGIN_URL . 'lightbox/light-gallery/css/lg-transitions.css' );
 }
-
+wp_enqueue_script( 'jquery' );
 wp_enqueue_script( 'awplife-npg-light-gallery-js', NPG_PLUGIN_URL . 'lightbox/light-gallery/js/lightgallery.js' );
 wp_enqueue_script( 'awplife-npg-all-plugins-js', NPG_PLUGIN_URL . 'lightbox/light-gallery/js/lightgallery-all.js' );
 
@@ -68,7 +68,7 @@ while ( $loop->have_posts() ) :
 					$thumbnail_url = $full[0]; }
 				?>
 					<?php if ( $image_type == 'image' ) { ?>
-					<a href="<?php echo esc_url( $full[0] ); ?>" class="single-image-<?php echo esc_attr( $light_image_gallery_id ); ?> <?php echo esc_attr( $col_large_desktops ); ?> <?php echo esc_attr( $col_desktops ); ?> <?php echo esc_attr( $col_tablets ); ?> <?php echo esc_attr( $col_phones ); ?>" data-sub-html="<h4 class=pg-title><?php esc_html_e( $title, 'new-photo-gallery' ); ?></h4>">
+					<a href="<?php echo esc_url( $full[0] ); ?>" class="single-image-<?php echo esc_attr( $light_image_gallery_id ); ?> <?php echo esc_attr( $col_large_desktops ); ?> <?php echo esc_attr( $col_desktops ); ?> <?php echo esc_attr( $col_tablets ); ?> <?php echo esc_attr( $col_phones ); ?>" data-sub-html="<?php esc_html_e( $title, 'new-photo-gallery' ); ?>">
 						<img class="<?php echo esc_attr( $spacing_class ); ?> <?php echo esc_attr( $image_hover_effect ); ?>" src="<?php echo esc_url( $thumbnail_url ); ?>"  alt="<?php esc_html_e( $image_alt, 'new-photo-gallery' ); ?>"/>
 					</a>
 					<?php } ?>
@@ -90,7 +90,7 @@ while ( $loop->have_posts() ) :
 							$thumbnail_url = $hash[0]['thumbnail_medium'];
 						}
 						?>
-					<a href="<?php echo esc_attr( $image_link ); ?>" data-poster="<?php echo esc_attr( $thumbnail_url ); ?>" class="single-image-<?php echo esc_attr( $light_image_gallery_id ); ?> <?php echo esc_attr( $col_large_desktops ); ?> <?php echo esc_attr( $col_desktops ); ?> <?php echo esc_attr( $col_tablets ); ?> <?php echo esc_attr( $col_phones ); ?>" href="<?php echo $full[0]; ?>" data-sub-html="<h4 class=pg-title><?php esc_html_e( $title, 'new-photo-gallery' ); ?></h4>">
+					<a href="<?php echo esc_attr( $image_link ); ?>" data-poster="<?php echo esc_attr( $thumbnail_url ); ?>" class="single-image-<?php echo esc_attr( $light_image_gallery_id ); ?> <?php echo esc_attr( $col_large_desktops ); ?> <?php echo esc_attr( $col_desktops ); ?> <?php echo esc_attr( $col_tablets ); ?> <?php echo esc_attr( $col_phones ); ?>" href="<?php echo $full[0]; ?>" data-sub-html="<?php esc_html_e( $title, 'new-photo-gallery' ); ?>">
 						<img class="<?php echo esc_attr( $spacing_class ); ?> <?php echo esc_attr( $image_hover_effect ); ?>" src="<?php echo esc_url( $thumbnail_url ); ?>"  alt="<?php esc_html_e( $image_alt, 'new-photo-gallery' ); ?>"/>
 					</a>
 					<?php } ?>
