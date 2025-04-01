@@ -3,8 +3,8 @@ Contributors: awordpresslife, razipathhan, hanif0991, muhammadshahid, fkfaisalkh
 Donate link: https://paypal.me/awplife
 Tags: portfolio gallery, photo gallery, responsive gallery, album gallery, image gallery
 Requires at least: 4.0
-Tested up to: 6.7.1
-Stable tag: 1.4.9
+Tested up to: 6.7.2
+Stable tag: 1.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -82,6 +82,7 @@ The responsive photo gallery allows to upload unlimited number of pictures and c
 > #### Photo Gallery Premium Plugin Demo
 
 > * [Photo Gallery Premium](https://awplife.com/demo/photo-gallery-premium/ "Photo Gallery Premium")
+> * [Grid Gallery Premium](https://awplife.com/demo/photo-gallery-premium/grid-gllery/ "Grid Gallery Premium")
 > * [Load More Gallery](https://awplife.com/demo/photo-gallery-premium/load-more/ "Load More Gallery")
 > * [Column Layout Demo](https://awplife.com/demo/photo-gallery-premium/column-layout-demo/ "Column Layout Demo")
 > * [Thumbnails Spacing](https://awplife.com/demo/photo-gallery-premium/thumbnails-spacing/ "Thumbnails Spacing")
@@ -175,6 +176,9 @@ https://WordPress.org/support/plugin/new-photo-gallery/
 13. Photo Gallery And Video Gallery Settings Page
 
 == Changelog ==
+
+= 1.5.0 =
+* Bug Fix: Fixed.
 
 = 1.4.9 =
 * Bug Fix: Fixed.

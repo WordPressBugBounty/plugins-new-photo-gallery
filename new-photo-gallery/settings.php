@@ -503,7 +503,6 @@ $gallery_settings = get_post_meta( $post->ID, 'awl_lg_settings_' . $post->ID, tr
 	<br>
 	<a href="https://awplife.com/wordpress-plugins/photo-gallery-premium/" target="_blank" class="button button-primary button-hero load-customize hide-if-no-customize">Photo Gallery Premium Version Details</a>
 	<a href="https://awplife.com/demo/photo-gallery-premium/" target="_blank" class="button button-primary button-hero load-customize hide-if-no-customize">Photo Gallery Premium Plugin Live Demo</a>
-	<a href="https://awplife.com/demo/photo-gallery-premium-admin-demo/" target="_blank" class="button button-primary button-hero load-customize hide-if-no-customize">Try Premium Version Before Buy</a>
 	</div>
 	<style>
 	.awp_bale_offer {
