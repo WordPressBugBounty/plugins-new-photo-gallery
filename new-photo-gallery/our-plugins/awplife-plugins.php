@@ -1,7 +1,9 @@
 <?php
-wp_enqueue_style('awplife-npg-bootstrap-css', NPG_PLUGIN_URL.'our-plugins/css/bootstrap.css');
-wp_enqueue_style('awplife-npg-smartech-css', NPG_PLUGIN_URL.'our-plugins/css/smartech.css');
-wp_enqueue_style('awplife-npg-feature-plugins', NPG_PLUGIN_URL.'our-plugins/css/feature-plugins.css');
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- NPG is the plugin prefix
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound -- NPG is the plugin prefix
+wp_enqueue_style('awplife-npg-bootstrap-css', NPG_PLUGIN_URL.'our-plugins/css/bootstrap.css', array(), NPG_VER);
+wp_enqueue_style('awplife-npg-smartech-css', NPG_PLUGIN_URL.'our-plugins/css/smartech.css', array(), NPG_VER);
+wp_enqueue_style('awplife-npg-feature-plugins', NPG_PLUGIN_URL.'our-plugins/css/feature-plugins.css', array(), NPG_VER);
 ?>
 <style>
 .col-md-12{
@@ -45,7 +47,7 @@ wp_enqueue_style('awplife-npg-feature-plugins', NPG_PLUGIN_URL.'our-plugins/css/
 		$tabs = array();
 		$tab = "search";
 		$per_page = 50;
-		$args = array
+		$npg_args = array
 		(
 			"author"=> "awordpresslife",
 			"page" => $paged,
@@ -53,19 +55,20 @@ wp_enqueue_style('awplife-npg-feature-plugins', NPG_PLUGIN_URL.'our-plugins/css/
 			"fields" => array( "last_updated" => true, "active_installs" => true, "downloaded" => true, "icons" => true, ),
 			"locale" => get_locale(),
 		);
-		$arges = apply_filters( "install_plugins_table_api_args_$tab", $args );
-		$api = plugins_api( "query_plugins", $arges );
-		$item = $api->plugins;
-		if(!function_exists("wp_star_rating"))
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Core WordPress hook pattern
+		$npg_arges = apply_filters( "install_plugins_table_api_args_$tab", $npg_args );
+		$npg_api = plugins_api( "query_plugins", $npg_arges );
+		$npg_item = $npg_api->plugins;
+		if(!function_exists("npg_wp_star_rating"))
 		{
-			function wp_star_rating( $args = array() )
+			function npg_wp_star_rating( $npg_args = array() )
 			{
 				$defaults = array(
 						'rating' => 0,
 						'type' => 'rating',
 						'number' => 0,
 				);
-				$r = wp_parse_args( $args, $defaults );
+				$r = wp_parse_args( $npg_args, $defaults );
 		
 				// Non-english decimal places when the $rating is coming from a string
 				$rating = str_replace( ',', '.', $r['rating'] );
@@ -82,17 +85,20 @@ wp_enqueue_style('awplife-npg-feature-plugins', NPG_PLUGIN_URL.'our-plugins/css/
 		
 				if ( $r['number'] ) {
 					/* translators: 1: The rating, 2: The number of ratings */
-					$format = _n( '%1$s rating based on %2$s rating', '%1$s rating based on %2$s ratings', $r['number'] );
+					$format = _n( '%1$s rating based on %2$s rating', '%1$s rating based on %2$s ratings', $r['number'], 'new-photo-gallery' );
 					$title = sprintf( $format, number_format_i18n( $rating, 1 ), number_format_i18n( $r['number'] ) );
 				} else {
 					/* translators: 1: The rating */
-					$title = sprintf( __( '%s rating' ), number_format_i18n( $rating, 1 ) );
+					$title = sprintf( __( '%s rating', 'new-photo-gallery' ), number_format_i18n( $rating, 1 ) );
 				}
 		
 				echo '<div class="star-rating" title="' . esc_attr( $title ) . '">';
-				echo '<span class="screen-reader-text">' . $title . '</span>';
+				echo '<span class="screen-reader-text">' . esc_html( $title ) . '</span>';
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is hardcoded HTML
 				echo str_repeat( '<div class="star star-full"></div>', $full_stars );
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is hardcoded HTML
 				echo str_repeat( '<div class="star star-half"></div>', $half_stars );
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is hardcoded HTML
 				echo str_repeat( '<div class="star star-empty"></div>', $empty_stars);
 				echo '</div>';
 			}
@@ -108,7 +114,7 @@ wp_enqueue_style('awplife-npg-feature-plugins', NPG_PLUGIN_URL.'our-plugins/css/
 				<table class="form-table2">
 					<tr class="radio-span" style="border-bottom:none;">
 						<td><?php
-							foreach ((array) $item as $plugin) 
+							foreach ((array) $npg_item as $plugin) 
 							{
 								if (is_object( $plugin))
 								{
@@ -117,38 +123,38 @@ wp_enqueue_style('awplife-npg-feature-plugins', NPG_PLUGIN_URL.'our-plugins/css/
 								}
 								if (!empty($plugin["icons"]["svg"]))
 								{
-									$plugin_icon_url = $plugin["icons"]["svg"];
+									$npg_plugin_icon_url = $plugin["icons"]["svg"];
 								} 
 								elseif (!empty( $plugin["icons"]["2x"])) 
 								{
-									$plugin_icon_url = $plugin["icons"]["2x"];
+									$npg_plugin_icon_url = $plugin["icons"]["2x"];
 								} 
 								elseif (!empty( $plugin["icons"]["1x"]))
 								{
-									$plugin_icon_url = $plugin["icons"]["1x"];
+									$npg_plugin_icon_url = $plugin["icons"]["1x"];
 								} 
 								else 
 								{
-									$plugin_icon_url = $plugin["icons"]["default"];
+									$npg_plugin_icon_url = $plugin["icons"]["default"];
 								}
-								$plugins_allowedtags = array
+								$npg_plugins_allowedtags = array
 								(
 									"a" => array( "href" => array(),"title" => array(), "target" => array() ),
 									"abbr" => array( "title" => array() ),"acronym" => array( "title" => array() ),
 									"code" => array(), "pre" => array(), "em" => array(),"strong" => array(),
 									"ul" => array(), "ol" => array(), "li" => array(), "p" => array(), "br" => array()
 								);
-								$title = wp_kses($plugin["name"], $plugins_allowedtags);
-								$description = strip_tags($plugin["short_description"]);
-								$author = wp_kses($plugin["author"], $plugins_allowedtags);
-								$version = wp_kses($plugin["version"], $plugins_allowedtags);
-								$name = strip_tags( $title . " " . $version );
-								$details_link   = self_admin_url( "plugin-install.php?tab=plugin-information&amp;plugin=" . $plugin["slug"] .
+								$title = wp_kses($plugin["name"], $npg_plugins_allowedtags);
+								$npg_description = wp_strip_all_tags($plugin["short_description"]);
+								$npg_author = wp_kses($plugin["author"], $npg_plugins_allowedtags);
+								$npg_version = wp_kses($plugin["version"], $npg_plugins_allowedtags);
+								$npg_name = wp_strip_all_tags( $title . " " . $npg_version );
+								$npg_details_link   = self_admin_url( "plugin-install.php?tab=plugin-information&amp;plugin=" . $plugin["slug"] .
 								"&amp;TB_iframe=true&amp;width=600&amp;height=550" );
 								
 								/* translators: 1: Plugin name and version. */
-								$action_links[] = '<a href="' . esc_url( $details_link ) . '" class="thickbox" aria-label="' . esc_attr( sprintf("More information about %s", $name ) ) . '" data-title="' . esc_attr( $name ) . '">' . __( 'More Details' ) . '</a>';
-								$action_links = array();
+								$npg_action_links[] = '<a href="' . esc_url( $npg_details_link ) . '" class="thickbox" aria-label="' . esc_attr( sprintf( __( 'More information about %s', 'new-photo-gallery' ), $npg_name ) ) . '" data-title="' . esc_attr( $npg_name ) . '">' . __( 'More Details', 'new-photo-gallery' ) . '</a>';
+								$npg_action_links = array();
 								if (current_user_can( "install_plugins") || current_user_can("update_plugins"))
 								{
 									$status = install_plugin_install_status( $plugin );
@@ -158,19 +164,19 @@ wp_enqueue_style('awplife-npg-feature-plugins', NPG_PLUGIN_URL.'our-plugins/css/
 											if ( $status["url"] )
 											{
 												/* translators: 1: Plugin name and version. */
-												$action_links[] = '<a class="install-now button button-primary" href="' . $status['url'] . '" aria-label="' . esc_attr( sprintf("Install %s now", $name ) ) . '">' . __( 'Install Now' ) . '</a>';
+												$npg_action_links[] = '<a class="install-now button button-primary" href="' . esc_url( $status['url'] ) . '" aria-label="' . esc_attr( sprintf( __( 'Install %s now', 'new-photo-gallery' ), $npg_name ) ) . '">' . __( 'Install Now', 'new-photo-gallery' ) . '</a>';
 											}
 										break;
 										case "update_available":
 											if ($status["url"])
 											{
 												/* translators: 1: Plugin name and version */
-												$action_links[] = '<a class="button button-primary" href="' . $status['url'] . '" aria-label="' . esc_attr( sprintf( "Update %s now", $name ) ) . '">' . __( 'Update Now' ) . '</a>';
+												$npg_action_links[] = '<a class="button button-primary" href="' . esc_url( $status['url'] ) . '" aria-label="' . esc_attr( sprintf( __( 'Update %s now', 'new-photo-gallery' ), $npg_name ) ) . '">' . __( 'Update Now', 'new-photo-gallery' ) . '</a>';
 											}
 										break;
 										case "latest_installed":
 										case "newer_installed":
-											$action_links[] = '<button class="button button-primary button-disabled" title="' . esc_attr__( "This plugin is already installed and is up to date" ) . ' ">' . __( 'Installed', 'plugin' ) . '</button>';
+											$npg_action_links[] = '<button class="button button-primary button-disabled" title="' . esc_attr__( 'This plugin is already installed and is up to date', 'new-photo-gallery' ) . ' ">' . __( 'Installed', 'new-photo-gallery' ) . '</button>';
 										break;
 									}
 								}
@@ -179,16 +185,16 @@ wp_enqueue_style('awplife-npg-feature-plugins', NPG_PLUGIN_URL.'our-plugins/css/
 									<br>
 									<div class="col-md-2">
 										<div class="text-center">
-											<a href="<?php echo esc_url( $details_link ); ?>">
-												<img class="custom_icon" src="<?php echo esc_attr( $plugin_icon_url ) ?>" />
+											<a href="<?php echo esc_url( $npg_details_link ); ?>">
+												<img class="custom_icon" src="<?php echo esc_attr( $npg_plugin_icon_url ) ?>" />
 											</a>
 										</div><br>
 										<div class="text-center">
 											<ul>
 												<?php
-													if ($action_links)
+													if ($npg_action_links)
 													{
-														echo implode("", $action_links);
+														echo wp_kses_post( implode("", $npg_action_links) );
 													}
 														?>		
 											</ul>
@@ -199,16 +205,16 @@ wp_enqueue_style('awplife-npg-feature-plugins', NPG_PLUGIN_URL.'our-plugins/css/
 										<div class="text-center plugin-div-inner-content">
 											<div class="name column-name">
 												<h4>
-													<a href="<?php echo esc_url( $details_link ); ?>" class="thickbox"><?php echo $title; ?></a>
+													<a href="<?php echo esc_url( $npg_details_link ); ?>" class="thickbox"><?php echo esc_html( $title ); ?></a>
 												</h4>
 											</div>
 											<div class="desc column-description">
 												<p>
-													<?php echo $description; ?>
+													<?php echo esc_html( $npg_description ); ?>
 												</p>
 												<p class="authors">
 													<cite>
-														By <?php echo $author; ?>
+														By <?php echo wp_kses_post( $npg_author ); ?>
 													</cite>
 												</p>
 											</div>
@@ -225,16 +231,22 @@ wp_enqueue_style('awplife-npg-feature-plugins', NPG_PLUGIN_URL.'our-plugins/css/
 												<div class="vers column-rating">
 													<?php wp_star_rating( array( "rating" => $plugin["rating"], "type" => "percent", "number" => $plugin["num_ratings"] ) ); ?>
 													<span class="num-ratings">
-														(<?php echo number_format_i18n( $plugin["num_ratings"] ); ?>)
+														(<?php echo esc_html( number_format_i18n( $plugin["num_ratings"] ) ); ?>)
 													</span>
 												</div>
 												<div class="column-updated">
-													<strong><?php _e("Last Updated:"); ?></strong> <span title="<?php echo esc_attr($plugin["last_updated"]); ?>">
-														<?php printf("%s ago", human_time_diff(strtotime($plugin["last_updated"]))); ?>
+													<strong><?php esc_html_e( 'Last Updated:', 'new-photo-gallery' ); ?></strong> <span title="<?php echo esc_attr($plugin["last_updated"]); ?>">
+														<?php
+														/* translators: %s: Human-readable time difference */
+														printf( esc_html__( '%s ago', 'new-photo-gallery' ), esc_html( human_time_diff( strtotime( $plugin["last_updated"] ) ) ) );
+														?>
 													</span>
 												</div>
 												<div class="column-downloaded">
-													<?php echo sprintf( _n("%s download", "%s downloads", $plugin["downloaded"]), number_format_i18n($plugin["downloaded"])); ?>
+													<?php
+													/* translators: %s: Number of downloads */
+													echo esc_html( sprintf( _n( '%s download', '%s downloads', $plugin['downloaded'], 'new-photo-gallery' ), number_format_i18n( $plugin['downloaded'] ) ) );
+													?>
 												</div>
 											</div>
 										</div>

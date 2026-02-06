@@ -1,0 +1,178 @@
+/* New Photo Gallery Admin Design */
+.npg-settings-wrapper {
+    max-width: 1200px;
+    margin: 20px auto;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+.npg-card {
+    background: #fff;
+    border: 1px solid #e2e4e7;
+    border-radius: 8px;
+    /* Standard rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    /* Subtle unique shadow */
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.npg-card:hover {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
+}
+
+.npg-card-header {
+    background: #f8f9fa;
+    padding: 15px 20px;
+    border-bottom: 1px solid #e2e4e7;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.npg-card-title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1d2327;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.npg-card-body {
+    padding: 20px;
+}
+
+.npg-form-group {
+    margin-bottom: 20px;
+}
+
+.npg-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #3c434a;
+}
+
+.npg-help-text {
+    font-size: 13px;
+    color: #646970;
+    margin-top: 6px;
+    line-height: 1.4;
+}
+
+.npg-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -10px;
+}
+
+.npg-col {
+    flex: 1;
+    padding: 10px;
+    min-width: 250px;
+}
+
+/* Form Controls */
+.npg-select,
+.npg-input,
+.npg-textarea {
+    width: 100%;
+    max-width: 100%;
+    height: 40px;
+    border: 1px solid #8c8f94;
+    border-radius: 4px;
+    padding: 0 12px;
+    font-size: 14px;
+    color: #2c3338;
+}
+
+.npg-textarea {
+    height: 100px;
+    padding: 10px;
+}
+
+/* Radio Switch - Modern Segmented Control */
+.npg-switch-field {
+    display: inline-flex;
+    background: #f6f7f7;
+    padding: 4px;
+    border-radius: 8px;
+    border: 1px solid #dcdcde;
+}
+
+.npg-switch-field input {
+    position: absolute !important;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    width: 1px;
+    border: 0;
+    overflow: hidden;
+}
+
+.npg-switch-field label {
+    flex: 1;
+    text-align: center;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #646970;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.npg-switch-field label:hover {
+    color: #1d2327;
+}
+
+.npg-switch-field input:checked+label {
+    background: #fff;
+    color: #2271b1;
+    border-color: #c3c4c7;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    font-weight: 600;
+}
+
+/* Upsell box */
+.npg-upsell-box {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    border: 1px solid #90caf9;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.npg-upsell-title {
+    font-size: 18px;
+    margin: 0 0 10px;
+    color: #0d47a1;
+}
+
+.npg-upsell-btn {
+    display: inline-block;
+    background: #1976d2;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    margin: 5px;
+    transition: background 0.2s;
+}
+
+.npg-upsell-btn:hover {
+    background: #1565c0;
+    color: white;
+}
+
+/* Color Picker fix */
+.wp-picker-container {
+    vertical-align: middle;
+}

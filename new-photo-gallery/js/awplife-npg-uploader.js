@@ -36,9 +36,9 @@ jQuery(function(jQuery) {
 			/**
 			 * Delete Slide Callback Function
 			 */
-			this.ul.on('click', '#remove-photo', function() {
+			this.ul.on('click', '.button-icon-delete', function() {
 				if (confirm('Are sure to delete this photo?')) {
-					jQuery(this).parent().fadeOut(700, function() {
+					jQuery(this).closest('li').fadeOut(700, function() {
 						jQuery(this).remove();
 					});
 				}

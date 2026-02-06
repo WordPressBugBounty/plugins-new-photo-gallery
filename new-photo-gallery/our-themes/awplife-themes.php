@@ -1,11 +1,11 @@
 <?php
 //JS
-wp_enqueue_script('awplife-npg-theme-bootstrap-js', plugin_dir_url( __FILE__ ) .'../js/bootstrap.min.js', array('jquery'), '' , true);
+wp_enqueue_script('awplife-npg-theme-bootstrap-js', plugin_dir_url( __FILE__ ) .'../js/bootstrap.min.js', array('jquery'), NPG_VER , true);
 
 //CSS
-wp_enqueue_style('awplife-npg-theme-bootstrap-css', plugin_dir_url( __FILE__ ) .'css/bootstrap.min.css');
-wp_enqueue_style('awplife-npg-theme-css', plugin_dir_url( __FILE__ ) .'css/our-theme.css');
-wp_enqueue_style('awplife-npg-theme-font-awesome-css', plugin_dir_url( __FILE__ ) .'css/font-awesome.min.css');
+wp_enqueue_style('awplife-npg-theme-bootstrap-css', plugin_dir_url( __FILE__ ) .'css/bootstrap.min.css', array(), NPG_VER);
+wp_enqueue_style('awplife-npg-theme-css', plugin_dir_url( __FILE__ ) .'css/our-theme.css', array(), NPG_VER);
+wp_enqueue_style('awplife-npg-theme-font-awesome-css', plugin_dir_url( __FILE__ ) .'css/font-awesome.min.css', array(), NPG_VER);
 ?>
 <style>
 .awl_theme_container {
@@ -26,7 +26,7 @@ wp_enqueue_style('awplife-npg-theme-font-awesome-css', plugin_dir_url( __FILE__ 
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 col-sm-6">
-					<img src="<?php echo plugin_dir_url( __FILE__ ) ?>img/aneeq-premium.png" class="img-responsive">
+					<img src="<?php echo esc_url( plugin_dir_url( __FILE__ ) ); ?>img/aneeq-premium.png" class="img-responsive">
 				</div>
 				<div class="col-md-6 col-sm-6 aneeq_theme_desc">
 					<h1 class="theme_spacing">ANEEQ PREMIUM <span>WORDPRESS THEME</span></h1>

@@ -1,0 +1,12 @@
+= 1.5.4 =
+* New: Redesigned Settings Page with modern Card-based UI.
+* Fixed: Enqueue scripts logic refactored (removed inline enqueues).
+* Improvement: Better form controls and validation ui.
+* Improvement: Code cleanup and optimization.
+* Fixed: Typos in function names and shortcode logic.
+* Fixed: Deprecated jQuery load event.
+* Improvement: Removed unused code and variables.
+* Improvement: Standardized code structure (removed closing PHP tag).
+
+= 1.5.3 =
+* Initial version reference.

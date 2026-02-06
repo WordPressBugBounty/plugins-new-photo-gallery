@@ -1,566 +1,281 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly
 }
-// toggle button CSS
-wp_enqueue_style( 'awplife-npg-toggle-button-css', NPG_PLUGIN_URL . 'css/toogle-button.css' );
-wp_enqueue_style( 'awplife-npg-font-awesome-css', NPG_PLUGIN_URL . 'css/font-awesome.min.css' );
-wp_enqueue_style( 'awplife-npg-go-to-top-css', NPG_PLUGIN_URL . 'css/go-to-top.css' );
-// JS
-wp_enqueue_script( 'jquery' );
-wp_enqueue_script( 'awplife-npg-go-to-top-js', NPG_PLUGIN_URL . 'js/go-to-top.js', array( 'jquery' ), '', true );
 
-
-// load settings
+// Load Settings
 $post_id = esc_attr($post->ID);
+$gallery_settings = get_post_meta($post->ID, 'awl_lg_settings_' . $post->ID, true);
 
-$gallery_settings = get_post_meta( $post->ID, 'awl_lg_settings_' . $post->ID, true );
+// Defaults
+$defaults = array(
+	'gal_thumb_size' => 'full',
+	'col_large_desktops' => 'col-lg-4',
+	'col_desktops' => 'col-md-4',
+	'col_tablets' => 'col-sm-4',
+	'col_phones' => 'col-xs-6',
+	'tool_color' => 'gold',
+	'title_color' => 'white',
+	'image_hover_effect_type' => 'no',
+	'image_hover_effect_four' => 'hvr-box-shadow-outset',
+	'transition_effects' => 'lg-fade',
+	'image_protection' => 1,
+	'image_grayscale' => 0,
+	'thumbnails_spacing' => 0,
+	'custom_css' => '',
+);
+
+// Merge saved settings with defaults
+$settings = wp_parse_args($gallery_settings, $defaults);
 
 ?>
 
-<!-- Return to Top -->
-<a href="javascript:" id="return-to-top"><i class="fa fa-chevron-up"></i></a>
-<style>
-.wp-color-result::after {
-	height: 25px;
-}
-.wp-picker-container input.wp-color-picker[type="text"] {
-	width: 80px !important;
-	height: 22px !important;
-	float: left;
-	font-size: 11px !important;
-}
-.iris-border .iris-palette-container {
-	bottom: 6px;
-}
-.wp-core-ui .button, .wp-core-ui .button.button-large, .wp-core-ui .button.button-small, a.preview, input#publish, input#save-post {
-	height: auto !important;
-	padding: 0 12px !important;
-}
-/* Edit Permalink Removed */
-#edit-slug-box {
-	display: none !important;
-}
-</style>
-<div>
-	<p class="bg-title"><?php esc_html_e( '1. Gallery Thumbnail Size', 'new-photo-gallery' ); ?></p></br>
-	<?php
-	if ( isset( $gallery_settings['gal_thumb_size'] ) ) {
-		$gal_thumb_size = $gallery_settings['gal_thumb_size'];
-	} else {
-		$gal_thumb_size = 'thumbnail';
-	}
-	?>
-	<select id="gal_thumb_size" name="gal_thumb_size">
-		<option value="thumbnail" 
-		<?php
-		if ( $gal_thumb_size == 'thumbnail' ) {
-			echo 'selected=selected';}
-		?>
-		>Thumbnail - 150 x 150</option>
-		<option value="medium" 
-		<?php
-		if ( $gal_thumb_size == 'medium' ) {
-			echo 'selected=selected';}
-		?>
-		>Medium - 300 x 169</option>
-		<option value="large" 
-		<?php
-		if ( $gal_thumb_size == 'large' ) {
-			echo 'selected=selected';}
-		?>
-		>Large - 840 x 473</option>
-		<option value="full" 
-		<?php
-		if ( $gal_thumb_size == 'full' ) {
-			echo 'selected=selected';}
-		?>
-		>Full Size - 1280 x 720</option>
-	</select><br>
-	<p><?php esc_html_e( 'Select gallery thumbnails size to display into gallery<br> Note: Thumbnail setting will not work with video gallery, video poster fetch directly from YouTube and Vimeo server.', 'new-photo-gallery' ); ?></p>
-</div><br>
+<div class="npg-settings-wrapper">
+	<?php wp_nonce_field('lg_save_settings', 'lg_save_nonce'); ?>
 
-<div>
-	<p class="bg-title"><?php esc_html_e( '2. Columns Layout Settings', 'new-photo-gallery' ); ?></p>
-	<p class="bg-lower-title"><?php esc_html_e( 'A. Column On Large Desktops', 'new-photo-gallery' ); ?></p></br>
-	<?php
-	if ( isset( $gallery_settings['col_large_desktops'] ) ) {
-		$col_large_desktops = $gallery_settings['col_large_desktops'];
-	} else {
-		$col_large_desktops = 'col-lg-2';
-	}
-	?>
-	<select id="col_large_desktops" name="col_large_desktops" class="form-control">
-		<option value="col-lg-12" 
-		<?php
-		if ( $col_large_desktops == 'col-lg-12' ) {
-			echo 'selected=selected';}
-		?>
-		><?php esc_html_e( '1 Column', 'new-photo-gallery' ); ?></option>
-		<option value="col-lg-6" 
-		<?php
-		if ( $col_large_desktops == 'col-lg-6' ) {
-			echo 'selected=selected';}
-		?>
-		><?php esc_html_e( '2 Column', 'new-photo-gallery' ); ?></option>
-		<option value="col-lg-4" 
-		<?php
-		if ( $col_large_desktops == 'col-lg-4' ) {
-			echo 'selected=selected';}
-		?>
-		><?php esc_html_e( '3 Column', 'new-photo-gallery' ); ?></option>
-		<option value="col-lg-3" 
-		<?php
-		if ( $col_large_desktops == 'col-lg-3' ) {
-			echo 'selected=selected';}
-		?>
-		><?php esc_html_e( '4 Column', 'new-photo-gallery' ); ?></option>
-		<option value="col-lg-2" 
-		<?php
-		if ( $col_large_desktops == 'col-lg-2' ) {
-			echo 'selected=selected';}
-		?>
-		><?php esc_html_e( '6 Column', 'new-photo-gallery' ); ?></option>
-		<option value="col-lg-1" 
-		<?php
-		if ( $col_large_desktops == 'col-lg-1' ) {
-			echo 'selected=selected';}
-		?>
-		><?php esc_html_e( '12 Column', 'new-photo-gallery' ); ?></option>
-	</select><br>
-	<p><?php esc_html_e( 'Select gallery column layout for large desktop devices.', 'new-photo-gallery' ); ?></p>
-</div>
-<div>
-	<p class="bg-lower-title"><?php esc_html_e( 'B. Column On Desktops', 'new-photo-gallery' ); ?></p></br>
-	<?php
-	if ( isset( $gallery_settings['col_desktops'] ) ) {
-		$col_desktops = $gallery_settings['col_desktops'];
-	} else {
-		$col_desktops = 'col-md-3';
-	}
-	?>
-	<select id="col_desktops" name="col_desktops" class="form-control">
-		<option value="col-md-12" 
-		<?php
-		if ( $col_desktops == 'col-md-12' ) {
-			echo 'selected=selected';}
-		?>
-		><?php esc_html_e( '1 Column', 'new-photo-gallery' ); ?></option>
-		<option value="col-md-6" 
-		<?php
-		if ( $col_desktops == 'col-md-6' ) {
-			echo 'selected=selected';}
-		?>
-		><?php esc_html_e( '2 Column', 'new-photo-gallery' ); ?></option>
-		<option value="col-md-4" 
-		<?php
-		if ( $col_desktops == 'col-md-4' ) {
-			echo 'selected=selected';}
-		?>
-		><?php esc_html_e( '3 Column', 'new-photo-gallery' ); ?></option>
-		<option value="col-md-3" 
-		<?php
-		if ( $col_desktops == 'col-md-3' ) {
-			echo 'selected=selected';}
-		?>
-		><?php esc_html_e( '4 Column', 'new-photo-gallery' ); ?></option>
-		<option value="col-md-2" 
-		<?php
-		if ( $col_desktops == 'col-md-2' ) {
-			echo 'selected=selected';}
-		?>
-		><?php esc_html_e( '6 Column', 'new-photo-gallery' ); ?></option>
-		<option value="col-md-1" 
-		<?php
-		if ( $col_desktops == 'col-md-1' ) {
-			echo 'selected=selected';}
-		?>
-		><?php esc_html_e( '12 Column', 'new-photo-gallery' ); ?></option>
-	</select><br>
-	<p><?php esc_html_e( 'Select gallery column layout for desktop devices.', 'new-photo-gallery' ); ?></p>
-</div>
-<div>
-	<p class="bg-lower-title"><?php esc_html_e( 'C. Column On Tablets', 'new-photo-gallery' ); ?></p></br>
-	<?php
-	if ( isset( $gallery_settings['col_tablets'] ) ) {
-		$col_tablets = $gallery_settings['col_tablets'];
-	} else {
-		$col_tablets = 'col-sm-4';
-	}
-	?>
-	<select id="col_tablets" name="col_tablets" class="form-control">
-		<option value="col-sm-12" 
-		<?php
-		if ( $col_tablets == 'col-sm-12' ) {
-			echo 'selected=selected';}
-		?>
-		><?php esc_html_e( '1 Column', 'new-photo-gallery' ); ?></option>
-		<option value="col-sm-6" 
-		<?php
-		if ( $col_tablets == 'col-sm-6' ) {
-			echo 'selected=selected';}
-		?>
-		><?php esc_html_e( '2 Column', 'new-photo-gallery' ); ?></option>
-		<option value="col-sm-4" 
-		<?php
-		if ( $col_tablets == 'col-sm-4' ) {
-			echo 'selected=selected';}
-		?>
-		><?php esc_html_e( '3 Column', 'new-photo-gallery' ); ?></option>
-		<option value="col-sm-3" 
-		<?php
-		if ( $col_tablets == 'col-sm-3' ) {
-			echo 'selected=selected';}
-		?>
-		><?php esc_html_e( '4 Column', 'new-photo-gallery' ); ?></option>
-		<option value="col-sm-2" 
-		<?php
-		if ( $col_tablets == 'col-sm-2' ) {
-			echo 'selected=selected';}
-		?>
-		><?php esc_html_e( '6 Column', 'new-photo-gallery' ); ?></option>
-	</select><br>
-	<p><?php esc_html_e( 'Select gallery column layout for tablet devices.', 'new-photo-gallery' ); ?></p>
-</div>
-<div>
-	<p class="bg-lower-title"><?php esc_html_e( 'D. Column On Phones', 'new-photo-gallery' ); ?></p></br>
-	<?php
-	if ( isset( $gallery_settings['col_phones'] ) ) {
-		$col_phones = $gallery_settings['col_phones'];
-	} else {
-		$col_phones = 'col-xs-6';
-	}
-	?>
-	<select id="col_phones" name="col_phones" class="form-control">
-		<option value="col-xs-12" 
-		<?php
-		if ( $col_phones == 'col-xs-12' ) {
-			echo 'selected=selected';}
-		?>
-		><?php esc_html_e( '1 Column', 'new-photo-gallery' ); ?></option>
-		<option value="col-xs-6" 
-		<?php
-		if ( $col_phones == 'col-xs-6' ) {
-			echo 'selected=selected';}
-		?>
-		><?php esc_html_e( '2 Column', 'new-photo-gallery' ); ?></option>
-		<option value="col-xs-4" 
-		<?php
-		if ( $col_phones == 'col-xs-4' ) {
-			echo 'selected=selected';}
-		?>
-		><?php esc_html_e( '3 Column', 'new-photo-gallery' ); ?></option>
-		<option value="col-xs-3" 
-		<?php
-		if ( $col_phones == 'col-xs-3' ) {
-			echo 'selected=selected';}
-		?>
-		><?php esc_html_e( '4 Column', 'new-photo-gallery' ); ?></option>
-	</select><br>
-	<p><?php esc_html_e( 'Select gallery column layout for phone devices.', 'new-photo-gallery' ); ?></p>
-</div>
+	<!-- Layout Settings -->
+	<div class="npg-card">
+		<div class="npg-card-header">
+			<h3 class="npg-card-title"><i class="dashicons dashicons-layout"></i>
+				<?php esc_html_e('Layout Settings', 'new-photo-gallery'); ?></h3>
+		</div>
+		<div class="npg-card-body">
+			<div class="npg-row">
+				<div class="npg-col">
+					<div class="npg-form-group">
+						<label class="npg-label"
+							for="gal_thumb_size"><?php esc_html_e('Thumbnail Size', 'new-photo-gallery'); ?></label>
+						<select id="gal_thumb_size" name="gal_thumb_size" class="npg-select">
+							<option value="thumbnail" <?php selected($settings['gal_thumb_size'], 'thumbnail'); ?>>
+								Thumbnail - 150 x 150</option>
+							<option value="medium" <?php selected($settings['gal_thumb_size'], 'medium'); ?>>Medium -
+								300 x 169</option>
+							<option value="large" <?php selected($settings['gal_thumb_size'], 'large'); ?>>Large - 840
+								x 473</option>
+							<option value="full" <?php selected($settings['gal_thumb_size'], 'full'); ?>>Full Size -
+								1280 x 720</option>
+						</select>
+						<p class="npg-help-text">
+							<?php esc_html_e('Select the size of thumbnails to display in the gallery grid.', 'new-photo-gallery'); ?>
+						</p>
+					</div>
+				</div>
+				<div class="npg-col">
+					<div class="npg-form-group">
+						<label class="npg-label"><?php esc_html_e('Thumbnails Spacing', 'new-photo-gallery'); ?></label>
+						<div class="npg-switch-field">
+							<input type="radio" id="spacing_yes" name="thumbnails_spacing" value="1" <?php checked($settings['thumbnails_spacing'], 1); ?> />
+							<label for="spacing_yes"><?php esc_html_e('Show Gap', 'new-photo-gallery'); ?></label>
+							<input type="radio" id="spacing_no" name="thumbnails_spacing" value="0" <?php checked($settings['thumbnails_spacing'], 0); ?> />
+							<label for="spacing_no"><?php esc_html_e('No Gap', 'new-photo-gallery'); ?></label>
+						</div>
+						<p class="npg-help-text">
+							<?php esc_html_e('Enable or disable spacing between gallery items.', 'new-photo-gallery'); ?>
+						</p>
+					</div>
+				</div>
+			</div>
 
-<!--start gallery tools settings -->
-	<div>
-		<p class="bg-title"><?php esc_html_e( '3. Lightbox Tool Color', 'new-photo-gallery' ); ?></p><br>&nbsp;&nbsp;
-		<?php
-		if ( isset( $gallery_settings['tool_color'] ) ) {
-			$tool_color = $gallery_settings['tool_color'];
-		} else {
-			$tool_color = 'gold';
-		}
-		?>
-		<input type="text" class="form-control" id="tool_color" name="tool_color" placeholder="type color name / code" value="<?php echo esc_attr( $tool_color ); ?>" default-color="<?php echo esc_attr( $tool_color ); ?>"><br>
-		<p><?php esc_html_e( 'You can change color of lightbox tools for photo gallery.', 'new-photo-gallery' ); ?>
+			<div class="npg-form-group">
+				<label class="npg-label"><?php esc_html_e('Column Layout', 'new-photo-gallery'); ?></label>
+				<div class="npg-row">
+					<div class="npg-col">
+						<label class="npg-help-text"><?php esc_html_e('Large Desktop', 'new-photo-gallery'); ?></label>
+						<select name="col_large_desktops" class="npg-select">
+							<?php
+							$cols = array('col-lg-12' => '1 Column', 'col-lg-6' => '2 Columns', 'col-lg-4' => '3 Columns', 'col-lg-3' => '4 Columns', 'col-lg-2' => '6 Columns', 'col-lg-1' => '12 Columns');
+							foreach ($cols as $val => $label) {
+								echo '<option value="' . esc_attr($val) . '" ' . selected($settings['col_large_desktops'], $val, false) . '>' . esc_html($label) . '</option>';
+							}
+							?>
+						</select>
+					</div>
+					<div class="npg-col">
+						<label class="npg-help-text"><?php esc_html_e('Desktop', 'new-photo-gallery'); ?></label>
+						<select name="col_desktops" class="npg-select">
+							<?php
+							$cols_md = array('col-md-12' => '1 Column', 'col-md-6' => '2 Columns', 'col-md-4' => '3 Columns', 'col-md-3' => '4 Columns', 'col-md-2' => '6 Columns', 'col-md-1' => '12 Columns');
+							foreach ($cols_md as $val => $label) {
+								echo '<option value="' . esc_attr($val) . '" ' . selected($settings['col_desktops'], $val, false) . '>' . esc_html($label) . '</option>';
+							}
+							?>
+						</select>
+					</div>
+					<div class="npg-col">
+						<label class="npg-help-text"><?php esc_html_e('Tablets', 'new-photo-gallery'); ?></label>
+						<select name="col_tablets" class="npg-select">
+							<?php
+							$cols_sm = array('col-sm-12' => '1 Column', 'col-sm-6' => '2 Columns', 'col-sm-4' => '3 Columns', 'col-sm-3' => '4 Columns', 'col-sm-2' => '6 Columns');
+							foreach ($cols_sm as $val => $label) {
+								echo '<option value="' . esc_attr($val) . '" ' . selected($settings['col_tablets'], $val, false) . '>' . esc_html($label) . '</option>';
+							}
+							?>
+						</select>
+					</div>
+					<div class="npg-col">
+						<label class="npg-help-text"><?php esc_html_e('Phones', 'new-photo-gallery'); ?></label>
+						<select name="col_phones" class="npg-select">
+							<?php
+							$cols_xs = array('col-xs-12' => '1 Column', 'col-xs-6' => '2 Columns', 'col-xs-4' => '3 Columns', 'col-xs-3' => '4 Columns');
+							foreach ($cols_xs as $val => $label) {
+								echo '<option value="' . esc_attr($val) . '" ' . selected($settings['col_phones'], $val, false) . '>' . esc_html($label) . '</option>';
+							}
+							?>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-<!--end gallery tools settings -->
 
-<div>
-	<p class="bg-title"><?php esc_html_e( '4. Title Color', 'new-photo-gallery' ); ?></p><br>&nbsp;&nbsp;
-	<?php
-	if ( isset( $gallery_settings['title_color'] ) ) {
-		$title_color = $gallery_settings['title_color'];
-	} else {
-		$title_color = 'white';
-	}
-	?>
-	<input type="text" class="form-control" id="title_color" name="title_color" placeholder="type color name / code" value="<?php echo esc_attr( $title_color ); ?>" default-color="<?php echo esc_attr( $title_color ); ?>"><br>
-	<p><?php esc_html_e( 'You can change title color of image / photo.', 'new-photo-gallery' ); ?></p>
+
+
+	<!-- Effects Settings -->
+	<div class="npg-card">
+		<div class="npg-card-header">
+			<h3 class="npg-card-title"><i class="dashicons dashicons-admin-appearance"></i>
+				<?php esc_html_e('Effects & Animations', 'new-photo-gallery'); ?></h3>
+		</div>
+		<div class="npg-card-body">
+			<div class="npg-row">
+				<div class="npg-col">
+					<div class="npg-form-group">
+						<label class="npg-label"><?php esc_html_e('Image Hover Effect', 'new-photo-gallery'); ?></label>
+						<div class="npg-switch-field">
+							<input type="radio" id="hover_none" name="image_hover_effect_type" value="no" <?php checked($settings['image_hover_effect_type'], 'no'); ?> />
+							<label for="hover_none"><?php esc_html_e('None', 'new-photo-gallery'); ?></label>
+							<input type="radio" id="hover_sg" name="image_hover_effect_type" value="sg" <?php checked($settings['image_hover_effect_type'], 'sg'); ?> />
+							<label for="hover_sg"><?php esc_html_e('Shadow & Glow', 'new-photo-gallery'); ?></label>
+						</div>
+					</div>
+				</div>
+
+				<div class="npg-col he_two"
+					style="<?php echo ($settings['image_hover_effect_type'] == 'no') ? 'display:none;' : ''; ?>">
+					<div class="npg-form-group">
+						<label class="npg-label"
+							for="image_hover_effect_four"><?php esc_html_e('Select Shadow Style', 'new-photo-gallery'); ?></label>
+						<select name="image_hover_effect_four" id="image_hover_effect_four" class="npg-select">
+							<option value="hvr-grow-shadow" <?php selected($settings['image_hover_effect_four'], 'hvr-grow-shadow'); ?>>Grow Shadow</option>
+							<option value="hvr-float-shadow" <?php selected($settings['image_hover_effect_four'], 'hvr-float-shadow'); ?>>Float Shadow</option>
+							<option value="hvr-glow" <?php selected($settings['image_hover_effect_four'], 'hvr-glow'); ?>>Glow</option>
+							<option value="hvr-box-shadow-outset" <?php selected($settings['image_hover_effect_four'], 'hvr-box-shadow-outset'); ?>>Box Shadow Outset</option>
+							<option value="hvr-box-shadow-inset" <?php selected($settings['image_hover_effect_four'], 'hvr-box-shadow-inset'); ?>>Box Shadow Inset</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="npg-col">
+					<div class="npg-form-group">
+						<label class="npg-label"
+							for="transition_effects"><?php esc_html_e('Lightbox Transition', 'new-photo-gallery'); ?></label>
+						<select name="transition_effects" id="transition_effects" class="npg-select">
+							<option value="none" <?php selected($settings['transition_effects'], 'none'); ?>>None
+							</option>
+							<option value="lg-slide" <?php selected($settings['transition_effects'], 'lg-slide'); ?>>
+								Slide</option>
+							<option value="lg-fade" <?php selected($settings['transition_effects'], 'lg-fade'); ?>>
+								Fade</option>
+							<option value="lg-zoom-in" <?php selected($settings['transition_effects'], 'lg-zoom-in'); ?>>Zoom In</option>
+							<option value="lg-zoom-in-big" <?php selected($settings['transition_effects'], 'lg-zoom-in-big'); ?>>Zoom In (Big)</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Extra Features -->
+	<div class="npg-card">
+		<div class="npg-card-header">
+			<h3 class="npg-card-title"><i class="dashicons dashicons-plus-alt"></i>
+				<?php esc_html_e('Extra Features', 'new-photo-gallery'); ?></h3>
+		</div>
+		<div class="npg-card-body">
+			<div class="npg-row">
+
+				<!-- Image Protection -->
+				<div class="npg-col">
+					<div class="npg-form-group">
+						<label class="npg-label"><?php esc_html_e('Image Protection', 'new-photo-gallery'); ?></label>
+						<div class="npg-switch-field">
+							<input type="radio" id="protect_yes" name="image_protection" value="1" <?php checked($settings['image_protection'], 1); ?> />
+							<label for="protect_yes"><?php esc_html_e('Enable', 'new-photo-gallery'); ?></label>
+							<input type="radio" id="protect_no" name="image_protection" value="0" <?php checked($settings['image_protection'], 0); ?> />
+							<label for="protect_no"><?php esc_html_e('Disable', 'new-photo-gallery'); ?></label>
+						</div>
+						<p class="npg-help-text">
+							<?php esc_html_e('Disable right-click on images to prevent downloading.', 'new-photo-gallery'); ?>
+						</p>
+					</div>
+				</div>
+
+				<!-- Grayscale Effect -->
+				<div class="npg-col">
+					<div class="npg-form-group">
+						<label class="npg-label"><?php esc_html_e('Grayscale Effect', 'new-photo-gallery'); ?></label>
+						<div class="npg-switch-field">
+							<input type="radio" id="gray_yes" name="image_grayscale" value="1" <?php checked($settings['image_grayscale'], 1); ?> />
+							<label for="gray_yes"><?php esc_html_e('Enable', 'new-photo-gallery'); ?></label>
+							<input type="radio" id="gray_no" name="image_grayscale" value="0" <?php checked($settings['image_grayscale'], 0); ?> />
+							<label for="gray_no"><?php esc_html_e('Disable', 'new-photo-gallery'); ?></label>
+						</div>
+						<p class="npg-help-text">
+							<?php esc_html_e('Show images in B&W, color on hover.', 'new-photo-gallery'); ?>
+						</p>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- Custom CSS -->
+	<div class="npg-card">
+		<div class="npg-card-header">
+			<h3 class="npg-card-title"><i class="dashicons dashicons-editor-code"></i>
+				<?php esc_html_e('Custom CSS', 'new-photo-gallery'); ?></h3>
+		</div>
+		<div class="npg-card-body">
+			<div class="npg-form-group">
+				<textarea name="custom_css" id="custom_css" class="npg-textarea"
+					placeholder=".my-custom-class { color: red; }"><?php echo esc_textarea($settings['custom_css']); ?></textarea>
+				<p class="npg-help-text">
+					<?php esc_html_e('Enter custom CSS to override default gallery styles. Do not include <style> tags.', 'new-photo-gallery'); ?>
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- Upsell -->
+	<div class="npg-upsell-box">
+		<h3 class="npg-upsell-title">🎁 Upgrade to Premium - Special Offer</h3>
+		<p class="npg-help-text">Get all 23+ premium plugins (including Photo Gallery Premium) for just $149 (Value
+			$300+)</p>
+		<div style="margin-top: 15px;">
+			<a href="https://awplife.com/wordpress-plugins/photo-gallery-premium/" target="_blank"
+				class="npg-upsell-btn">View Premium Features</a>
+			<a href="https://awplife.com/account/signup/all-premium-plugins" target="_blank" class="npg-upsell-btn">Get
+				the Bundle</a>
+		</div>
+	</div>
+
 </div>
-
-<!-- Start Hover Effect Settings -->
-<div>
-	<p class="bg-title"><?php esc_html_e( '5. Image Hover Effect Type', 'new-photo-gallery' ); ?></p></br>
-	<p class="switch-field em_size_field">	
-		<?php
-		if ( isset( $gallery_settings['image_hover_effect_type'] ) ) {
-			$image_hover_effect_type = $gallery_settings['image_hover_effect_type'];
-		} else {
-			$image_hover_effect_type = 'no';
-		}
-		?>
-		<input type="radio" name="image_hover_effect_type" id="image_hover_effect_type1" value="no" 
-		<?php
-		if ( $image_hover_effect_type == 'no' ) {
-			echo 'checked=checked';}
-		?>
-		>
-		<label for="image_hover_effect_type1"><?php esc_html_e( 'None', 'new-photo-gallery' ); ?></label>
-		<input type="radio" name="image_hover_effect_type" id="image_hover_effect_type2" value="sg" 
-		<?php
-		if ( $image_hover_effect_type == 'sg' ) {
-			echo 'checked=checked';}
-		?>
-		>
-		<label for="image_hover_effect_type2"><?php esc_html_e( 'Shadow & Glow', 'new-photo-gallery' ); ?></label>
-		<p><?php esc_html_e( 'Select a image/photo hover effect type.', 'new-photo-gallery' ); ?></p>
-	</p>
-</div>
-
-<!-- 4 -->
-<div class="he_two">
-	<label style="font-size: x-large; padding-left:15px;"><?php esc_html_e( 'Image Hover Effects', 'new-photo-gallery' ); ?></label><br><br>
-	<?php
-	if ( isset( $gallery_settings['image_hover_effect_four'] ) ) {
-		$image_hover_effect_four = $gallery_settings['image_hover_effect_four'];
-	} else {
-		$image_hover_effect_four = 'hvr-box-shadow-outset';
-	}
-	?>
-	<select name="image_hover_effect_four" id="image_hover_effect_four">
-		<optgroup label="Shadow and Glow Transitions Effects" class="sg">
-			<option value="hvr-grow-shadow" 
-			<?php
-			if ( $image_hover_effect_four == 'hvr-grow-shadow' ) {
-				echo 'selected=selected';}
-			?>
-			><?php esc_html_e( 'Grow Shadow', 'new-photo-gallery' ); ?></option>
-			<option value="hvr-float-shadow" 
-			<?php
-			if ( $image_hover_effect_four == 'hvr-float-shadow' ) {
-				echo 'selected=selected';}
-			?>
-			><?php esc_html_e( 'Float Shadow', 'new-photo-gallery' ); ?></option>
-			<option value="hvr-glow" 
-			<?php
-			if ( $image_hover_effect_four == 'hvr-glow' ) {
-				echo 'selected=selected';}
-			?>
-			><?php esc_html_e( 'Glow', 'new-photo-gallery' ); ?></option>
-			<option value="hvr-box-shadow-outset" 
-			<?php
-			if ( $image_hover_effect_four == 'hvr-box-shadow-outset' ) {
-				echo 'selected=selected';}
-			?>
-			><?php esc_html_e( 'Box Shadow Outset', 'new-photo-gallery' ); ?></option>
-			<option value="hvr-box-shadow-inset" 
-			<?php
-			if ( $image_hover_effect_four == 'hvr-box-shadow-inset' ) {
-				echo 'selected=selected';}
-			?>
-			><?php esc_html_e( 'Box Shadow Inset', 'new-photo-gallery' ); ?></option>
-		</optgroup>
-	</select><br>
-	<p class="he_two gal_settings"><?php esc_html_e( 'Set an image/photo hover effect on gallery.', 'new-photo-gallery' ); ?></p>
-</div>
-<!-- End Hover Effect Settings -->
-
-<div>
-	<p class="bg-title"><?php esc_html_e( '6. Effect Types On Change Image', 'new-photo-gallery' ); ?></p></br>
-	<?php
-	if ( isset( $gallery_settings['transition_effects'] ) ) {
-		$transition_effects = $gallery_settings['transition_effects'];
-	} else {
-		$transition_effects = 'lg-fade';
-	}
-	?>
-	<select id="transition_effects" name="transition_effects" class="form-control">
-		<option value="none" 
-		<?php
-		if ( $transition_effects == 'none' ) {
-			echo 'selected=selected';}
-		?>
-		><?php esc_html_e( 'None', 'new-photo-gallery' ); ?></option>
-		<option value="lg-slide" 
-		<?php
-		if ( $transition_effects == 'lg-slide' ) {
-			echo 'selected=selected';}
-		?>
-		>Slide</option>
-		<option value="lg-fade" 
-		<?php
-		if ( $transition_effects == 'lg-fade' ) {
-			echo 'selected=selected';}
-		?>
-		>Fade</option>
-		<option value="lg-zoom-in" 
-		<?php
-		if ( $transition_effects == 'lg-zoom-in' ) {
-			echo 'selected=selected';}
-		?>
-		>Zoom In</option>
-		<option value="lg-zoom-in-big" 
-		<?php
-		if ( $transition_effects == 'lg-zoom-in-big' ) {
-			echo 'selected=selected';}
-		?>
-		>Zoom In Big Effect</option>
-	</select><br>
-	<p><?php esc_html_e( 'Select custom effects for photo image gallery.', 'new-photo-gallery' ); ?></p>
-</div>
-
-<div>
-	<p class="bg-title"><?php esc_html_e( '7. Thumbnails Spacing', 'new-photo-gallery' ); ?></p><br>
-	<p class="switch-field em_size_field">
-		<?php
-		if ( isset( $gallery_settings['thumbnails_spacing'] ) ) {
-			$thumbnails_spacing = $gallery_settings['thumbnails_spacing'];
-		} else {
-			$thumbnails_spacing = 1;
-		}
-		?>
-		<input type="radio" name="thumbnails_spacing" id="thumbnails_spacing1" value="1" 
-		<?php
-		if ( $thumbnails_spacing == 1 ) {
-			echo 'checked=checked';}
-		?>
-		>
-		<label for="thumbnails_spacing1"><?php esc_html_e( 'Yes', 'new-photo-gallery' ); ?></label>
-		<input type="radio" name="thumbnails_spacing" id="thumbnails_spacing2" value="0" 
-		<?php
-		if ( $thumbnails_spacing == 0 ) {
-			echo 'checked=checked';}
-		?>
-		>
-		<label for="thumbnails_spacing2"><?php esc_html_e( 'No', 'new-photo-gallery' ); ?></label>
-		<p><?php esc_html_e( 'Hide gap / margin / padding / spacing between gallery thumbnails.', 'new-photo-gallery' ); ?></p>
-	</p>
-</div>
-
-<div>
-	<p class="bg-title"><?php esc_html_e( '8. Custom CSS', 'new-photo-gallery' ); ?></p></br>
-	<?php
-	if ( isset( $gallery_settings['custom-css'] ) ) {
-		$custom_css = $gallery_settings['custom-css'];
-	} else {
-		$custom_css = '';
-	}
-	?>
-	<textarea name="custom-css" id="custom-css" style="width: 100%; height: 120px;" placeholder="Type direct CSS code here. Don't use <style>...</style> tag."><?php echo $custom_css; ?></textarea><br>
-	<p><?php esc_html_e( 'Apply own css on photo image gallery and dont use style tag.', 'new-photo-gallery' ); ?></p>
-</div>
-
-<?php wp_nonce_field( 'lg_save_settings', 'lg_save_nonce' ); ?>
 
 <script>
-//hover effect hide and show 
-	var effect_type = jQuery('input[name="image_hover_effect_type"]:checked').val();
-	if(effect_type == "no") {
-		jQuery('.he_one').hide();
-		jQuery('.he_two').hide();
-	}
-	
-	if(effect_type == "sg") {
-		jQuery('.he_one').hide();
-		jQuery('.he_two').show();
-	}
-	
-	//on change effect
-	jQuery(document).ready(function() {
-		// image hover effect hide show
-		jQuery('input[name="image_hover_effect_type"]').change(function(){
-			var effect_type = jQuery('input[name="image_hover_effect_type"]:checked').val();
-			if(effect_type == "no") {
-				jQuery('.he_one').hide();
-				jQuery('.he_two').hide();
+	jQuery(document).ready(function ($) {
+		// Hover effect toggle
+		$('input[name="image_hover_effect_type"]').change(function () {
+			if ($(this).val() == 'sg') {
+				$('.he_two').slideDown();
+			} else {
+				$('.he_two').slideUp();
 			}
-			if(effect_type == "sg") {
-				jQuery('.he_one').hide();
-				jQuery('.he_two').show();
-			}
-		})	
+		});
+
+		// Initialize Color Picker if available
+		if ($('.wp-color-picker').length) {
+			$('.wp-color-picker').wpColorPicker();
+		}
 	});
-
-// start pulse on page load
-	function pulseEff() {
-		jQuery('#shortcode').fadeOut(600).fadeIn(600);
-	};
-	var Interval;
-	Interval = setInterval(pulseEff,1500);
-
-	// stop pulse
-	function pulseOff() {
-		clearInterval(Interval);
-	}
-	// start pulse
-	function pulseStart() {
-		Interval = setInterval(pulseEff,1500);
-	}
 </script>
-	<hr>
-	<div class="row" style="text-align: center;">
-	<h1>Upgrade To Photo Gallery Premium in Just <strong>$15</strong></h1>
-	<br>
-	<a href="https://awplife.com/wordpress-plugins/photo-gallery-premium/" target="_blank" class="button button-primary button-hero load-customize hide-if-no-customize">Photo Gallery Premium Version Details</a>
-	<a href="https://awplife.com/demo/photo-gallery-premium/" target="_blank" class="button button-primary button-hero load-customize hide-if-no-customize">Photo Gallery Premium Plugin Live Demo</a>
-	</div>
-	<style>
-	.awp_bale_offer {
-		padding:30px;
-	}
-	.awp_bale_offer h1 {
-		font-size:35px;
-		color:#008EC2;
-	}
-	.awp_bale_offer h3 {
-		font-size:25px;
-		color:#008EC2;
-	}
-	.awplife-free-plugins { 
-		margin: 5px !important;
-	}
-	</style>
-	<div class="row awp_bale_offer" style="text-align: center;">
-		<hr />
-		<div>
-			<h1>Plugin's Bundle Offer</h1>
-			<h3>Get All 23 Premium Plugin ( Personal License) in just $179 </h3>
-			<h3><strike>$399</strike> For $179 Only</h3>
-		</div>
-		<div class="">
-			<a href="https://awplife.com/account/signup/all-premium-plugins" target="_blank" class="button button-primary button-hero">BUY NOW</a>
-		</div>
-	</div>
-	<hr />
-	<div style="text-align: center;">
-		<p>
-			<h2>Try Out Other Free WordPress Plugins</h2>
-			<br>
-			<a href="https://wordpress.org/plugins/new-album-gallery/" target="_blank" class="button button-primary awplife-free-plugins">Album Gallery</a>
-			<a href="https://wordpress.org/plugins/wp-flickr-gallery/" target="_blank" class="button button-primary awplife-free-plugins">Flickr gallery</a>
-			<a href="https://wordpress.org/plugins/animated-live-wall/" target="_blank" class="button button-primary awplife-free-plugins">Animated Live Wall</a>
-			<a href="https://wordpress.org/plugins/blog-filter/" target="_blank" class="button button-primary awplife-free-plugins">Blog Filter</a>
-			<a href="https://wordpress.org/plugins/new-contact-form-widget/" target="_blank" class="button button-primary awplife-free-plugins">Contact Form Widget</a>
-			<a href="https://wordpress.org/plugins/customizer-login-page/" target="_blank" class="button button-primary awplife-free-plugins">Custom Login Page</a>
-			<a href="https://wordpress.org/plugins/event-monster/" target="_blank" class="button button-primary awplife-free-plugins">Event Monster</a>
-			<a href="https://wordpress.org/plugins/floating-news-headline/" target="_blank" class="button button-primary awplife-free-plugins">Floating News Headline</a>
-			<a href="https://wordpress.org/plugins/new-photo-gallery/" target="_blank" class="button button-primary awplife-free-plugins">Photo Gallery</a>
-			<a href="https://wordpress.org/plugins/new-grid-gallery/" target="_blank" class="button button-primary awplife-free-plugins">Grid Gallery</a>
-			<a href="https://wordpress.org/plugins/hash-converter/" target="_blank" class="button button-primary awplife-free-plugins">Hash Converter</a>
-			<a href="https://wordpress.org/plugins/new-image-gallery/" target="_blank" class="button button-primary awplife-free-plugins">Image Gallery</a>
-			<a href="https://wordpress.org/plugins/media-slider/" target="_blank" class="button button-primary awplife-free-plugins">Media Slider</a>
-			<a href="https://wordpress.org/plugins/modal-popup-box/" target="_blank" class="button button-primary awplife-free-plugins">Modal Popup Box</a>
-			<a href="https://wordpress.org/plugins/portfolio-filter-gallery/" target="_blank" class="button button-primary awplife-free-plugins">Portfolio Filter Gallery</a>
-			<a href="https://wordpress.org/plugins/abc-pricing-table/" target="_blank" class="button button-primary awplife-free-plugins">Pricing Table</a>
-			<a href="https://wordpress.org/plugins/facebook-likebox-widget-and-shortcode/" target="_blank" class="button button-primary awplife-free-plugins">Facebook Likebox</a>
-			<a href="https://wordpress.org/plugins/responsive-slider-gallery/" target="_blank" class="button button-primary awplife-free-plugins">Responsive Slider Gallery</a>
-			<a href="https://wordpress.org/plugins/right-click-disable-or-ban/" target="_blank" class="button button-primary awplife-free-plugins">Right Click Ban And Disable</a>
-			<a href="https://wordpress.org/plugins/slider-responsive-slideshow/" target="_blank" class="button button-primary awplife-free-plugins">Slider Responsive Slideshow</a>
-			<a href="https://wordpress.org/plugins/wp-instagram-feed-awplife/" target="_blank" class="button button-primary awplife-free-plugins">Instagram Feed</a>
-			<a href="https://wordpress.org/plugins/new-social-media-widget/" target="_blank" class="button button-primary awplife-free-plugins">Social Media Icon Widget</a>
-			<a href="https://wordpress.org/plugins/insta-type-gallery/" target="_blank" class="button button-primary awplife-free-plugins">Instagram Type Gallery</a>
-			<a href="https://wordpress.org/plugins/testimonial-maker/" target="_blank" class="button button-primary awplife-free-plugins">Testimonial</a>
-			<a href="https://wordpress.org/plugins/new-video-gallery/" target="_blank" class="button button-primary awplife-free-plugins">Video Gallery</a>
-			<a href="https://wordpress.org/plugins/weather-effect/" target="_blank" class="button button-primary awplife-free-plugins">Weather Effect</a>
-		</p>
-	</div>

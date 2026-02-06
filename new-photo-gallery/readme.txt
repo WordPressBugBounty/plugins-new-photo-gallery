@@ -1,163 +1,152 @@
-=== Photo Gallery - Responsive Photo Gallery, Image Gallery, Portfolio Gallery, Logo Gallery And Team Gallery ===
+=== Photo Gallery for Images ===
 Contributors: awordpresslife, razipathhan, hanif0991, muhammadshahid, fkfaisalkhan007, sharikkhan007, zishlife, FARAZFRANK
 Donate link: https://paypal.me/awplife
-Tags: portfolio gallery, photo gallery, responsive gallery, album gallery, image gallery
+Tags: photo gallery, image gallery, responsive gallery, lightbox gallery, portfolio gallery
 Requires at least: 4.0
-Tested up to: 6.8.2
-Stable tag: 1.5.2
+Tested up to: 6.9
+Stable tag: 1.5.4
+Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Create Responsive Photo Gallery, Image Gallery, Portfolio Gallery, Lightbox Gallery.
+Display photos in responsive grid and lightbox layouts. Build image galleries, portfolios, and video galleries.
 
 == Description ==
 
-Make Photo, Image, Picture, Grid, Lightbox Portfolio, Logo Gallery using photo gallery plugin.
+New Photo Gallery offers a versatile solution for creating and managing image collections on your WordPress website. This plugin enables you to build responsive photo galleries that adjust seamlessly to different screen resolutions, ensuring a consistent viewing experience across desktop and mobile devices.
 
-Photo Gallery is an advanced plugin with a list of tools and options for adding images to different views. This is a fully responsive plugin. The product includes the plugin for adding image galleries to posts and pages, as well as multiple widgets. You can add images with titles, organize the galleries into different photo albums.
+= Check Live Demos =
 
-It allows to upload the unlimited number of pictures and create as many photo albums as you need. Want to include videos? The plugin comes with video support, that will enable you to create a YouTube gallery quick and easy.
-
-Change the way you display images with lightbox functionality. The image lightbox galleries are fully responsive and will display the large version of the image in the lightbox with thumbnails of the rest of the images in the form of image carousel. Lightbox gallery also supports full-screen gallery mode.
-
-**Check Free Plugin Demo - <a href="https://awplife.com/demo/photo-gallery-free-wordpress-plugin/">Click Here</a>**
-
-**Upgrade To Premium Plugin - <a href="https://awplife.com/wordpress-plugins/photo-gallery-wordpress-plugin/">Click Here</a>**
-
-**Check Premium Plugin Demo - <a href="https://awplife.com/demo/photo-gallery-premium/">Click Here</a>**
-
-**How to use plugin?**
-
-Download & install the plugin into your site. After successful installation of the plugin go to plugins "DOC" menu for help and instructions.
+**[Photo Gallery Free](https://awplife.com/demo/photo-gallery-free-wordpress-plugin/)** | **[Photo Gallery Premium](https://awplife.com/demo/photo-gallery-premium/)** | **[Where To Buy](https://awplife.com/wordpress-plugins/photo-gallery-wordpress-plugin/)**
 
 https://www.youtube.com/watch?v=nAhzDfCTl6M
 
-**Photo Gallery Plugin** enables you to create several media such as image gallery, photo albums also simple picture to an Photo lightbox, YouTube video, Vimeo video, WordPress media uploaded video.
+The core functionality centers on a grid-based display that keeps your images organized. When a visitor clicks on an item, it opens in a lightbox, providing a focused view of the image or video. This feature is particularly useful for portfolios, product showcases, or event albums where visual detail is important.
 
-It is an advanced plugin with a list of tools and options for adding and editing images for different views. This is a fully responsive gallery plugin. The product includes plugin for adding image galleries and albums to posts and pages, as well as multiple widgets. You can add images, providing detailed gallery descriptions and tags, organize the galleries into different photo albums.
+Beyond standard images, the plugin supports video content from YouTube and Vimeo, allowing you to create mixed media galleries. You can also utilize the layout options to present team members or partner logos in a structured format. The interface is designed to be intuitive, letting you upload media and generate shortcodes without complex configuration.
 
-The responsive photo gallery allows to upload unlimited number of pictures and create as many photo albums as you need.
+= What You Can Create =
 
-> #### Photo Gallery Free Plugin Demo
->
->
+*   **Photo Gallery** - Organize your images in a clean, structured grid layout.
+*   **Portfolio Showcase** - Present your work professionally with optional hover effects.
+*   **Lightbox Display** - Enable users to view images in a full-screen overlay.
+*   **Video Gallery** - Integrate content directly from YouTube and Vimeo.
+*   **Team Layouts** - Introduce team members with photos and bios.
+*   **Brand Displays** - Show client logos or partner brands effectively.
 
-**Get Premium Version With More Features**
+= Key Features (Free Version) =
 
-* Easy & Simple
-* Responsive Gallery
-* Grid Gallery
-* Masonry Gallery
-* Link Gallery
-* Map Gallery
-* Photo Gallery
-* YouTube Video Gallery
-* Vimeo Video Gallery
-* WordPress Video Gallery
-* Multiple Column Layouts
-* Fixed Size Light Box
-* Show Thumbnail
-* Background Color Events
-* Bootstrap 3.3.6 Based
-* 30 Hover Effect 
-* Shadow and Glow Transitions Effects
-* Transitions Effects Into Thumbnail
-* Thumbnail Spacing
-* Image Title
-* Title Color Picker
-* Lightbox Tool Color Picker 
-* Open Image Link URL
-* Gallery in Post
-* Gallery in Page
-* SEO Friendly Gallery
-* Thumbnail Size & Quality Setting
-* Navigation Error in Lightbox Preview
-* Simple & User-Friendly Custom Plugin Dashboard
-* Create Unlimited Galleries With Unlimited Images
-* Custom CSS
-* Easy To Implement Anywhere Into WordPress
-* Easily Customization
-* Fast, Friendly & Quality Support
+*   Responsive grid system that adapts to any screen size.
+*   Lightbox functionality for viewing images and videos without leaving the page.
+*   Create unlimited galleries with no restriction on the number of images.
+*   Support for YouTube and Vimeo video embedding.
+*   Image protection for gallery
+*   Grayscale effect for images.
+*   Options to add titles and descriptions to your media.
+*   Multiple column configurations (ranging from 2 to 6 columns).
+*   Hover effects for gallery thumbnails.
+*   Shortcode system for easy insertion into posts and pages.
+*   Translation support for multilingual websites.
 
-> #### Photo Gallery Premium Plugin Demo
+= Premium Features =
 
-> * [Photo Gallery Premium](https://awplife.com/demo/photo-gallery-premium/ "Photo Gallery Premium")
-> * [Grid Gallery Premium](https://awplife.com/demo/photo-gallery-premium/grid-gllery/ "Grid Gallery Premium")
-> * [Load More Gallery](https://awplife.com/demo/photo-gallery-premium/load-more/ "Load More Gallery")
-> * [Column Layout Demo](https://awplife.com/demo/photo-gallery-premium/column-layout-demo/ "Column Layout Demo")
-> * [Thumbnails Spacing](https://awplife.com/demo/photo-gallery-premium/thumbnails-spacing/ "Thumbnails Spacing")
-> * [Video Gallery](https://awplife.com/demo/photo-gallery-premium/video-gallery/ "Video Gallery")
-> * [Masonry Gallery](https://awplife.com/demo/photo-gallery-premium/masonry-gallery/ "Masonry Gallery")
+Upgrade to the premium version for additional capabilities:
+
+*   **Masonry Layout** - Utilize a dynamic Pinterest-style grid for varied image aspect ratios.
+*   **Advanced Hover Effects** - Choose from 30 distinct animation styles for thumbnails.
+*   **Load More Pagination** - Implement a "Load More" button for large collections.
+*   **Map Integration** - Associate images with location data on a map.
+*   **Custom Links** - Attach specific URLs to individual gallery items.
+*   **Fixed Dimension Lightbox** - maintain consistent sizing for the lightbox viewer.
+*   **Transition Effects** - Smooth 2D animations when enhanced gallery navigation.
+*   **Visual Enhancements** - Apply shadow and glow effects to thumbnails.
+*   **Interface Customization** - Adjust colors for the lightbox tool and background.
+*   **Custom CSS** - Apply your own style rules for precise control.
+*   **Priority Support** - Receive direct assistance for technical inquiries.
+
+[Get Photo Gallery Premium](https://awplife.com/wordpress-plugins/photo-gallery-wordpress-plugin/)
+
+= How to Use =
+
+1.  Navigate to **Photo Gallery > Add New** in your WordPress dashboard.
+2.  Provide a title for your new gallery.
+3.  Upload your desired images using the standard media uploader.
+4.  Adjust the gallery settings, such as column count and spacing.
+5.  Copy the shortcode generated by the plugin.
+6.  Paste this shortcode into any page or post editor.
+7.  Publish the page to view your live gallery.
 
 == Installation ==
 
-Install  New Photo Gallery either via the WordPress.org plugin directory or by uploading the files to your server.
+= Automatic Installation =
 
-After activating New Photo Gallery plugin, go to plugin menu.
+1.  Go to **Plugins > Add New** in your WordPress dashboard.
+2.  Search for "Photo Gallery Starter".
+3.  Click **Install Now** and then **Activate**.
 
-Login into WordPress admin dashboard. Go to menu: New Photo Gallery --> Add New Photo Gallery
+= Manual Installation =
 
-Create gallery & configure settings and save.
+1.  Download the plugin zip file.
+2.  Go to **Plugins > Add New > Upload Plugin**.
+3.  Choose the zip file and click **Install Now**.
+4.  Activate the plugin.
 
-Copy shortcode and paste shortcode into any Page / Post. And view page for gallery output.
+= After Activation =
 
-That's it. You're ready to go!
+1.  Navigate to **Photo Gallery** in your admin menu.
+2.  Click **Add New** to create your first gallery.
+3.  Upload images and configure settings.
+4.  Use the shortcode in your pages or posts.
 
-= Recommended Plugins =
-
-The following are other recommended plugins by the author:
-
-* [Portfolio Filter Gallery](https://WordPress.org/plugins/portfolio-filter-gallery/ "Best Portfolio Filter Gallery") - The Gallery Plugin to create awesome Portfolio Filter Gallery Plugin in minutes. 
-
-**Buy Premium Plugin - <a href="https://awplife.com/WordPress-plugins/portfolio-filter-gallery-premium/">Click Here</a>**
-
-* [Media Slider](https://WordPress.org/plugins/media-slider/ "Best Media Slider") - The Media Slider Plugin to create Media / Video Slider Gallery Plugin in minutes. 
-
-**Buy Premium Plugin - <a href="https://awplife.com/WordPress-plugins/media-slider-premium/">Click Here</a>**
-
-* [Best Weather Effect Plugin](https://WordPress.org/plugins/weather-effect/ "Best Weather Effect Plugin") - Very Simple And Easy To Design Your Sites With Multiple Effects.
-
-**Buy Premium Plugin - <a href="https://awplife.com/WordPress-plugins/weather-effect-premium/">Click Here</a>**
-
-* [Best Grid Gallery Plugin](https://WordPress.org/plugins/new-grid-gallery/ "Best Grid Galley Plugin") - Easy Grid Gallery Widget - Displaying your image in Page & Post widget/sidebar area with very easy.Allows you to customize it to looking exactly what you want.
-
-**Buy Premium Plugin - <a href="https://awplife.com/WordPress-plugins/grid-gallery-premium/">Click Here</a>**
-
-* [Social Media Plugin](https://WordPress.org/plugins/new-social-media-widget/ "Social Media") - Display your Social Media Plugin into Widget/Sidebar in WordPress site with very easily.
-
-**Buy Premium Plugin - <a href="https://awplife.com/WordPress-plugins/social-media-widget-premium//">Click Here</a>**
-
-* [Image Gallery Plugin](https://WordPress.org/plugins/new-image-gallery/ "Image Gallery Plugin") - Gallery Lightbox - Displays all gallery images into the lightbox slider in just a few seconds.
-
-**Buy Premium Plugin - <a href="https://awplife.com/WordPress-plugins/image-gallery-premium/">Click Here</a>**
-
-* [Slider Plugin](https://WordPress.org/plugins/responsive-slider-gallery/ "Slider Plugin") - Fully Responsive Slider Gallery For Wordpress ,You can Show Slider Into Page/Post & Widget/Sidebar By Generate Shortcode.
-
-**Buy Premium Plugin - <a href="https://awplife.com/WordPress-plugins/responsive-slider-gallery-premium/">Click Here</a>**
-
-* [Contact Form](https://WordPress.org/plugins/new-contact-form-widget/ "Contact Form Plugin") - Contact Form Widget Shortcode Plugin For WordPress.
-
-**Buy Premium Plugin - <a href="http://awplife.com/WordPress-plugins/contact-form-premium/">Click Here</a>**
-
-* [Best Responsive Slider Plugin](https://WordPress.org/plugins/slider-responsive-slideshow/ "Responsive Slider Plugin") - Fully Responsive Light Weight Easy Powerful WordPress Slider Slideshow Plugin.
-
-**Buy Premium Plugin - <a href="https://awplife.com/WordPress-plugins/slider-responsive-slideshow-premium//">Click Here</a>**
-
-* [Video Gallery Plugin](https://WordPress.org/plugins/new-video-gallery/ "Best Video Gallery Plugin") - The Best Responsive video gallery For Wordpress.
-
-**Buy Premium Plugin - <a href="https://awplife.com/WordPress-plugins/video-gallery-premium/">Click Here</a>**
-
-* [Facebook Like Share Follow Button](https://WordPress.org/plugins/new-facebook-like-share-follow-button/ "Facebook Like Share Follow Button") - Display your Facebook Like Share Follow Button Plugin into Page/Post & Widget/Sidebar in WordPress sites with very easily.
- 
-* [Facebook Like box Plugin](https://WordPress.org/plugins/facebook-likebox-widget-and-shortcode/ "Facebook Likebox Plugin") - Facebook Light Box Plugin For Wordpress 
- 
 == Frequently Asked Questions ==
 
-Have any queries?
+= How do I create a photo gallery? =
 
-Please post your question on plugin support forum
+Go to Photo Gallery > Add New in your dashboard. Enter a title, upload your images, configure the display settings, and copy the shortcode. Paste this shortcode into any page or post to display your gallery.
 
-https://WordPress.org/support/plugin/new-photo-gallery/
+= Can I add multiple galleries to one page? =
+
+Yes, you can add multiple galleries to a single page. Simply paste the respective shortcodes into your page content where you want them to appear.
+
+= Is the gallery responsive on mobile devices? =
+
+Yes, the galleries are designed to be responsive. The grid layout automatically adjusts to fit the screen size, ensuring compatibility with desktops, tablets, and smartphones.
+
+= How do I add videos to my gallery? =
+
+When adding items to your gallery, you can input a YouTube or Vimeo URL instead of uploading an image. The plugin will fetch the thumbnail and play the video within the lightbox.
+
+= Can I customize the lightbox appearance? =
+
+The free version provides a standard lightbox style. The premium version allows for further customization, including color options for tools and background events.
+
+= What image formats are supported? =
+
+The plugin supports standard web image formats such as JPG, JPEG, PNG, GIF, and WebP.
+
+= How do I change the number of columns? =
+
+You can adjust the column layout in the gallery settings. Options range from 2 to 6 columns to suit your layout needs.
+
+= Can I use the gallery in widget areas? =
+
+Yes, the shortcode can be placed in any widget area that accepts shortcodes, allowing you to display galleries in sidebars or footers.
+
+= Does the plugin affect website loading speed? =
+
+The plugin is designed for efficiency, loading scripts only when necessary. For optimal performance with large galleries, we recommend using properly optimized images.
+
+= How do I get support for this plugin? =
+
+For users of the free version, please use the [plugin support forum](https://wordpress.org/support/plugin/new-photo-gallery/). Premium users have access to priority support through our website.
+
+= Can I translate the plugin to my language? =
+
+Yes, the plugin is translation-ready. You can use translation tools or create your own language files to localize the interface.
+
+= How do I display only specific images? =
+
+The shortcode currently displays all images contained within that specific gallery. To show different sets of images, you should create separate galleries for each set.
 
 == Screenshots ==
 
@@ -177,287 +166,70 @@ https://WordPress.org/support/plugin/new-photo-gallery/
 
 == Changelog ==
 
+= 1.5.4 =
+* Tested with WordPress 6.9
+* New: Redesigned Settings Page with modern Card-based UI.
+* Fixed: Typos in function names and shortcode logic.
+* Fixed: Deprecated jQuery load event.
+* Improvement: Removed unused code and variables.
+* Improvement: Standardized code structure (removed closing PHP tag).
+
+= 1.5.3 =
+* Fixed translation loading warning for WordPress 6.7+
+* Updated default gallery settings (3 column layout, full size thumbnails)
+* Default thumbnails spacing set to No
+
 = 1.5.2 =
-* Testing plugin for wordpress 6.8.2
+* Tested with WordPress 6.8.3
 
 = 1.5.1 =
-* Testing plugin for wordpress 6.8.1
+* Tested with WordPress 6.8.1
 
 = 1.5.0 =
-* Bug Fix: Fixed.
+* Bug fixes and improvements
 
 = 1.4.9 =
-* Bug Fix: Fixed.
-* Twenty Twenty-Five Conflict issue fixed
+* Fixed Twenty Twenty-Five theme compatibility issue
+* Bug fixes
 
 = 1.4.8 =
-* Bug Fix: Fixed.
-* docs menu remove 
-
+* Removed deprecated docs menu
+* Bug fixes
 
 = 1.4.7 =
-* Bug Fix: Fixed.
-* Testing plugin for wordpress 6.7.1
-* Vimeo video poster fatch
+* Added Vimeo video poster fetch functionality
+* Tested with WordPress 6.7.1
+* Bug fixes
 
 = 1.4.6 =
-* Bug Fix: Fixed.
-* Testing plugin for wordpress 6.6.2
+* Tested with WordPress 6.6.2
+* Bug fixes
 
 = 1.4.5 =
-
-* Testing plugin for wordpress 6.6.1
+* Tested with WordPress 6.6.1
 
 = 1.4.4 =
-
-* Testing plugin for wordpress 6.5.4
-
+* Tested with WordPress 6.5.4
 
 = 1.4.3 =
-
-* Bug Fix: Fixed.
-* Additional changes: wordpress security issues update
-* Testing plugin for wordpress 6.5.3
+* Security improvements
+* Tested with WordPress 6.5.3
+* Bug fixes
 
 = 1.4.2 =
-
-* Bug Fix: Fixed.
-* Additional changes: wordpress security issues update
-* Testing plugin for wordpress 6.5.2
+* Security improvements
+* Tested with WordPress 6.5.2
+* Bug fixes
 
 = 1.4.1 =
-
-* Bug Fix: Fixed.
-* Additional changes: None.
-* Testing plugin for wordpress 6.4.3
+* Tested with WordPress 6.4.3
+* Bug fixes
 
 = 1.4.0 =
-
-* Bug Fix: Fixed.
-* Additional changes: None.
-* Testing plugin for wordpress 6.4.2
-
-= 1.3.9 =
-
-* Bug Fix: Fixed.
-* Additional changes: None.
-* Testing plugin for wordpress 6.4.2
-
-= 1.3.8 =
-* Tested WordPress version 6.3.2
-
-= 1.3.7 =
-* Tested WordPress version 6.3.1
-
-= 1.3.6 =
-* Tested WordPress version 6.2.2
-
-= 1.3.5 =
-* Tested WordPress version 6.2.1
-* Fixed Codding bugs.
-
-= 1.3.4 =
-* Tested WordPress version 6.1.1
-
-= 1.3.3 =
-* Tested WordPress version 6.0.3
-* Fixed Codding bugs.
-
-= 1.3.2 =
-* Tested WordPress version 6.0.3
-* Fixed Codding bugs.
-
-= 1.3.1 =
-* WordPress security issues fixed.
-
-= 1.3.0 =
-* Enhancements: tested for WordPress 6.0.1
-
-= 1.2.9 =
-* Enhancements: tested for WordPress 6.0
-
-= 1.2.8 =
-* Enhancements: tested for WordPress 5.9.3
-
-= 1.2.7 =
-* Enhancements: tested for WordPress 5.9
-
-= 1.2.6 =
-* Enhancements: tested for WordPress 5.8.2
-* wordpress security issues fixed
-
-= 1.2.5 =
-* Enhancements: tested for WordPress 5.8.1
-
-= 1.2.4 =
-* Fixed Security issues.
-* Bug Fix: Fixed.
-* Enhancements: Yes,
-
-= 1.2.3 =
-* Bug Fix: Yes
-
-= 1.2.2 =
-* Enhancements: tested for WordPress 5.7.2
-
-= 1.2.1 =
-* Bootstrap column issue fixed.
-
-= 1.2.0 =
-* Enhancements: tested for WordPress 5.7
-
-= 1.1.10 =
-* Enhancements: tested for WordPress 5.6.2
-
-= 1.1.9 =
-* Enhancements: tested for WordPress 5.6
-* Bug Fix: Yes
-
-= 1.1.8 =
-* Enhancements: tested for WordPress 5.5.3
-* Bug Fix: Yes
-
-= 1.1.7 =
-* Enhancements: tested for WordPress 5.5.3
-
-= 1.1.6 =
-* Enhancements: tested for WordPress 5.5.1
-
-= 1.1.5 =
-* Enhancements: tested for WordPress 5.5
-
-= 1.1.4 =
-* Enhancements: tested for WordPress 5.4.2
-
-= 1.1.3 =
-* Enhancements: tested for WordPress 5.4.1
-
-= 1.1.2 =
-* Plugin settings updated
-* CSS and JS slug updated
-* Readme update
-* Translation strings updated
-* UI design updated
-* Permalink hide
-* Typos fixed
-* Light Box library updated to v1.6.12
-* Image alt added
-* Transition effects with spacing now working
-
-= 1.1.1 =
-* Enhancements: tested for WordPress 5.3.2
-
-= 1.1.0 =
-* Enhancements: tested for WordPress 5.3.2
-
-= 1.0.10 =
-* Enhancements: tested for WordPress 5.2.3
-
-= 1.0.9 =
-* Enhancements: tested for WordPress 5.2.3
-
-= 1.0.8 =
-* Enhancements: tested for WordPress 5.2.2
-* Bug Fix: Yes
-* Additional changes: None.
-
-= 1.0.7 =
-* Enhancements: tested for WordPress 5.2.2
-* Bug Fix: Yes
-* Additional changes: None.
-
-= 1.0.6 =
-* Enhancements: tested for WordPress 5.2.2
-* Bug Fix: Yes
-* Additional changes: None.
-
-= 1.0.5 =
-* Enhancements: tested for WordPress 5.2.1
-* Bug Fix: Yes
-* Additional changes: None.
-
-= 1.0.4 =
-* Enhancements: tested for WordPress 5.2.1
-* Bug Fix: Yes
-* Additional changes: None.
-
-= 1.0.3 =
-* Enhancements: tested for WordPress 5.1.1
-* Bug Fix: Yes
-* Additional changes: None.
-
-= 1.0.2 =
-* Enhancements: tested for WordPress 5.1.1
-* Bug Fix: Yes
-* Additional changes: None.
-
-= 1.0.1 =
-
-* Enhancements: tested for WordPress 5.0.3
-* Bug Fix: Yes
-* Additional changes: None.
-
-= 1.0.0 =
-
-* Enhancements: tested for WordPress 5.0.3
-* Bug Fix: Yes
-* Additional changes: None.
-
-= 0.3.7 =
-
-* Enhancements: tested for WordPress 5.0.3
-* Bug Fix: Yes
-* Additional changes: None.
-
-= 0.3.6 =
-
-* Enhancements: tested for WordPress 5.0.2
-* Bug Fix: Yes
-* Additional changes: None.
-
-= 0.3.5 =
-
-* Enhancements: tested for WordPress 5.0.2
-* Bug Fix: Yes
-* Additional changes: None.
-
-= 0.3.4 =
-
-* Enhancements: tested for WordPress 5.0.1
-* Bug Fix: None
-* Additional changes: None.
-
-= 0.3.3 =
-
-* Enhancements: tested for WordPress 4.9.8
-* Bug Fix: None
-* Additional changes: custome shortcode copy function added.
-
-= 0.3.2 =
-
-* Enhancements: tested for WordPress 4.9.8
-* Bug Fix: None
-* Additional changes: Changed Sites Link
-
-= 0.3.1 =
-
-* Enhancements: tested for WordPress 4.9.8
-* Bug Fix: Yes
-* Additional changes: No.
-
-= 0.3.0 =
-
-* Enhancements: tested for WordPress 4.9.8
-* Bug Fix: None
-* Additional changes: yes, Added hindi translation file added.
-
-= 0.2.19 =
-
-* Enhancements: tested for WordPress 4.9
-* Bug Fix: None
-* Additional changes: yes, Added theme menu.
-
+* Tested with WordPress 6.4.2
+* Bug fixes
 
 == Upgrade Notice ==
 
-This is an initial release. Start with version 0.0.1. and share your feedback <a href="https://WordPress.org/support/view/plugin-reviews/new-photo-gallery/">here</a>.
+= 1.5.2 =
+Tested with WordPress 6.8.3. Update recommended for compatibility.
