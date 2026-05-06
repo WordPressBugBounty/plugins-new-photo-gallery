@@ -1,19 +1,19 @@
-=== Photo Gallery for Images ===
+=== Photo Gallery - Image Gallery & Portfolio ===
 Contributors: awordpresslife, razipathhan, hanif0991, muhammadshahid, fkfaisalkhan007, sharikkhan007, zishlife, FARAZFRANK
 Donate link: https://paypal.me/awplife
 Tags: photo gallery, image gallery, responsive gallery, lightbox gallery, portfolio gallery
 Requires at least: 4.0
 Tested up to: 6.9
-Stable tag: 1.5.4
+Stable tag: 1.5.5
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Display photos in responsive grid and lightbox layouts. Build image galleries, portfolios, and video galleries.
+Create a responsive Photo Gallery, stunning Image Gallery, and professional Portfolio in seconds.
 
 == Description ==
 
-New Photo Gallery offers a versatile solution for creating and managing image collections on your WordPress website. This plugin enables you to build responsive photo galleries that adjust seamlessly to different screen resolutions, ensuring a consistent viewing experience across desktop and mobile devices.
+New Photo Gallery helps you build a beautiful Photo Gallery and responsive Image Gallery. It is also perfect for showcasing a professional Portfolio on your WordPress site.
 
 = Check Live Demos =
 
@@ -21,18 +21,21 @@ New Photo Gallery offers a versatile solution for creating and managing image co
 
 https://www.youtube.com/watch?v=nAhzDfCTl6M
 
-The core functionality centers on a grid-based display that keeps your images organized. When a visitor clicks on an item, it opens in a lightbox, providing a focused view of the image or video. This feature is particularly useful for portfolios, product showcases, or event albums where visual detail is important.
+The plugin displays your Photo Gallery or Image Gallery in a clean grid. When users click an image, it opens in a modern popup window. This window is called a lightbox. It lets users view your images in full size.
 
-Beyond standard images, the plugin supports video content from YouTube and Vimeo, allowing you to create mixed media galleries. You can also utilize the layout options to present team members or partner logos in a structured format. The interface is designed to be intuitive, letting you upload media and generate shortcodes without complex configuration.
+You can also add videos from YouTube and Vimeo. This is great for a video gallery, business portfolio, and team pages. You can upload media and get shortcodes in seconds. No complex settings are needed.
 
-= What You Can Create =
+= Create a Stunning Photo Gallery =
 
-*   **Photo Gallery** - Organize your images in a clean, structured grid layout.
-*   **Portfolio Showcase** - Present your work professionally with optional hover effects.
-*   **Lightbox Display** - Enable users to view images in a full-screen overlay.
-*   **Video Gallery** - Integrate content directly from YouTube and Vimeo.
-*   **Team Layouts** - Introduce team members with photos and bios.
-*   **Brand Displays** - Show client logos or partner brands effectively.
+Display your photography in a beautiful grid. You can organize files in columns from two to six. This is great for event albums, travel blogs, or design archives. Visitors can browse your photos without any distractions. The responsive layout keeps everything perfectly aligned on every single screen size.
+
+= Organize an Advanced Image Gallery =
+
+Create unlimited galleries with zero restrictions. You can add titles, descriptions, and custom hover styles to each thumbnail. A built-in grayscale feature allows for a vintage look. With our optimized scripts, your image lists load very quickly. This ensures your visitors stay engaged.
+
+= Showcase a Professional Portfolio =
+
+Highlight your best creative projects cleanly. This layout is perfect for web designers, artists, and architects. You can easily merge images with YouTube and Vimeo video thumbnails. This creates a modern, mixed-media portfolio showcase. Users can copy shortcodes and publish pages in seconds.
 
 = Key Features (Free Version) =
 
@@ -100,9 +103,17 @@ Upgrade to the premium version for additional capabilities:
 
 == Frequently Asked Questions ==
 
-= How do I create a photo gallery? =
+= How do I create a Photo Gallery? =
 
 Go to Photo Gallery > Add New in your dashboard. Enter a title, upload your images, configure the display settings, and copy the shortcode. Paste this shortcode into any page or post to display your gallery.
+
+= Can I use this plugin to build an Image Gallery? =
+
+Yes, this plugin is an advanced Image Gallery builder. You can organize your images in grids with beautiful lightbox views.
+
+= How do I showcase a professional Portfolio? =
+
+You can create a custom Portfolio by selecting our responsive grid templates and choosing a multi-column layout.
 
 = Can I add multiple galleries to one page? =
 
@@ -165,6 +176,16 @@ The shortcode currently displays all images contained within that specific galle
 13. Photo Gallery And Video Gallery Settings Page
 
 == Changelog ==
+
+= 1.5.5 =
+* 2026-05-6
+* Security: Implemented secure Vimeo thumbnail API parsing and meta caching.
+* Compliance: Updated Custom Post Type slug to 'npg_gallery' with seamless auto-migration.
+* Compliance: Upgraded menu and post save capabilities from 'administrator' to 'manage_options'/'edit_post'.
+* Modernization: Replaced deprecated copy commands with navigator.clipboard API.
+* Housekeeping: Purged dead/unused assets (go-to-top, toggle-button, duplicate bootstrap, fontawesome fonts, old promotional assets).
+* Housekeeping: Excised TGMPA (TGM Plugin Activation) library to eliminate intrusive admin nags and reduce plugin weight by 126KB.
+* Feature: Added fully dynamic, cached, and translation-ready "Our Plugins" and "Our Themes" submenus matching WP.org standards.
 
 = 1.5.4 =
 * Tested with WordPress 6.9

@@ -1,15 +1,15 @@
 <?php
 /**
 @package New Photo Gallery
-Plugin Name: New Photo Gallery
-Plugin URI: https://awplife.com/wordpress-plugins/photo-gallery-premium/
-Description: new photo gallery plugin with lightbox preview for WordPress
-Version: 1.5.4
-Author: A WP Life
-Author URI: https://awplife.com/
-License: GPLv2 or later
-Text Domain: new-photo-gallery
-Domain Path: /languages
+ * Plugin Name: New Photo Gallery
+ * Plugin URI: https://awplife.com/wordpress-plugins/photo-gallery-premium/
+ * Description: new photo gallery plugin with lightbox preview for WordPress
+ * Version: 1.5.5
+ * Author: A WP Life
+ * Author URI: https://awplife.com/
+ * License: GPLv2 or later
+ * Text Domain: new-photo-gallery
+ * Domain Path: /languages
  */
 if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly
@@ -34,7 +34,7 @@ if (!class_exists('New_Photo_Gallery')) {
 		protected function _constants()
 		{
 			// Plugin Version
-			define('NPG_VER', '1.5.4');
+			define('NPG_VER', '1.5.5');
 
 			// Plugin Text Domain
 			define('NPG_TXTDM', 'new-photo-gallery');
@@ -43,7 +43,7 @@ if (!class_exists('New_Photo_Gallery')) {
 			define('NPG_PLUGIN_NAME', 'New Photo Gallery');
 
 			// Plugin Slug
-			define('NPG_PLUGIN_SLUG', '_light_image_gallery');
+			define('NPG_PLUGIN_SLUG', 'npg_gallery');
 
 			// Plugin Directory Path
 			define('NPG_PLUGIN_DIR', plugin_dir_path(__FILE__));
@@ -62,7 +62,7 @@ if (!class_exists('New_Photo_Gallery')) {
 			// Load text domain
 			add_action('init', array($this, '_load_textdomain'));
 
-			// add gallery menu item, change menu filter for multisite
+			// add gallery menu item
 			add_action('admin_menu', array($this, '_npg_menus'), 101);
 
 			// create Image Gallery Custom Post
@@ -73,6 +73,7 @@ if (!class_exists('New_Photo_Gallery')) {
 
 			// loaded during admin init
 			add_action('admin_init', array($this, '_admin_add_meta_box'));
+			add_action('admin_init', array($this, '_npg_database_migration'));
 
 			add_action('wp_ajax_photo_gallery_js', array(&$this, '_ajax_light_image_gallery'));
 			add_action('save_post', array(&$this, '_lg_save_settings'));
@@ -81,10 +82,10 @@ if (!class_exists('New_Photo_Gallery')) {
 			add_filter('widget_text', 'do_shortcode');
 
 			// add npg cpt shortcode column - manage_{$post_type}_posts_columns
-			add_filter('manage__light_image_gallery_posts_columns', array(&$this, 'set_light_image_gallery_shortcode_column_name'));
+			add_filter('manage_npg_gallery_posts_columns', array(&$this, 'set_light_image_gallery_shortcode_column_name'));
 
 			// add npg cpt shortcode column data - manage_{$post_type}_posts_custom_column
-			add_action('manage__light_image_gallery_posts_custom_column', array(&$this, 'custom_light_image_gallery_shortcode_data'), 10, 2);
+			add_action('manage_npg_gallery_posts_custom_column', array(&$this, 'custom_light_image_gallery_shortcode_data'), 10, 2);
 
 			add_action('wp_enqueue_scripts', array(&$this, 'npg_enqueue_scripts_in_header'));
 
@@ -102,12 +103,12 @@ if (!class_exists('New_Photo_Gallery')) {
 		public function set_light_image_gallery_shortcode_column_name($columns)
 		{
 			$new = array();
-			$shortcode = isset($columns['_light_image_gallery_shortcode']) ? $columns['_light_image_gallery_shortcode'] : '';
+			$shortcode = isset($columns['npg_gallery_shortcode']) ? $columns['npg_gallery_shortcode'] : '';
 			unset($columns['tags']); // remove it from the columns list
 
 			foreach ($columns as $key => $value) {
 				if ($key == 'date') {  // when we find the date column
-					$new['_light_image_gallery_shortcode'] = __('Shortcode', 'new-photo-gallery');  // put the tags column before it
+					$new['npg_gallery_shortcode'] = __('Shortcode', 'new-photo-gallery');  // put the tags column before it
 				}
 				$new[$key] = $value;
 			}
@@ -118,19 +119,24 @@ if (!class_exists('New_Photo_Gallery')) {
 		public function custom_light_image_gallery_shortcode_data($column, $post_id)
 		{
 			switch ($column) {
-				case '_light_image_gallery_shortcode':
+				case 'npg_gallery_shortcode':
 					echo "<input type='text' class='button button-primary' id='light-image-gallery-shortcode-" . esc_attr($post_id) . "' value='[NPG id=" . esc_attr($post_id) . "]' style='font-weight:bold; background-color:#32373C; color:#FFFFFF; text-align:center;' />";
 					echo "<input type='button' class='button button-primary' onclick='return PHOTOCopyShortcode" . esc_attr($post_id) . "();' readonly value='Copy' style='margin-left:4px;' />";
 					echo "<span id='copy-msg-" . esc_attr($post_id) . "' class='button button-primary' style='display:none; background-color:#32CD32; color:#FFFFFF; margin-left:4px; border-radius: 4px;'>copied</span>";
 					echo '<script>
 						function PHOTOCopyShortcode' . esc_attr($post_id) . "() {
 							var copyText = document.getElementById('light-image-gallery-shortcode-" . esc_attr($post_id) . "');
-							copyText.select();
-							document.execCommand('copy');
-							
-							//fade in and out copied message
-							jQuery('#copy-msg-" . esc_attr($post_id) . "').fadeIn('1000', 'linear');
-							jQuery('#copy-msg-" . esc_attr($post_id) . "').fadeOut(2500,'swing');
+							var value = copyText.value;
+							if (navigator.clipboard && navigator.clipboard.writeText) {
+								navigator.clipboard.writeText(value).then(function() {
+									copyText.select();
+									jQuery('#copy-msg-" . esc_attr($post_id) . "').fadeIn('1000', 'linear').fadeOut(2500, 'swing');
+								});
+							} else {
+								copyText.select();
+								document.execCommand('copy');
+								jQuery('#copy-msg-" . esc_attr($post_id) . "').fadeIn('1000', 'linear').fadeOut(2500, 'swing');
+							}
 						}
 						</script>
 					";
@@ -147,9 +153,22 @@ if (!class_exists('New_Photo_Gallery')) {
 		// Adds the photo gallery menus
 		public function _npg_menus()
 		{
-			$themes_menu = add_submenu_page('edit.php?post_type=' . NPG_PLUGIN_SLUG, __('Our Themes', 'new-photo-gallery'), __('Our Themes', 'new-photo-gallery'), 'administrator', 'npg-themes', array($this, '_npg_theme_page'));
-			$plugins_menu = add_submenu_page('edit.php?post_type=' . NPG_PLUGIN_SLUG, __('Our Plugins', 'new-photo-gallery'), __('Our Plugins', 'new-photo-gallery'), 'administrator', 'npg-plugins', array($this, '_npg_featured_plugins'));
+			add_submenu_page('edit.php?post_type=' . NPG_PLUGIN_SLUG, __('Our Themes', 'new-photo-gallery'), __('Our Themes', 'new-photo-gallery'), 'manage_options', 'npg-themes', array($this, '_npg_theme_page'));
+			add_submenu_page('edit.php?post_type=' . NPG_PLUGIN_SLUG, __('Our Plugins', 'new-photo-gallery'), __('Our Plugins', 'new-photo-gallery'), 'manage_options', 'npg-plugins', array($this, '_npg_featured_plugins'));
 		}
+
+		// a wp life plugins page
+		public function _npg_featured_plugins()
+		{
+			require_once 'our-plugins.php';
+		}
+
+		// a wp life themes page
+		public function _npg_theme_page()
+		{
+			require_once 'our-themes.php';
+		}
+
 
 		// Photo Gallery Custom Post
 		public function light_image_gallery()
@@ -191,7 +210,7 @@ if (!class_exists('New_Photo_Gallery')) {
 				'publicly_queryable' => true,
 				'capability_type' => 'page',
 			);
-			register_post_type('_light_image_gallery', $args);
+			register_post_type(NPG_PLUGIN_SLUG, $args);
 
 		} // end of post type function
 
@@ -199,8 +218,8 @@ if (!class_exists('New_Photo_Gallery')) {
 		public function _admin_add_meta_box()
 		{
 			// Syntax: add_meta_box( $id, $title, $callback, $screen, $context, $priority, $callback_args );
-			add_meta_box('1', __('Copy Photo Gallery Shortcode', 'new-photo-gallery'), array(&$this, '_lg_shortcode_left_metabox'), '_light_image_gallery', 'side', 'default');
-			add_meta_box('', __('Add Photos To Photo Gallery', 'new-photo-gallery'), array(&$this, 'lg_upload_multiple_images'), '_light_image_gallery', 'normal', 'default');
+			add_meta_box('1', __('Copy Photo Gallery Shortcode', 'new-photo-gallery'), array(&$this, '_lg_shortcode_left_metabox'), NPG_PLUGIN_SLUG, 'side', 'default');
+			add_meta_box('', __('Add Photos To Photo Gallery', 'new-photo-gallery'), array(&$this, 'lg_upload_multiple_images'), NPG_PLUGIN_SLUG, 'normal', 'default');
 		}
 
 		// image gallery copy shortcode meta box under publish button
@@ -232,13 +251,21 @@ if (!class_exists('New_Photo_Gallery')) {
 			<script>
 				jQuery("#npg-copy-code").hide();
 				function copyToClipboard(element) {
-					var $temp = jQuery("<input>");
-					jQuery("body").append($temp);
-					$temp.val(jQuery(element).val()).select();
-					document.execCommand("copy");
-					$temp.remove();
-					jQuery("#photoCopyShortcode").select();
-					jQuery("#npg-copy-code").fadeIn();
+					var value = jQuery(element).val();
+					if (navigator.clipboard && navigator.clipboard.writeText) {
+						navigator.clipboard.writeText(value).then(function() {
+							jQuery("#photoCopyShortcode").select();
+							jQuery("#npg-copy-code").fadeIn().delay(2000).fadeOut();
+						});
+					} else {
+						var $temp = jQuery("<input>");
+						jQuery("body").append($temp);
+						$temp.val(value).select();
+						document.execCommand("copy");
+						$temp.remove();
+						jQuery("#photoCopyShortcode").select();
+						jQuery("#npg-copy-code").fadeIn().delay(2000).fadeOut();
+					}
 				}
 			</script>
 			<?php
@@ -396,7 +423,7 @@ if (!class_exists('New_Photo_Gallery')) {
 
 		public function _lg_save_settings($post_id)
 		{
-			if (current_user_can('manage_options')) {
+			if (current_user_can('edit_post', $post_id)) {
 				$nonce = isset($_POST['lg_save_nonce']) ? sanitize_text_field(wp_unslash($_POST['lg_save_nonce'])) : '';
 				if (wp_verify_nonce($nonce, 'lg_save_settings')) {
 
@@ -469,16 +496,14 @@ if (!class_exists('New_Photo_Gallery')) {
 		}//end _lg_save_settings()
 
 
-		// a wp life plugins page
-		public function _npg_featured_plugins()
+		// database CPT slug migration
+		public function _npg_database_migration()
 		{
-			require_once 'our-plugins/awplife-plugins.php';
-		}
-
-		// a wp life themes page
-		public function _npg_theme_page()
-		{
-			require_once 'our-themes/awplife-themes.php';
+			if (get_option('npg_db_version_1_5_4') !== 'done') {
+				global $wpdb;
+				$wpdb->query("UPDATE {$wpdb->posts} SET post_type = 'npg_gallery' WHERE post_type = '_light_image_gallery'");
+				update_option('npg_db_version_1_5_4', 'done');
+			}
 		}
 		// Admin scripts
 		public function npg_admin_scripts($hook)
@@ -486,7 +511,7 @@ if (!class_exists('New_Photo_Gallery')) {
 			global $post;
 
 			if ($hook == 'post-new.php' || $hook == 'post.php') {
-				if ('_light_image_gallery' === $post->post_type) {
+				if ($post && NPG_PLUGIN_SLUG === $post->post_type) {
 					wp_enqueue_script('media-upload');
 					wp_enqueue_script('awplife-npg-uploader-js', NPG_PLUGIN_URL . 'js/awplife-npg-uploader.js', array('jquery'), NPG_VER, true);
 					wp_enqueue_style('awplife-npg-uploader-css', NPG_PLUGIN_URL . 'css/awplife-npg-uploader.css', array(), '1.5.6');
@@ -495,6 +520,12 @@ if (!class_exists('New_Photo_Gallery')) {
 					// Admin Layout CSS
 					wp_enqueue_style('npg-admin-css', NPG_PLUGIN_URL . 'css/npg-admin.css', array(), '1.5.6');
 				}
+			}
+
+			if (strpos($hook, 'npg-themes') !== false || strpos($hook, 'npg-plugins') !== false) {
+				wp_enqueue_style('ig-our-plugins-style', NPG_PLUGIN_URL . 'css/our-plugins-style.css', array(), NPG_VER);
+				wp_enqueue_style('thickbox');
+				wp_enqueue_script('thickbox');
 			}
 		}
 
@@ -513,35 +544,10 @@ if (!class_exists('New_Photo_Gallery')) {
 	add_action('wp_enqueue_scripts', 'npg_register_scripts');
 
 
-	// Plugin Recommend
-	add_action('tgmpa_register', 'npg_plugin_recommend');
-	function npg_plugin_recommend()
-	{
-		$plugins = array(
-			array(
-				'name' => 'Modal Popup Box',
-				'slug' => 'modal-popup-box',
-				'required' => false,
-			),
-			array(
-				'name' => 'Animated Live Wall',
-				'slug' => 'animated-live-wall',
-				'required' => false,
-			),
-			array(
-				'name' => 'Album Gallery Photostream Profile For Flickr',
-				'slug' => 'wp-flickr-gallery',
-				'required' => false,
-			),
-		);
-		tgmpa($plugins);
-	}
-
 	/**
 	 * Instantiates the Class
 	 */
 	$npg_gallery_object = new New_Photo_Gallery();
 	require_once 'shortcode.php';
-	require_once 'class-tgm-plugin-activation.php';
 } // end of class exists
 ?>

@@ -15,7 +15,7 @@ wp_enqueue_script('awplife-npg-all-plugins-js', NPG_PLUGIN_URL . 'lightbox/light
 
 $npg_allslides = array(
 	'p' => $light_image_gallery_id,
-	'post_type' => '_light_image_gallery',
+	'post_type' => NPG_PLUGIN_SLUG,
 	'orderby' => 'ASC',
 );
 $npg_loop = new WP_Query($npg_allslides);
@@ -103,15 +103,26 @@ while ($npg_loop->have_posts()):
 
 					// get Vimeo thumbnail by id
 					if ($pos = strpos($image_link, 'vimeo')) {
-						// echo (int) substr(parse_url($image_link, PHP_URL_PATH), 1);
 						$Vvid = (int) substr(parse_url($image_link, PHP_URL_PATH), 1);
-						$hash = unserialize(file_get_contents("https://vimeo.com/api/v2/video/$Vvid.php"));
-						$thumbnail_url = $hash[0]['thumbnail_medium'];
+						$meta_key = '_vimeo_thumb_' . $Vvid;
+						$cached_thumb = get_post_meta($post_id, $meta_key, true);
+						if ($cached_thumb) {
+							$thumbnail_url = $cached_thumb;
+						} else {
+							$response = wp_safe_remote_get("https://vimeo.com/api/v2/video/$Vvid.json", array('timeout' => 5));
+							if (!is_wp_error($response) && wp_remote_retrieve_response_code($response) === 200) {
+								$data = json_decode(wp_remote_retrieve_body($response), true);
+								if (!empty($data[0]['thumbnail_medium'])) {
+									$thumbnail_url = esc_url_raw($data[0]['thumbnail_medium']);
+									update_post_meta($post_id, $meta_key, $thumbnail_url);
+								}
+							}
+						}
 					}
 					?>
-					<a href="<?php echo esc_attr($image_link); ?>" data-poster="<?php echo esc_attr($thumbnail_url); ?>"
+					<a href="<?php echo esc_url($image_link); ?>" data-poster="<?php echo esc_url($thumbnail_url); ?>"
 						class="single-image-<?php echo esc_attr($light_image_gallery_id); ?> <?php echo esc_attr($col_large_desktops); ?> <?php echo esc_attr($col_desktops); ?> <?php echo esc_attr($col_tablets); ?> <?php echo esc_attr($col_phones); ?>"
-						href="<?php echo esc_url($full[0]); ?>" data-sub-html="<?php echo esc_attr($title); ?>">
+						data-sub-html="<?php echo esc_attr($title); ?>">
 						<img class="<?php echo esc_attr($spacing_class); ?> <?php echo esc_attr($image_hover_effect); ?>"
 							src="<?php echo esc_url($thumbnail_url); ?>" alt="<?php echo esc_attr($image_alt); ?>" />
 					</a>
