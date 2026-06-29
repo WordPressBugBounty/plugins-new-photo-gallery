@@ -1,10 +1,10 @@
 <?php
 /**
 @package New Photo Gallery
- * Plugin Name: New Photo Gallery
+ * Plugin Name: Photo & Video Gallery
  * Plugin URI: https://awplife.com/wordpress-plugins/photo-gallery-premium/
  * Description: new photo gallery plugin with lightbox preview for WordPress
- * Version: 1.5.5
+ * Version: 2.0.1
  * Author: A WP Life
  * Author URI: https://awplife.com/
  * License: GPLv2 or later
@@ -13,6 +13,25 @@
  */
 if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly
+}
+
+/**
+ * Normalizes column settings to a clean numeric column count.
+ */
+if (!function_exists('npg_get_column_count')) {
+	function npg_get_column_count($value, $default = 4) {
+		if (empty($value)) return $default;
+		if (is_numeric($value)) return (int) $value;
+		
+		// Map Bootstrap-style classes (col-lg-4, col-md-6, col-6, etc.)
+		if (preg_match('/(?:col-\w+-|col-)(\d+)/', $value, $matches)) {
+			$span = (int) $matches[1];
+			if ($span > 0) {
+				return max(1, floor(12 / $span));
+			}
+		}
+		return $default;
+	}
 }
 
 if (!class_exists('New_Photo_Gallery')) {
@@ -34,13 +53,13 @@ if (!class_exists('New_Photo_Gallery')) {
 		protected function _constants()
 		{
 			// Plugin Version
-			define('NPG_VER', '1.5.5');
+			define('NPG_VER', '2.0.1');
 
 			// Plugin Text Domain
 			define('NPG_TXTDM', 'new-photo-gallery');
 
 			// Plugin Name
-			define('NPG_PLUGIN_NAME', 'New Photo Gallery');
+			define('NPG_PLUGIN_NAME', 'Photo & Video Gallery');
 
 			// Plugin Slug
 			define('NPG_PLUGIN_SLUG', 'npg_gallery');
@@ -76,6 +95,7 @@ if (!class_exists('New_Photo_Gallery')) {
 			add_action('admin_init', array($this, '_npg_database_migration'));
 
 			add_action('wp_ajax_photo_gallery_js', array(&$this, '_ajax_light_image_gallery'));
+			add_action('wp_ajax_npg_fetch_video_poster', array($this, 'npg_fetch_video_poster'));
 			add_action('save_post', array(&$this, '_lg_save_settings'));
 
 			// shortcode compatibility in Text Widgets
@@ -153,20 +173,26 @@ if (!class_exists('New_Photo_Gallery')) {
 		// Adds the photo gallery menus
 		public function _npg_menus()
 		{
+			add_submenu_page('edit.php?post_type=' . NPG_PLUGIN_SLUG, __('Docs / How to Use', 'new-photo-gallery'), __('Docs / How to Use', 'new-photo-gallery'), 'manage_options', 'npg-docs', array($this, '_npg_docs_page'));
 			add_submenu_page('edit.php?post_type=' . NPG_PLUGIN_SLUG, __('Our Themes', 'new-photo-gallery'), __('Our Themes', 'new-photo-gallery'), 'manage_options', 'npg-themes', array($this, '_npg_theme_page'));
 			add_submenu_page('edit.php?post_type=' . NPG_PLUGIN_SLUG, __('Our Plugins', 'new-photo-gallery'), __('Our Plugins', 'new-photo-gallery'), 'manage_options', 'npg-plugins', array($this, '_npg_featured_plugins'));
+		}
+
+		public function _npg_docs_page()
+		{
+			require_once NPG_PLUGIN_DIR . 'include/docs.php';
 		}
 
 		// a wp life plugins page
 		public function _npg_featured_plugins()
 		{
-			require_once 'our-plugins.php';
+			require_once NPG_PLUGIN_DIR . 'include/our-plugins.php';
 		}
 
 		// a wp life themes page
 		public function _npg_theme_page()
 		{
-			require_once 'our-themes.php';
+			require_once NPG_PLUGIN_DIR . 'include/our-themes.php';
 		}
 
 
@@ -174,40 +200,41 @@ if (!class_exists('New_Photo_Gallery')) {
 		public function light_image_gallery()
 		{
 			$labels = array(
-				'name' => __('New Photo Gallery', 'new-photo-gallery'),
-				'singular_name' => __('New Photo Gallery', 'new-photo-gallery'),
-				'menu_name' => __('New Photo Gallery', 'new-photo-gallery'),
-				'name_admin_bar' => __('New Photo Gallery', 'new-photo-gallery'),
+				'name' => __('Photo & Video Gallery', 'new-photo-gallery'),
+				'singular_name' => __('Photo & Video Gallery', 'new-photo-gallery'),
+				'menu_name' => __('Photo & Video Gallery', 'new-photo-gallery'),
+				'name_admin_bar' => __('Photo & Video Gallery', 'new-photo-gallery'),
 				'parent_item_colon' => __('Parent Item:', 'new-photo-gallery'),
-				'all_items' => __('All Photo Gallery', 'new-photo-gallery'),
-				'add_new_item' => __('Add New Photo Gallery', 'new-photo-gallery'),
-				'add_new' => __('Add New Gallery', 'new-photo-gallery'),
-				'new_item' => __('New Photo Gallery', 'new-photo-gallery'),
-				'edit_item' => __('Edit New Photo Gallery', 'new-photo-gallery'),
-				'update_item' => __('Update New Photo Gallery', 'new-photo-gallery'),
-				'search_items' => __('Search New Photo Gallery', 'new-photo-gallery'),
-				'not_found' => __('Photo Gallery Not found', 'new-photo-gallery'),
-				'not_found_in_trash' => __('Photo Gallery Not found in Trash', 'new-photo-gallery'),
+				'all_items' => __('All Galleries', 'new-photo-gallery'),
+				'add_new_item' => __('Add Gallery', 'new-photo-gallery'),
+				'add_new' => __('Add Gallery', 'new-photo-gallery'),
+				'new_item' => __('New Gallery', 'new-photo-gallery'),
+				'edit_item' => __('Edit Gallery', 'new-photo-gallery'),
+				'update_item' => __('Update Gallery', 'new-photo-gallery'),
+				'search_items' => __('Search Gallery', 'new-photo-gallery'),
+				'not_found' => __('Gallery Not found', 'new-photo-gallery'),
+				'not_found_in_trash' => __('Gallery Not found in Trash', 'new-photo-gallery'),
 			);
 			$args = array(
-				'label' => __('New Photo Gallery', 'new-photo-gallery'),
 				'label' => __('New Photo Gallery', 'new-photo-gallery'),
 				'description' => __('Custom Post Type For New Photo Gallery', 'new-photo-gallery'),
 				'labels' => $labels,
 				'supports' => array('title'),
 				'taxonomies' => array(),
 				'hierarchical' => false,
-				'public' => true,
+				'public' => false,
 				'show_ui' => true,
 				'show_in_menu' => true,
 				'menu_position' => 65,
 				'menu_icon' => 'dashicons-images-alt2',
-				'show_in_admin_bar' => true,
-				'show_in_nav_menus' => true,
+				'show_in_admin_bar' => false,
+				'show_in_nav_menus' => false,
 				'can_export' => true,
-				'has_archive' => true,
-				'exclude_from_search' => false,
-				'publicly_queryable' => true,
+				'has_archive' => false,
+				'exclude_from_search' => true,
+				'publicly_queryable' => false,
+				'query_var' => false,
+				'rewrite' => false,
 				'capability_type' => 'page',
 			);
 			register_post_type(NPG_PLUGIN_SLUG, $args);
@@ -218,8 +245,8 @@ if (!class_exists('New_Photo_Gallery')) {
 		public function _admin_add_meta_box()
 		{
 			// Syntax: add_meta_box( $id, $title, $callback, $screen, $context, $priority, $callback_args );
-			add_meta_box('1', __('Copy Photo Gallery Shortcode', 'new-photo-gallery'), array(&$this, '_lg_shortcode_left_metabox'), NPG_PLUGIN_SLUG, 'side', 'default');
-			add_meta_box('', __('Add Photos To Photo Gallery', 'new-photo-gallery'), array(&$this, 'lg_upload_multiple_images'), NPG_PLUGIN_SLUG, 'normal', 'default');
+			add_meta_box('1', __('Copy Photo Gallery Shortcode', 'new-photo-gallery'), array(&$this, '_lg_shortcode_left_metabox'), NPG_PLUGIN_SLUG, 'side', 'high');
+			add_meta_box('', __('Add Photos To Photo Gallery', 'new-photo-gallery'), array(&$this, 'lg_upload_multiple_images'), NPG_PLUGIN_SLUG, 'normal', 'high');
 		}
 
 		// image gallery copy shortcode meta box under publish button
@@ -275,87 +302,7 @@ if (!class_exists('New_Photo_Gallery')) {
 
 		public function lg_upload_multiple_images($post)
 		{
-			?>
-			<div id="photo-gallery" class="npg-uploader-wrapper">
-
-				<!-- Toolbar -->
-				<div class="npg-toolbar">
-					<div id="add-new-photos" class="button button-primary npg-add-btn">
-						<span class="dashicons dashicons-plus"></span> <?php esc_html_e('Add Photos', 'new-photo-gallery'); ?>
-						<?php wp_nonce_field('lg_add_images', 'lg_add_images_nonce'); ?>
-					</div>
-
-					<input type="button" id="remove-all-photos" name="remove-all-photos" class="button button-link-delete" rel=""
-						value="<?php esc_html_e('Delete All Photos', 'new-photo-gallery'); ?>">
-				</div>
-
-				<ul id="remove-photos" class="npg-photo-grid photo-box">
-					<?php
-
-					$gallery_settings = get_post_meta($post->ID, 'awl_lg_settings_' . $post->ID, true);
-
-
-					if (isset($gallery_settings['slide-ids'])) {
-						$count = 0;
-						foreach ($gallery_settings['slide-ids'] as $id) {
-							$thumbnail = wp_get_attachment_image_src($id, 'medium', true);
-							$attachment = get_post($id);
-							$image_link = isset($gallery_settings['slide-link'][$count]) ? $gallery_settings['slide-link'][$count] : '';
-							$image_type = isset($gallery_settings['slide-type'][$count]) ? $gallery_settings['slide-type'][$count] : 'image';
-							?>
-							<li class="npg-photo-card">
-								<div class="npg-photo-preview">
-									<img class="photo" src="<?php echo esc_url($thumbnail[0]); ?>"
-										alt="<?php echo esc_html(get_the_title($id)); ?>">
-									<div class="npg-card-actions">
-										<input type="button" name="remove-photo" id="remove-photo" class="button button-icon-delete"
-											title="Delete" value="&times;">
-									</div>
-								</div>
-
-								<div class="npg-card-content">
-									<input type="hidden" id="slide-ids[]" name="slide-ids[]" value="<?php echo esc_attr($id); ?>" />
-
-									<!-- Type -->
-									<div class="npg-field-group">
-										<select id="slide-type[]" name="slide-type[]" class="npg-input-sm photo-type">
-											<option value="image" <?php selected($image_type, 'image'); ?>>
-												<?php esc_html_e('Image', 'new-photo-gallery'); ?>
-											</option>
-											<option value="video" <?php selected($image_type, 'video'); ?>>
-												<?php esc_html_e('Video', 'new-photo-gallery'); ?>
-											</option>
-										</select>
-									</div>
-
-									<!-- Title -->
-									<div class="npg-field-group">
-										<input type="text" name="slide-title[]" id="slide-title[]" class="npg-input-sm photo-title"
-											placeholder="<?php esc_html_e('Title', 'new-photo-gallery'); ?>"
-											value="<?php echo esc_attr(get_the_title($id)); ?>">
-									</div>
-
-									<!-- Link -->
-									<div class="npg-field-group">
-										<input type="text" name="slide-link[]" id="slide-link[]" class="npg-input-sm photo-link"
-											placeholder="<?php esc_html_e('Video URL', 'new-photo-gallery'); ?>"
-											value="<?php echo esc_attr($image_link); ?>">
-									</div>
-								</div>
-							</li>
-							<?php
-							$count++;
-						} // end of for each
-					} //end of if
-					?>
-				</ul>
-			</div>
-			<div style="clear:left;"></div>
-			<br>
-			<h1><?php esc_html_e('Configure Settings For Photo Gallery', 'new-photo-gallery'); ?></h1>
-			<hr>
-			<?php
-			require_once 'settings.php';
+			require_once NPG_PLUGIN_DIR . 'include/settings.php';
 		} // end of upload multiple image
 
 		public function _ajax_light_image_gallery()
@@ -373,48 +320,88 @@ if (!class_exists('New_Photo_Gallery')) {
 			}
 		}
 
+		public function npg_fetch_video_poster() {
+			if (!current_user_can('manage_options')) {
+				wp_send_json_error(array('message' => 'Unauthorized'));
+			}
+			$video_url = isset($_POST['video_url']) ? esc_url_raw(wp_unslash($_POST['video_url'])) : '';
+			if (empty($video_url)) {
+				wp_send_json_error(array('message' => 'Empty Video URL'));
+			}
+
+			$poster_url = '';
+			if (strpos($video_url, 'youtube') !== false || strpos($video_url, 'youtu.be') !== false) {
+				if (preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/', $video_url, $matches)) {
+					$video_id = $matches[1];
+					$poster_url = "https://img.youtube.com/vi/{$video_id}/hqdefault.jpg";
+				}
+			} elseif (strpos($video_url, 'vimeo') !== false) {
+				if (preg_match('/vimeo\.com\/(?:video\/)?([0-9]+)/', $video_url, $matches)) {
+					$video_id = $matches[1];
+					$response = wp_safe_remote_get("https://vimeo.com/api/v2/video/{$video_id}.json", array('timeout' => 5));
+					if (!is_wp_error($response) && wp_remote_retrieve_response_code($response) === 200) {
+						$data = json_decode(wp_remote_retrieve_body($response), true);
+						if (!empty($data[0]['thumbnail_large'])) {
+							$poster_url = esc_url_raw($data[0]['thumbnail_large']);
+						} elseif (!empty($data[0]['thumbnail_medium'])) {
+							$poster_url = esc_url_raw($data[0]['thumbnail_medium']);
+						}
+					}
+				}
+			}
+
+			if ($poster_url) {
+				wp_send_json_success(array('poster_url' => $poster_url));
+			} else {
+				wp_send_json_error(array('message' => 'Could not fetch poster from the URL'));
+			}
+		}
+
 		public function _lg_ajax_callback_function($id)
 		{
 			$thumbnail = wp_get_attachment_image_src($id, 'medium', true);
-			$attachment = get_post($id); // $id = attachment id
+			$attachment = get_post($id);
 			?>
-			<li class="npg-photo-card">
-				<div class="npg-photo-preview">
-					<img class="photo" src="<?php echo esc_url($thumbnail[0]); ?>"
-						alt="<?php echo esc_html(get_the_title($id)); ?>">
-					<div class="npg-card-actions">
-						<input type="button" name="remove-photo" id="remove-photo" class="button button-icon-delete" title="Delete"
-							value="&times;">
+			<li class="npg-image-slide" id="<?php echo esc_attr($id); ?>" data-position="<?php echo esc_attr($id); ?>">
+				<div class="npg-image-preview">
+					<div class="npg-image-controls">
+						<div class="npg-move-handle" title="<?php esc_attr_e('Drag to reorder', 'new-photo-gallery'); ?>"><span class="dashicons dashicons-move"></span></div>
+						<a class="pw-trash-icon remove-slide" name="remove-slide" href="#" title="<?php esc_attr_e('Delete photo', 'new-photo-gallery'); ?>"><span class="dashicons dashicons-trash"></span></a>
 					</div>
+					<img class="photo" src="<?php echo esc_url($thumbnail[0]); ?>" alt="<?php echo esc_html(get_the_title($id)); ?>" data-default-src="<?php echo esc_url($thumbnail[0]); ?>">
 				</div>
 
-				<div class="npg-card-content">
-					<input type="hidden" id="slide-ids[]" name="slide-ids[]" value="<?php echo esc_attr($id); ?>" />
+				<div class="npg-image-info">
+					<input type="hidden" name="slide-ids[]" value="<?php echo esc_attr($id); ?>" />
 
 					<!-- Type -->
-					<div class="npg-field-group">
-						<?php $image_type = isset($image_type) ? $image_type : 'image'; ?>
-						<select id="slide-type[]" name="slide-type[]" class="npg-input-sm photo-type">
-							<option value="image" <?php selected($image_type, 'image'); ?>>
-								<?php esc_html_e('Image', 'new-photo-gallery'); ?>
-							</option>
-							<option value="video" <?php selected($image_type, 'video'); ?>>
-								<?php esc_html_e('Video', 'new-photo-gallery'); ?>
-							</option>
-						</select>
-					</div>
+					<select name="slide-type[]" class="npg-input-sm photo-type" style="width: 100%;">
+						<option value="image" selected="selected">
+							<?php esc_html_e('Image', 'new-photo-gallery'); ?>
+						</option>
+						<option value="video">
+							<?php esc_html_e('Video', 'new-photo-gallery'); ?>
+						</option>
+					</select>
 
 					<!-- Title -->
-					<div class="npg-field-group">
-						<input type="text" name="slide-title[]" id="slide-title[]" class="npg-input-sm photo-title"
-							placeholder="<?php esc_html_e('Title', 'new-photo-gallery'); ?>"
-							value="<?php echo esc_attr(get_the_title($id)); ?>">
-					</div>
+					<input type="text" name="slide-title[]" class="npg-input-sm photo-title"
+						placeholder="<?php esc_html_e('Title', 'new-photo-gallery'); ?>"
+						value="<?php echo esc_attr(get_the_title($id)); ?>" style="width: 100%;">
 
 					<!-- Link -->
-					<div class="npg-field-group">
-						<input type="text" name="slide-link[]" id="slide-link[]" class="npg-input-sm photo-link"
-							placeholder="<?php esc_html_e('Video URL', 'new-photo-gallery'); ?>">
+					<div class="photo-link-wrapper" style="width: 100%; display:none;">
+						<input type="text" name="slide-link[]" class="npg-input-sm photo-link"
+							placeholder="<?php esc_html_e('Video URL', 'new-photo-gallery'); ?>" style="width: 100%;">
+						<input type="hidden" name="slide-poster[]" class="photo-poster" value="" />
+						<div class="npg-poster-actions" style="margin-top: 8px; display: flex; gap: 8px;">
+							<button type="button" class="button button-secondary npg-fetch-poster-btn" style="flex: 1; font-size: 11px; padding: 0 8px; min-height: 26px; line-height: 24px;">
+								<span class="dashicons dashicons-download" style="font-size: 14px; width: 14px; height: 14px; line-height: 14px; margin-top: 5px;"></span> Fetch Poster
+							</button>
+							<button type="button" class="button button-link npg-revert-poster-btn" style="color: #a00; text-decoration: none; font-size: 11px; padding: 0 4px; display: none;">
+								Revert
+							</button>
+						</div>
 					</div>
 				</div>
 			</li>
@@ -432,19 +419,22 @@ if (!class_exists('New_Photo_Gallery')) {
 					$col_desktops = isset($_POST['col_desktops']) ? sanitize_text_field(wp_unslash($_POST['col_desktops'])) : '';
 					$col_tablets = isset($_POST['col_tablets']) ? sanitize_text_field(wp_unslash($_POST['col_tablets'])) : '';
 					$col_phones = isset($_POST['col_phones']) ? sanitize_text_field(wp_unslash($_POST['col_phones'])) : '';
-					$tool_color = isset($_POST['tool_color']) ? sanitize_text_field(wp_unslash($_POST['tool_color'])) : '';
-					$title_color = isset($_POST['title_color']) ? sanitize_text_field(wp_unslash($_POST['title_color'])) : '';
 					$image_hover_effect_type = isset($_POST['image_hover_effect_type']) ? sanitize_text_field(wp_unslash($_POST['image_hover_effect_type'])) : '';
 					$image_hover_effect_four = isset($_POST['image_hover_effect_four']) ? sanitize_text_field(wp_unslash($_POST['image_hover_effect_four'])) : '';
 					$transition_effects = isset($_POST['transition_effects']) ? sanitize_text_field(wp_unslash($_POST['transition_effects'])) : '';
 					$thumbnails_spacing = isset($_POST['thumbnails_spacing']) ? sanitize_text_field(wp_unslash($_POST['thumbnails_spacing'])) : '';
-					$custom_css = isset($_POST['custom_css']) ? sanitize_textarea_field(wp_unslash($_POST['custom_css'])) : '';
+					$img_title = isset($_POST['img_title']) ? sanitize_text_field(wp_unslash($_POST['img_title'])) : '';
+					$thumbnail_order = isset($_POST['thumbnail_order']) ? sanitize_text_field(wp_unslash($_POST['thumbnail_order'])) : '';
+					$show_lightbox_loop = isset($_POST['show_lightbox_loop']) ? sanitize_text_field(wp_unslash($_POST['show_lightbox_loop'])) : '';
+					$lightbox_thumbnails = isset($_POST['lightbox_thumbnails']) ? sanitize_text_field(wp_unslash($_POST['lightbox_thumbnails'])) : '';
+					$light_box = isset($_POST['light-box']) ? sanitize_text_field(wp_unslash($_POST['light-box'])) : 1;
 
 					$i = 0;
 					$image_ids = array();
 					$image_titles = array();
 					$image_type = array();
 					$slide_link = array();
+					$slide_poster = array();
 					// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Sanitized below with array_map
 					$image_ids_val = isset($_POST['slide-ids']) ? array_map('absint', wp_unslash((array) $_POST['slide-ids'])) : array();
 
@@ -456,38 +446,41 @@ if (!class_exists('New_Photo_Gallery')) {
 						$image_type[] = isset($_POST['slide-type'][$i]) ? sanitize_text_field(wp_unslash($_POST['slide-type'][$i])) : '';
 						// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- Values are accessed by index
 						$slide_link[] = isset($_POST['slide-link'][$i]) ? esc_url_raw(wp_unslash($_POST['slide-link'][$i])) : '';
+						// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- Values are accessed by index
+						$slide_poster[] = isset($_POST['slide-poster'][$i]) ? esc_url_raw(wp_unslash($_POST['slide-poster'][$i])) : '';
 						$single_image_update = array(
 							'ID' => $image_id,
 							'post_title' => $image_titles[$i],
 						);
-						// wp_update_post($single_image_update); // Removing this as it might not be intended to update the attachment title on every save, and was potentially causing issues or was redundant. If needed, uncomment.
+						wp_update_post($single_image_update);
 						$i++;
 					}
 
-					$image_protection = isset($_POST['image_protection']) ? sanitize_text_field(wp_unslash($_POST['image_protection'])) : '';
 					$image_grayscale = isset($_POST['image_grayscale']) ? sanitize_text_field(wp_unslash($_POST['image_grayscale'])) : '';
+					$grayscale_percentage = isset($_POST['grayscale_percentage']) ? sanitize_text_field(wp_unslash($_POST['grayscale_percentage'])) : '80';
 
 					$gallery_settings = array(
 						'slide-ids' => $image_ids,
 						'slide-title' => $image_titles,
 						'slide-type' => $image_type,
 						'slide-link' => $slide_link,
+						'slide-poster' => $slide_poster,
 						'gal_thumb_size' => $gal_thumb_size,
 						'col_large_desktops' => $col_large_desktops,
 						'col_desktops' => $col_desktops,
 						'col_tablets' => $col_tablets,
 						'col_phones' => $col_phones,
-						'tool_color' => $tool_color,
-						'title_color' => $title_color,
 						'image_hover_effect_type' => $image_hover_effect_type,
 						'image_hover_effect_four' => $image_hover_effect_four,
 						'transition_effects' => $transition_effects,
 						'thumbnails_spacing' => $thumbnails_spacing,
-						'image_protection' => $image_protection,
+						'img_title' => $img_title,
+						'thumbnail_order' => $thumbnail_order,
+						'show_lightbox_loop' => $show_lightbox_loop,
+						'lightbox_thumbnails' => $lightbox_thumbnails,
 						'image_grayscale' => $image_grayscale,
-						'image_grayscale' => $image_grayscale,
-						'custom_css' => $custom_css,
-
+						'grayscale_percentage' => $grayscale_percentage,
+						'light-box' => $light_box,
 					);
 					$awl_light_image_gallery_shortcode_setting = 'awl_lg_settings_' . $post_id;
 					update_post_meta($post_id, $awl_light_image_gallery_shortcode_setting, $gallery_settings);
@@ -513,19 +506,23 @@ if (!class_exists('New_Photo_Gallery')) {
 			if ($hook == 'post-new.php' || $hook == 'post.php') {
 				if ($post && NPG_PLUGIN_SLUG === $post->post_type) {
 					wp_enqueue_script('media-upload');
-					wp_enqueue_script('awplife-npg-uploader-js', NPG_PLUGIN_URL . 'js/awplife-npg-uploader.js', array('jquery'), NPG_VER, true);
-					wp_enqueue_style('awplife-npg-uploader-css', NPG_PLUGIN_URL . 'css/awplife-npg-uploader.css', array(), '1.5.6');
+					wp_enqueue_script('awplife-npg-uploader-js', NPG_PLUGIN_URL . 'assets/js/awplife-npg-uploader.js', array('jquery'), NPG_VER, true);
 					wp_enqueue_media();
 
 					// Admin Layout CSS
-					wp_enqueue_style('npg-admin-css', NPG_PLUGIN_URL . 'css/npg-admin.css', array(), '1.5.6');
+					wp_enqueue_style('npg-admin-css', NPG_PLUGIN_URL . 'assets/css/npg-admin.css', array(), NPG_VER);
+					wp_enqueue_style('npg-google-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap', array(), null);
 				}
 			}
 
 			if (strpos($hook, 'npg-themes') !== false || strpos($hook, 'npg-plugins') !== false) {
-				wp_enqueue_style('ig-our-plugins-style', NPG_PLUGIN_URL . 'css/our-plugins-style.css', array(), NPG_VER);
+				wp_enqueue_style('ig-our-plugins-style', NPG_PLUGIN_URL . 'assets/css/our-plugins-style.css', array(), NPG_VER);
 				wp_enqueue_style('thickbox');
 				wp_enqueue_script('thickbox');
+			}
+
+			if (strpos($hook, 'npg-docs') !== false) {
+				wp_enqueue_style('npg-docs-css', NPG_PLUGIN_URL . 'assets/css/npg-docs.css', array(), NPG_VER);
 			}
 		}
 
@@ -534,12 +531,9 @@ if (!class_exists('New_Photo_Gallery')) {
 	// register sf scripts
 	function npg_register_scripts()
 	{
-
 		// css & JS
-		wp_register_script('npg-ig-bootstrap-js', plugin_dir_url(__FILE__) . 'js/bootstrap.min.js', array('jquery'), NPG_VER, true);
-		wp_register_script('awplife-npg-isotope-js', plugin_dir_url(__FILE__) . 'js/isotope.pkgd.js', array(), NPG_VER, true);
-		wp_register_style('npg-bootstrap-css', plugin_dir_url(__FILE__) . 'css/bootstrap.css', array(), NPG_VER);
-		// css & JS
+		wp_register_script('awplife-npg-isotope-js', NPG_PLUGIN_URL . 'assets/js/isotope.pkgd.js', array(), NPG_VER, true);
+		wp_register_style('npg-frontend-css', NPG_PLUGIN_URL . 'assets/css/npg-frontend.css', array(), NPG_VER);
 	}
 	add_action('wp_enqueue_scripts', 'npg_register_scripts');
 
@@ -548,6 +542,8 @@ if (!class_exists('New_Photo_Gallery')) {
 	 * Instantiates the Class
 	 */
 	$npg_gallery_object = new New_Photo_Gallery();
-	require_once 'shortcode.php';
+	require_once NPG_PLUGIN_DIR . 'include/shortcode.php';
+	require_once NPG_PLUGIN_DIR . 'include/elementor-widget.php';
+	require_once NPG_PLUGIN_DIR . 'include/gutenberg-block.php';
 } // end of class exists
 ?>

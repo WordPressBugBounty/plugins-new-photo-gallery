@@ -1,19 +1,19 @@
-=== Photo Gallery - Image Gallery & Portfolio ===
+=== Photo & Video Gallery - Image, Video & Portfolio ===
 Contributors: awordpresslife, razipathhan, hanif0991, muhammadshahid, fkfaisalkhan007, sharikkhan007, zishlife, FARAZFRANK
 Donate link: https://paypal.me/awplife
-Tags: photo gallery, image gallery, responsive gallery, lightbox gallery, portfolio gallery
+Tags: photo gallery, image gallery, video gallery, lightbox gallery, portfolio gallery
 Requires at least: 4.0
-Tested up to: 6.9
-Stable tag: 1.5.5
+Tested up to: 7.0
+Stable tag: 2.0.1
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Create a responsive Photo Gallery, stunning Image Gallery, and professional Portfolio in seconds.
+Create a responsive Photo & Video Gallery, stunning Image Gallery, and professional Portfolio in seconds.
 
 == Description ==
 
-New Photo Gallery helps you build a beautiful Photo Gallery and responsive Image Gallery. It is also perfect for showcasing a professional Portfolio on your WordPress site.
+New Photo & Video Gallery helps you build a beautiful Photo Gallery, responsive Image Gallery, and Video Gallery. It is also perfect for showcasing a professional Portfolio on your WordPress site.
 
 = Check Live Demos =
 
@@ -21,17 +21,17 @@ New Photo Gallery helps you build a beautiful Photo Gallery and responsive Image
 
 https://www.youtube.com/watch?v=nAhzDfCTl6M
 
-The plugin displays your Photo Gallery or Image Gallery in a clean grid. When users click an image, it opens in a modern popup window. This window is called a lightbox. It lets users view your images in full size.
+The plugin displays your Photo, Image, and Video galleries in a clean, modern grid. When users click an item, it opens in a popup lightbox window. For videos, you can input YouTube or Vimeo links, and the plugin allows you to fetch their poster images dynamically or revert to default uploaded placeholders. The video plays directly within the lightbox.
 
-You can also add videos from YouTube and Vimeo. This is great for a video gallery, business portfolio, and team pages. You can upload media and get shortcodes in seconds. No complex settings are needed.
+You can easily mix images and videos. This is great for a video gallery, business portfolio, and team pages. You can upload media and get shortcodes in seconds. No complex settings are needed.
 
 = Create a Stunning Photo Gallery =
 
 Display your photography in a beautiful grid. You can organize files in columns from two to six. This is great for event albums, travel blogs, or design archives. Visitors can browse your photos without any distractions. The responsive layout keeps everything perfectly aligned on every single screen size.
 
-= Organize an Advanced Image Gallery =
+= Organize an Advanced Image & Video Gallery =
 
-Create unlimited galleries with zero restrictions. You can add titles, descriptions, and custom hover styles to each thumbnail. A built-in grayscale feature allows for a vintage look. With our optimized scripts, your image lists load very quickly. This ensures your visitors stay engaged.
+Create unlimited galleries with zero restrictions. You can add titles, descriptions, and custom hover styles to each thumbnail. A built-in grayscale feature with custom percentage settings allows for a vintage look. With our optimized scripts, your image lists load very quickly. This ensures your visitors stay engaged.
 
 = Showcase a Professional Portfolio =
 
@@ -39,16 +39,18 @@ Highlight your best creative projects cleanly. This layout is perfect for web de
 
 = Key Features (Free Version) =
 
-*   Responsive grid system that adapts to any screen size.
-*   Lightbox functionality for viewing images and videos without leaving the page.
-*   Create unlimited galleries with no restriction on the number of images.
-*   Support for YouTube and Vimeo video embedding.
-*   Image protection for gallery
-*   Grayscale effect for images.
-*   Options to add titles and descriptions to your media.
-*   Multiple column configurations (ranging from 2 to 6 columns).
-*   Hover effects for gallery thumbnails.
-*   Shortcode system for easy insertion into posts and pages.
+*   Responsive grid system that adapts perfectly to all screen sizes.
+*   Complete Photo and Video Gallery support for mixing images with YouTube and Vimeo videos.
+*   Manual Video Poster Manager: Fetch video thumbnail poster images dynamically from YouTube/Vimeo, or revert to the uploaded media image.
+*   Modern, high-performance CSS Grid frontend layout engine.
+*   Sleek admin settings dashboard with tabbed navigation interface.
+*   Grayscale effect with custom Percentage control (0% to 100%).
+*   Thumbnail spacing and margin controls with dynamic border-radius adaptation.
+*   Show or hide lightbox thumbnail strip with a yes/no toggle.
+*   Optimized lightweight lightbox thumbnails loading for faster performance.
+*   Infinite Lightbox Loop toggle.
+*   Modern Title Overlay designs matching premium grid gallery layouts.
+*   Shortcode system for easy embedding into posts, pages, and widgets.
 *   Translation support for multilingual websites.
 
 = Premium Features =
@@ -125,7 +127,7 @@ Yes, the galleries are designed to be responsive. The grid layout automatically 
 
 = How do I add videos to my gallery? =
 
-When adding items to your gallery, you can input a YouTube or Vimeo URL instead of uploading an image. The plugin will fetch the thumbnail and play the video within the lightbox.
+When editing your gallery, change the item type from "Image" to "Video" and input a YouTube or Vimeo URL. You can use the "Fetch Poster" button to fetch the video's poster thumbnail from the URL, or click "Revert" to restore the uploaded attachment image. The video plays directly within the lightbox.
 
 = Can I customize the lightbox appearance? =
 
@@ -161,7 +163,7 @@ The shortcode currently displays all images contained within that specific galle
 
 == Screenshots ==
 
-1. Photo Gallery With Spacing 
+1. Photo Gallery With Spacing
 2. Photo Gallery Without Spacing
 3. Photo Gallery With Thumbnail
 4. Photo Gallery Without Thumbnail
@@ -172,10 +174,28 @@ The shortcode currently displays all images contained within that specific galle
 9. Vimeo Thumbnail Video gallery
 10. Column Layout Settings
 11. Full Width Photo Gallery
-12. Photo Gallery Settings 
+12. Photo Gallery Settings
 13. Photo Gallery And Video Gallery Settings Page
 
 == Changelog ==
+
+= 2.0.1 =
+* Date: 29 June 2026
+* Fixed Gutenberg block to use ServerSideRender live preview with modern gradient placeholder.
+* Fixed Gutenberg block selectability, movement, and deletion by adding pointer-events fallbacks and flow-root display styling to prevent container collapse in the editor.
+* Fixed script errors in Gutenberg editor by wrapping output template's lightGallery and isotope calls in safe jQuery existence checks.
+* Fixed Elementor widget styling and script dependencies enqueuing.
+
+= 2.0.0 =
+* Date 29 June 2026
+* Modernization: Replaced legacy Bootstrap styling with a high-performance, native CSS Grid layout engine (`npg-frontend.css`).
+* UI/UX Upgrade: Redesigned the entire admin dashboard using a premium Indigo & Violet tabbed user interface.
+* Feature: Added manual "Fetch Poster" and "Revert" action buttons for video slide thumbnails (YouTube and Vimeo).
+* Feature: Added a Grayscale Amount (%) range control setting to customize the Black & White hover filter strength.
+* Feature: Added a "Show Lightbox Thumbnails" toggle switch to enable/disable the lightbox thumbnail strip.
+* Optimization: Enforced lightweight (medium resolution) image loading for lightbox thumbnails to resolve performance lag.
+* Housekeeping: Permanently removed duplicate CSS/JS code, obsolete bootstrap dependencies, and unused icon libraries.
+* Housekeeping: Refactored plugin architecture by organizing core files into dedicated `assets/` and `include/` directories.
 
 = 1.5.5 =
 * 2026-05-6
@@ -251,6 +271,9 @@ The shortcode currently displays all images contained within that specific galle
 * Bug fixes
 
 == Upgrade Notice ==
+
+= 2.0.1 =
+Fixed Elementor widget asset dependencies, Gutenberg block selection/deletion, and resolved inline template script errors inside the editor. Recommended for all users.
 
 = 1.5.2 =
 Tested with WordPress 6.8.3. Update recommended for compatibility.
