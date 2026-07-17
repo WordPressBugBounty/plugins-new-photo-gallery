@@ -464,15 +464,16 @@ $col_xs_val = npg_get_column_count($settings['col_phones'], 1);
 				<!-- Header section -->
 				<div class="npg-pro-header">
 					<div class="npg-pro-badge"><?php esc_html_e('PREMIUM FEATURES', 'new-photo-gallery'); ?></div>
-					<h2><?php esc_html_e('Experience the Best with Pro Version', 'new-photo-gallery'); ?></h2>
-					<p><?php esc_html_e('Take your photo galleries to the next level with advanced features, powerful tools, and priority support.', 'new-photo-gallery'); ?></p>
+					<h2><?php esc_html_e('Experience the Best with Video Gallery Premium', 'new-photo-gallery'); ?></h2>
+					<p style="font-weight: 600; margin-bottom: 10px; color: var(--npg-primary);"><?php esc_html_e('Its premium version is Video Gallery Premium.', 'new-photo-gallery'); ?></p>
+					<p><?php esc_html_e('Take your video and image galleries to the next level with native API integrations, advanced pagination, insights tracking, and priority support.', 'new-photo-gallery'); ?></p>
 					
 					<!-- Top Buy & Demo Buttons -->
 					<div class="npg-pro-top-cta" style="margin-top: 25px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-						<a href="https://awplife.com/wordpress-plugins/photo-gallery-wordpress-plugin/" target="_blank" class="npg-btn npg-btn-premium lg">
-							<span class="dashicons dashicons-cart"></span> <?php esc_html_e('Get the Pro Version Now', 'new-photo-gallery'); ?>
+						<a href="https://awplife.com/wordpress-plugins/video-gallery-wordpress-plugin/" target="_blank" class="npg-btn npg-btn-premium lg">
+							<span class="dashicons dashicons-cart"></span> <?php esc_html_e('Get Video Gallery Premium Now', 'new-photo-gallery'); ?>
 						</a>
-						<a href="https://awplife.com/demo/photo-gallery-premium/" target="_blank" class="npg-btn npg-btn-secondary lg">
+						<a href="https://awplife.com/demo/video-gallery-premium/" target="_blank" class="npg-btn npg-btn-secondary lg">
 							<span class="dashicons dashicons-welcome-view-site"></span> <?php esc_html_e('Check Live Demo', 'new-photo-gallery'); ?>
 						</a>
 					</div>
@@ -481,39 +482,115 @@ $col_xs_val = npg_get_column_count($settings['col_phones'], 1);
 				<!-- Feature Grid -->
 				<div class="npg-pro-grid">
 					<div class="npg-pro-feature-card">
-						<div class="npg-pro-icon"><span class="dashicons dashicons-admin-page"></span></div>
-						<h3><?php esc_html_e('Duplicate Gallery', 'new-photo-gallery'); ?></h3>
-						<p><?php esc_html_e('Clone any photo gallery instantly with its settings and images. Perfect for saving layout setups.', 'new-photo-gallery'); ?></p>
+						<div class="npg-pro-icon"><span class="dashicons dashicons-cloud"></span></div>
+						<h3><?php esc_html_e('YouTube, Vimeo, Twitch, TikTok, Dailymotion & Wistia APIs', 'new-photo-gallery'); ?></h3>
+						<p><?php esc_html_e('Fetch playlists, channels, shows, and portfolios dynamically using secure developer keys with high-performance transient caching.', 'new-photo-gallery'); ?></p>
 					</div>
 					<div class="npg-pro-feature-card">
 						<div class="npg-pro-icon"><span class="dashicons dashicons-clock"></span></div>
-						<h3><?php esc_html_e('AJAX Pagination Support', 'new-photo-gallery'); ?></h3>
-						<p><?php esc_html_e('Load images on demand with optimized AJAX pagination featuring multiple button styling configurations.', 'new-photo-gallery'); ?></p>
+						<h3><?php esc_html_e('Server-Side AJAX Load More', 'new-photo-gallery'); ?></h3>
+						<p><?php esc_html_e('Paginate extensive media collections dynamically using server-side AJAX requests with spinning loader indicators to optimize loading speeds.', 'new-photo-gallery'); ?></p>
 					</div>
 					<div class="npg-pro-feature-card">
 						<div class="npg-pro-icon"><span class="dashicons dashicons-images-alt2"></span></div>
-						<h3><?php esc_html_e('Masonry & Grid Layouts', 'new-photo-gallery'); ?></h3>
-						<p><?php esc_html_e('Unlock advanced Pinterest-style Masonry layout, Circle layout, and clean crop grid layouts.', 'new-photo-gallery'); ?></p>
+						<h3><?php esc_html_e('Masonry & Pinterest-Style Layouts', 'new-photo-gallery'); ?></h3>
+						<p><?php esc_html_e('Unlock advanced Pinterest-style Masonry configurations, Circle grids, up to 12 column widths, and pixel-precise spacing.', 'new-photo-gallery'); ?></p>
 					</div>
 					<div class="npg-pro-feature-card">
 						<div class="npg-pro-icon"><span class="dashicons dashicons-desktop"></span></div>
-						<h3><?php esc_html_e('Custom Slide Link URLs', 'new-photo-gallery'); ?></h3>
-						<p><?php esc_html_e('Add custom web links or page targets to individual slides to send visitors to targeted posts or pages.', 'new-photo-gallery'); ?></p>
+						<h3><?php esc_html_e('Custom Redirection Link Targets', 'new-photo-gallery'); ?></h3>
+						<p><?php esc_html_e('Bind custom web links or specific page targets directly to individual gallery cards, redirecting visitors to conversion pages.', 'new-photo-gallery'); ?></p>
 					</div>
 					<div class="npg-pro-feature-card">
-						<div class="npg-pro-icon"><span class="dashicons dashicons-forms"></span></div>
-						<h3><?php esc_html_e('Typography & Color Customization', 'new-photo-gallery'); ?></h3>
-						<p><?php esc_html_e('Change icons colors, card styling, and background colors with advanced custom styles.', 'new-photo-gallery'); ?></p>
+						<div class="npg-pro-icon"><span class="dashicons dashicons-update"></span></div>
+						<h3><?php esc_html_e('1-Click Photo Gallery Migration', 'new-photo-gallery'); ?></h3>
+						<p><?php esc_html_e('Upgrade with peace of mind. A built-in automatic migration tool imports all configurations and slide data into the Premium engine in one click.', 'new-photo-gallery'); ?></p>
 					</div>
+					<div class="npg-pro-feature-card">
+						<div class="npg-pro-icon"><span class="dashicons dashicons-chart-bar"></span></div>
+						<h3><?php esc_html_e('Advanced Analytics & Insights', 'new-photo-gallery'); ?></h3>
+						<p><?php esc_html_e('Track plays, views, click counts, and engagement metrics directly inside your dashboard with beautiful Chart.js visualizations.', 'new-photo-gallery'); ?></p>
+					</div>
+				</div>
+
+				<!-- Comparison Table -->
+				<div class="npg-pro-comparison">
+					<h3><?php esc_html_e('Photo & Video Gallery vs Video Gallery Premium', 'new-photo-gallery'); ?></h3>
+					<table class="npg-comparison-table">
+						<thead>
+							<tr>
+								<th><?php esc_html_e('Feature / Option', 'new-photo-gallery'); ?></th>
+								<th><?php esc_html_e('Free Version', 'new-photo-gallery'); ?></th>
+								<th><?php esc_html_e('Video Gallery Premium', 'new-photo-gallery'); ?></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><?php esc_html_e('Supported Layouts', 'new-photo-gallery'); ?></td>
+								<td><?php esc_html_e('CSS Grid (Multi-column)', 'new-photo-gallery'); ?></td>
+								<td><strong><?php esc_html_e('Pinterest Masonry, Circle Grid, and up to 12 Columns', 'new-photo-gallery'); ?></strong></td>
+							</tr>
+							<tr>
+								<td><?php esc_html_e('Automatic 1-Click Migration', 'new-photo-gallery'); ?></td>
+								<td><?php esc_html_e('Not Available', 'new-photo-gallery'); ?></td>
+								<td><strong><span style="color:#10b981; font-weight: bold;">&#10004;</span> <?php esc_html_e('Yes, imports all CPT configs & legacy [NPG] shortcodes', 'new-photo-gallery'); ?></strong></td>
+							</tr>
+							<tr>
+								<td><?php esc_html_e('Media Sources Supported', 'new-photo-gallery'); ?></td>
+								<td><?php esc_html_e('Local Images & Video Uploads', 'new-photo-gallery'); ?></td>
+								<td><strong><?php esc_html_e('YouTube, Vimeo, Twitch Helix, TikTok, Dailymotion, Wistia, Meta Reels & Self-hosted', 'new-photo-gallery'); ?></strong></td>
+							</tr>
+							<tr>
+								<td><?php esc_html_e('Automatic API Synchronisation', 'new-photo-gallery'); ?></td>
+								<td><?php esc_html_e('No (Manual URL input only)', 'new-photo-gallery'); ?></td>
+								<td><strong><span style="color:#10b981; font-weight: bold;">&#10004;</span> <?php esc_html_e('Yes (Playlists, Channels & albums dynamically cached)', 'new-photo-gallery'); ?></strong></td>
+							</tr>
+							<tr>
+								<td><?php esc_html_e('Pagination & Load More', 'new-photo-gallery'); ?></td>
+								<td><?php esc_html_e('No (All-in-one page load)', 'new-photo-gallery'); ?></td>
+								<td><strong><span style="color:#10b981; font-weight: bold;">&#10004;</span> <?php esc_html_e('Server-Side AJAX Load More & Spinner Options', 'new-photo-gallery'); ?></strong></td>
+							</tr>
+							<tr>
+								<td><?php esc_html_e('CPT Duplicate Gallery', 'new-photo-gallery'); ?></td>
+								<td><?php esc_html_e('No', 'new-photo-gallery'); ?></td>
+								<td><strong><span style="color:#10b981; font-weight: bold;">&#10004;</span> <?php esc_html_e('Yes, 1-click duplication on the CPT list view', 'new-photo-gallery'); ?></strong></td>
+							</tr>
+							<tr>
+								<td><?php esc_html_e('Custom Click Actions', 'new-photo-gallery'); ?></td>
+								<td><?php esc_html_e('Open in Lightbox only', 'new-photo-gallery'); ?></td>
+								<td><strong><span style="color:#10b981; font-weight: bold;">&#10004;</span> <?php esc_html_e('Open Lightbox OR redirect individual cards to custom URLs', 'new-photo-gallery'); ?></strong></td>
+							</tr>
+							<tr>
+								<td><?php esc_html_e('Lightbox Integration', 'new-photo-gallery'); ?></td>
+								<td><?php esc_html_e('Standard lightGallery with loop toggles', 'new-photo-gallery'); ?></td>
+								<td><strong><?php esc_html_e('Premium LightGallery with Fullscreen, Zoom, slideshow transitions, & custom skins', 'new-photo-gallery'); ?></strong></td>
+							</tr>
+							<tr>
+								<td><?php esc_html_e('Insights & Video Analytics', 'new-photo-gallery'); ?></td>
+								<td><?php esc_html_e('Not Available', 'new-photo-gallery'); ?></td>
+								<td><strong><span style="color:#10b981; font-weight: bold;">&#10004;</span> <?php esc_html_e('Yes, track play statistics, views, and actions in Chart.js', 'new-photo-gallery'); ?></strong></td>
+							</tr>
+							<tr>
+								<td><?php esc_html_e('Bulk Import / Export Utility', 'new-photo-gallery'); ?></td>
+								<td><?php esc_html_e('No', 'new-photo-gallery'); ?></td>
+								<td><strong><span style="color:#10b981; font-weight: bold;">&#10004;</span> <?php esc_html_e('Yes, export/import settings & attachments via JSON files', 'new-photo-gallery'); ?></strong></td>
+							</tr>
+							<tr>
+								<td><?php esc_html_e('Support', 'new-photo-gallery'); ?></td>
+								<td><?php esc_html_e('Community Forums', 'new-photo-gallery'); ?></td>
+								<td><strong><?php esc_html_e('Priority 24/7 Developer Support', 'new-photo-gallery'); ?></strong></td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 
 				<!-- Footer CTA -->
 				<div class="npg-pro-cta" style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
 					<div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-						<a href="https://awplife.com/wordpress-plugins/photo-gallery-wordpress-plugin/" target="_blank" class="npg-btn npg-btn-premium lg">
-							<span class="dashicons dashicons-cart"></span> <?php esc_html_e('Grab Photo Gallery Pro Now!', 'new-photo-gallery'); ?>
+						<a href="https://awplife.com/wordpress-plugins/video-gallery-wordpress-plugin/" target="_blank" class="npg-btn npg-btn-premium lg">
+							<span class="dashicons dashicons-cart"></span> <?php esc_html_e('Get Video Gallery Premium Now', 'new-photo-gallery'); ?>
 						</a>
-						<a href="https://awplife.com/demo/photo-gallery-premium/" target="_blank" class="npg-btn npg-btn-secondary lg">
+						<a href="https://awplife.com/demo/video-gallery-premium/" target="_blank" class="npg-btn npg-btn-secondary lg">
 							<span class="dashicons dashicons-welcome-view-site"></span> <?php esc_html_e('Check Live Demo', 'new-photo-gallery'); ?>
 						</a>
 					</div>

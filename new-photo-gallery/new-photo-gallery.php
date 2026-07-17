@@ -4,7 +4,7 @@
  * Plugin Name: Photo & Video Gallery
  * Plugin URI: https://awplife.com/wordpress-plugins/photo-gallery-premium/
  * Description: new photo gallery plugin with lightbox preview for WordPress
- * Version: 2.0.1
+ * Version: 2.0.2
  * Author: A WP Life
  * Author URI: https://awplife.com/
  * License: GPLv2 or later
@@ -53,7 +53,7 @@ if (!class_exists('New_Photo_Gallery')) {
 		protected function _constants()
 		{
 			// Plugin Version
-			define('NPG_VER', '2.0.1');
+			define('NPG_VER', '2.0.2');
 
 			// Plugin Text Domain
 			define('NPG_TXTDM', 'new-photo-gallery');

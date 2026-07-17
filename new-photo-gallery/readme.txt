@@ -1,183 +1,97 @@
-=== Photo & Video Gallery - Image, Video & Portfolio ===
+=== Photo Gallery - Image, Video & Portfolio ===
 Contributors: awordpresslife, razipathhan, hanif0991, muhammadshahid, fkfaisalkhan007, sharikkhan007, zishlife, FARAZFRANK
 Donate link: https://paypal.me/awplife
-Tags: photo gallery, image gallery, video gallery, lightbox gallery, portfolio gallery
+Tags: photo gallery, video gallery, image gallery, lightbox gallery, portfolio gallery
 Requires at least: 4.0
 Tested up to: 7.0
-Stable tag: 2.0.1
+Stable tag: 2.0.2
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Create a responsive Photo & Video Gallery, stunning Image Gallery, and professional Portfolio in seconds.
+Create a responsive photo gallery and video gallery in seconds. Display images and videos in a clean grid with popup lightbox options. Supports block and Elementor
 
 == Description ==
 
-New Photo & Video Gallery helps you build a beautiful Photo Gallery, responsive Image Gallery, and Video Gallery. It is also perfect for showcasing a professional Portfolio on your WordPress site.
+Photo Gallery is a fast, lightweight WordPress plugin designed to help you create stunning photo galleries and video galleries. Whether you need a simple image grid, a portfolio showcase, or a mixed-media video gallery, this plugin provides a clean layout that fits any screen size.
 
-= Check Live Demos =
+The plugin features a native CSS Grid layout engine to ensure fast loading times and perfect mobile responsiveness. For video galleries, you can embed YouTube and Vimeo links, fetch high-resolution poster images automatically, or revert to uploaded fallback thumbnails. The lightbox popup allows users to watch videos or view high-resolution photos without leaving the page.
 
-**[Photo Gallery Free](https://awplife.com/demo/photo-gallery-free-wordpress-plugin/)** | **[Photo Gallery Premium](https://awplife.com/demo/photo-gallery-premium/)** | **[Where To Buy](https://awplife.com/wordpress-plugins/photo-gallery-wordpress-plugin/)**
+It works seamlessly with standard WordPress Gutenberg blocks, the Elementor page builder, and traditional shortcodes.
 
-https://www.youtube.com/watch?v=nAhzDfCTl6M
+[Premium Live Demo](https://awplife.com/demo/video-gallery-premium/)
+[Get Premium](https://awplife.com/wordpress-plugins/video-gallery-wordpress-plugin/)
 
-The plugin displays your Photo, Image, and Video galleries in a clean, modern grid. When users click an item, it opens in a popup lightbox window. For videos, you can input YouTube or Vimeo links, and the plugin allows you to fetch their poster images dynamically or revert to default uploaded placeholders. The video plays directly within the lightbox.
+=== Key Features ===
+* Native CSS Grid layout for maximum page loading speed and mobile responsiveness.
+* Unified photo gallery and video gallery capabilities to display mixed media.
+* Video Poster Manager to automatically fetch YouTube and Vimeo video thumbnails.
+* Modern lightbox popup with thumbnail navigation strip and loop toggle.
+* Grayscale filter with customizable hover percentage transitions.
+* Custom grid column spacing and padding adjustments.
+* Integrated shortcode generator and Elementor widget support.
+* Gutenberg block integration for live backend preview.
 
-You can easily mix images and videos. This is great for a video gallery, business portfolio, and team pages. You can upload media and get shortcodes in seconds. No complex settings are needed.
-
-= Create a Stunning Photo Gallery =
-
-Display your photography in a beautiful grid. You can organize files in columns from two to six. This is great for event albums, travel blogs, or design archives. Visitors can browse your photos without any distractions. The responsive layout keeps everything perfectly aligned on every single screen size.
-
-= Organize an Advanced Image & Video Gallery =
-
-Create unlimited galleries with zero restrictions. You can add titles, descriptions, and custom hover styles to each thumbnail. A built-in grayscale feature with custom percentage settings allows for a vintage look. With our optimized scripts, your image lists load very quickly. This ensures your visitors stay engaged.
-
-= Showcase a Professional Portfolio =
-
-Highlight your best creative projects cleanly. This layout is perfect for web designers, artists, and architects. You can easily merge images with YouTube and Vimeo video thumbnails. This creates a modern, mixed-media portfolio showcase. Users can copy shortcodes and publish pages in seconds.
-
-= Key Features (Free Version) =
-
-*   Responsive grid system that adapts perfectly to all screen sizes.
-*   Complete Photo and Video Gallery support for mixing images with YouTube and Vimeo videos.
-*   Manual Video Poster Manager: Fetch video thumbnail poster images dynamically from YouTube/Vimeo, or revert to the uploaded media image.
-*   Modern, high-performance CSS Grid frontend layout engine.
-*   Sleek admin settings dashboard with tabbed navigation interface.
-*   Grayscale effect with custom Percentage control (0% to 100%).
-*   Thumbnail spacing and margin controls with dynamic border-radius adaptation.
-*   Show or hide lightbox thumbnail strip with a yes/no toggle.
-*   Optimized lightweight lightbox thumbnails loading for faster performance.
-*   Infinite Lightbox Loop toggle.
-*   Modern Title Overlay designs matching premium grid gallery layouts.
-*   Shortcode system for easy embedding into posts, pages, and widgets.
-*   Translation support for multilingual websites.
-
-= Premium Features =
-
-Upgrade to the premium version for additional capabilities:
-
-*   **Masonry Layout** - Utilize a dynamic Pinterest-style grid for varied image aspect ratios.
-*   **Advanced Hover Effects** - Choose from 30 distinct animation styles for thumbnails.
-*   **Load More Pagination** - Implement a "Load More" button for large collections.
-*   **Map Integration** - Associate images with location data on a map.
-*   **Custom Links** - Attach specific URLs to individual gallery items.
-*   **Fixed Dimension Lightbox** - maintain consistent sizing for the lightbox viewer.
-*   **Transition Effects** - Smooth 2D animations when enhanced gallery navigation.
-*   **Visual Enhancements** - Apply shadow and glow effects to thumbnails.
-*   **Interface Customization** - Adjust colors for the lightbox tool and background.
-*   **Custom CSS** - Apply your own style rules for precise control.
-*   **Priority Support** - Receive direct assistance for technical inquiries.
-
-[Get Photo Gallery Premium](https://awplife.com/wordpress-plugins/photo-gallery-wordpress-plugin/)
-
-= How to Use =
-
-1.  Navigate to **Photo Gallery > Add New** in your WordPress dashboard.
-2.  Provide a title for your new gallery.
-3.  Upload your desired images using the standard media uploader.
-4.  Adjust the gallery settings, such as column count and spacing.
-5.  Copy the shortcode generated by the plugin.
-6.  Paste this shortcode into any page or post editor.
-7.  Publish the page to view your live gallery.
+=== Upgrade to Video Gallery Premium ===
+The official premium counterpart is Video Gallery Premium. Upgrading unlocks features such as:
+* Pinterest-style masonry grid layouts.
+* Native API syncing for YouTube, Vimeo, Twitch Helix, TikTok, Dailymotion, Wistia, and Meta Reels.
+* Server-side AJAX pagination and Load More button for large collections.
+* Duplicate gallery action tool for CPT lists.
+* Custom redirect targets to send visitors to targeted URLs on slide click.
+* Chart.js analytics tracking for video plays and views.
+* Advanced lightbox settings, custom play icons, and priority support.
 
 == Installation ==
 
 = Automatic Installation =
-
-1.  Go to **Plugins > Add New** in your WordPress dashboard.
-2.  Search for "Photo Gallery Starter".
-3.  Click **Install Now** and then **Activate**.
+1. Go to Plugins > Add New in your WordPress dashboard.
+2. Search for "Photo Gallery Starter".
+3. Click Install Now and then Activate.
 
 = Manual Installation =
+1. Download the plugin zip file.
+2. Go to Plugins > Add New > Upload Plugin.
+3. Choose the zip file and click Install Now.
+4. Activate the plugin.
 
-1.  Download the plugin zip file.
-2.  Go to **Plugins > Add New > Upload Plugin**.
-3.  Choose the zip file and click **Install Now**.
-4.  Activate the plugin.
-
-= After Activation =
-
-1.  Navigate to **Photo Gallery** in your admin menu.
-2.  Click **Add New** to create your first gallery.
-3.  Upload images and configure settings.
-4.  Use the shortcode in your pages or posts.
+= Usage =
+1. Navigate to Photo & Video Gallery > Add Gallery.
+2. Enter a title and upload images/videos.
+3. Adjust the grid layout, columns, and lightbox options.
+4. Copy the generated shortcode [NPG id=XX] and paste it into any post, page, or widget.
 
 == Frequently Asked Questions ==
 
-= How do I create a Photo Gallery? =
+= How do I create a photo gallery? =
+Navigate to Photo & Video Gallery > Add Gallery. Enter a title, upload your images using the media manager, adjust your preferences, and copy the shortcode. Paste this shortcode into your page editor.
 
-Go to Photo Gallery > Add New in your dashboard. Enter a title, upload your images, configure the display settings, and copy the shortcode. Paste this shortcode into any page or post to display your gallery.
+= How do I add videos to my video gallery? =
+Under the gallery settings tab, change the slide type to "Video". Paste the YouTube or Vimeo URL in the field, and use the Fetch Poster button to fetch the video's cover thumbnail automatically.
 
-= Can I use this plugin to build an Image Gallery? =
+= Is the gallery responsive? =
+Yes, the layout uses modern CSS Grid with responsive columns (from 1 to 6) configured for desktops, tablets, and mobile devices.
 
-Yes, this plugin is an advanced Image Gallery builder. You can organize your images in grids with beautiful lightbox views.
+= Can I use it in Elementor or Gutenberg? =
+Yes, a custom Elementor widget is provided, along with a native Gutenberg block featuring backend previews.
 
-= How do I showcase a professional Portfolio? =
-
-You can create a custom Portfolio by selecting our responsive grid templates and choosing a multi-column layout.
-
-= Can I add multiple galleries to one page? =
-
-Yes, you can add multiple galleries to a single page. Simply paste the respective shortcodes into your page content where you want them to appear.
-
-= Is the gallery responsive on mobile devices? =
-
-Yes, the galleries are designed to be responsive. The grid layout automatically adjusts to fit the screen size, ensuring compatibility with desktops, tablets, and smartphones.
-
-= How do I add videos to my gallery? =
-
-When editing your gallery, change the item type from "Image" to "Video" and input a YouTube or Vimeo URL. You can use the "Fetch Poster" button to fetch the video's poster thumbnail from the URL, or click "Revert" to restore the uploaded attachment image. The video plays directly within the lightbox.
-
-= Can I customize the lightbox appearance? =
-
-The free version provides a standard lightbox style. The premium version allows for further customization, including color options for tools and background events.
-
-= What image formats are supported? =
-
-The plugin supports standard web image formats such as JPG, JPEG, PNG, GIF, and WebP.
-
-= How do I change the number of columns? =
-
-You can adjust the column layout in the gallery settings. Options range from 2 to 6 columns to suit your layout needs.
-
-= Can I use the gallery in widget areas? =
-
-Yes, the shortcode can be placed in any widget area that accepts shortcodes, allowing you to display galleries in sidebars or footers.
-
-= Does the plugin affect website loading speed? =
-
-The plugin is designed for efficiency, loading scripts only when necessary. For optimal performance with large galleries, we recommend using properly optimized images.
-
-= How do I get support for this plugin? =
-
-For users of the free version, please use the [plugin support forum](https://wordpress.org/support/plugin/new-photo-gallery/). Premium users have access to priority support through our website.
-
-= Can I translate the plugin to my language? =
-
-Yes, the plugin is translation-ready. You can use translation tools or create your own language files to localize the interface.
-
-= How do I display only specific images? =
-
-The shortcode currently displays all images contained within that specific gallery. To show different sets of images, you should create separate galleries for each set.
+= What is the premium version? =
+The premium version is Video Gallery Premium. It supports Masonry layout, automatic channel API syncing, AJAX pagination, and slide redirections.
 
 == Screenshots ==
 
-1. Photo Gallery With Spacing
-2. Photo Gallery Without Spacing
-3. Photo Gallery With Thumbnail
-4. Photo Gallery Without Thumbnail
-5. Photo Gallery Tool Settings Option
-6. Video Gallery With Spacing
-7. Video Gallery Without Spacing
-8. YouTube Thumbnail Video gallery
-9. Vimeo Thumbnail Video gallery
-10. Column Layout Settings
-11. Full Width Photo Gallery
-12. Photo Gallery Settings
-13. Photo Gallery And Video Gallery Settings Page
+1. Upload image and video poster.
+2. Layout tab options.
+3. Lightbox tab options. 
+4. Gallery frontend.
 
 == Changelog ==
+
+= 2.0.2 =
+* Date: 17 July 2026
+* Updated the "Upgrade to Pro" dashboard settings tab to officially showcase Video Gallery Premium features.
+* Added a detailed side-by-side Free vs. Premium layout and sources comparison table.
+* Corrected invalid dashicon identifier on the API features grid card to restore correct icon visibility.
 
 = 2.0.1 =
 * Date: 29 June 2026
@@ -188,23 +102,22 @@ The shortcode currently displays all images contained within that specific galle
 
 = 2.0.0 =
 * Date 29 June 2026
-* Modernization: Replaced legacy Bootstrap styling with a high-performance, native CSS Grid layout engine (`npg-frontend.css`).
+* Modernization: Replaced legacy Bootstrap styling with a high-performance, native CSS Grid layout engine.
 * UI/UX Upgrade: Redesigned the entire admin dashboard using a premium Indigo & Violet tabbed user interface.
 * Feature: Added manual "Fetch Poster" and "Revert" action buttons for video slide thumbnails (YouTube and Vimeo).
 * Feature: Added a Grayscale Amount (%) range control setting to customize the Black & White hover filter strength.
 * Feature: Added a "Show Lightbox Thumbnails" toggle switch to enable/disable the lightbox thumbnail strip.
 * Optimization: Enforced lightweight (medium resolution) image loading for lightbox thumbnails to resolve performance lag.
 * Housekeeping: Permanently removed duplicate CSS/JS code, obsolete bootstrap dependencies, and unused icon libraries.
-* Housekeeping: Refactored plugin architecture by organizing core files into dedicated `assets/` and `include/` directories.
+* Housekeeping: Refactored plugin architecture by organizing core files into dedicated assets/ and include/ directories.
 
 = 1.5.5 =
-* 2026-05-6
 * Security: Implemented secure Vimeo thumbnail API parsing and meta caching.
 * Compliance: Updated Custom Post Type slug to 'npg_gallery' with seamless auto-migration.
 * Compliance: Upgraded menu and post save capabilities from 'administrator' to 'manage_options'/'edit_post'.
 * Modernization: Replaced deprecated copy commands with navigator.clipboard API.
-* Housekeeping: Purged dead/unused assets (go-to-top, toggle-button, duplicate bootstrap, fontawesome fonts, old promotional assets).
-* Housekeeping: Excised TGMPA (TGM Plugin Activation) library to eliminate intrusive admin nags and reduce plugin weight by 126KB.
+* Housekeeping: Purged dead/unused assets.
+* Housekeeping: Excised TGMPA library to eliminate intrusive admin nags and reduce plugin weight.
 * Feature: Added fully dynamic, cached, and translation-ready "Our Plugins" and "Our Themes" submenus matching WP.org standards.
 
 = 1.5.4 =
@@ -213,7 +126,7 @@ The shortcode currently displays all images contained within that specific galle
 * Fixed: Typos in function names and shortcode logic.
 * Fixed: Deprecated jQuery load event.
 * Improvement: Removed unused code and variables.
-* Improvement: Standardized code structure (removed closing PHP tag).
+* Improvement: Standardized code structure.
 
 = 1.5.3 =
 * Fixed translation loading warning for WordPress 6.7+
@@ -271,6 +184,9 @@ The shortcode currently displays all images contained within that specific galle
 * Bug fixes
 
 == Upgrade Notice ==
+
+= 2.0.2 =
+Updated the settings panels to display correct comparison metrics and links to the premium counterpart (Video Gallery Premium). Recommended for all users.
 
 = 2.0.1 =
 Fixed Elementor widget asset dependencies, Gutenberg block selection/deletion, and resolved inline template script errors inside the editor. Recommended for all users.
