@@ -20,10 +20,10 @@ if (!defined('ABSPATH')) {
         </div>
 
         <div class="npg-sidebar-actions">
-            <a href="https://awplife.com/wordpress-plugins/photo-gallery-wordpress-plugin/" target="_blank" class="npg-action-btn npg-btn-premium">
+            <a href="https://awplife.com/wordpress-plugins/video-gallery-wordpress-plugin/" target="_blank" class="npg-action-btn npg-btn-premium">
                 <span class="dashicons dashicons-cart"></span> <?php esc_html_e('Buy Pro Version', 'new-photo-gallery'); ?>
             </a>
-            <a href="https://awplife.com/demo/photo-gallery-premium/" target="_blank" class="npg-action-btn npg-btn-demo">
+            <a href="https://awplife.com/demo/video-gallery-premium/" target="_blank" class="npg-action-btn npg-btn-demo">
                 <span class="dashicons dashicons-welcome-view-site"></span> <?php esc_html_e('Live Demo', 'new-photo-gallery'); ?>
             </a>
             <a href="https://wordpress.org/support/plugin/new-photo-gallery/reviews/" target="_blank" class="npg-action-btn npg-btn-rating">

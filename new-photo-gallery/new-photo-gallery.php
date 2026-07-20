@@ -2,9 +2,9 @@
 /**
 @package New Photo Gallery
  * Plugin Name: Photo & Video Gallery
- * Plugin URI: https://awplife.com/wordpress-plugins/photo-gallery-premium/
+ * Plugin URI: https://awplife.com/wordpress-plugins/video-gallery-wordpress-plugin/
  * Description: new photo gallery plugin with lightbox preview for WordPress
- * Version: 2.0.2
+ * Version: 2.0.3
  * Author: A WP Life
  * Author URI: https://awplife.com/
  * License: GPLv2 or later
@@ -53,7 +53,7 @@ if (!class_exists('New_Photo_Gallery')) {
 		protected function _constants()
 		{
 			// Plugin Version
-			define('NPG_VER', '2.0.2');
+			define('NPG_VER', '2.0.3');
 
 			// Plugin Text Domain
 			define('NPG_TXTDM', 'new-photo-gallery');
@@ -140,9 +140,9 @@ if (!class_exists('New_Photo_Gallery')) {
 		{
 			switch ($column) {
 				case 'npg_gallery_shortcode':
-					echo "<input type='text' class='button button-primary' id='light-image-gallery-shortcode-" . esc_attr($post_id) . "' value='[NPG id=" . esc_attr($post_id) . "]' style='font-weight:bold; background-color:#32373C; color:#FFFFFF; text-align:center;' />";
-					echo "<input type='button' class='button button-primary' onclick='return PHOTOCopyShortcode" . esc_attr($post_id) . "();' readonly value='Copy' style='margin-left:4px;' />";
-					echo "<span id='copy-msg-" . esc_attr($post_id) . "' class='button button-primary' style='display:none; background-color:#32CD32; color:#FFFFFF; margin-left:4px; border-radius: 4px;'>copied</span>";
+					echo "<input type='text' id='light-image-gallery-shortcode-" . esc_attr($post_id) . "' value='[NPG id=" . esc_attr($post_id) . "]' readonly style='font-weight: 500; font-family: monospace; background-color: #f8fafc; color: #334155; border: 1px solid #cbd5e1; border-radius: 6px; text-align: center; padding: 6px 12px; height: 32px; line-height: 18px; box-shadow: none; outline: none; min-width: 140px;' />";
+					echo "<input type='button' onclick='return PHOTOCopyShortcode" . esc_attr($post_id) . "();' readonly value='Copy' style='font-weight: 600; background-color: #4f46e5; color: #ffffff; border: none; border-radius: 6px; padding: 0 16px; height: 32px; line-height: 32px; cursor: pointer; transition: background 0.15s ease; box-shadow: 0 1px 2px rgba(79, 70, 229, 0.1); margin-left: 6px; display: inline-block; vertical-align: middle;' onmouseover='this.style.background=\"#4338ca\"' onmouseout='this.style.background=\"#4f46e5\"' />";
+					echo "<span id='copy-msg-" . esc_attr($post_id) . "' style='display:none; background-color: #10b981; color: #ffffff; font-weight: 600; font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen-Sans, Ubuntu, Cantarell, \"Helvetica Neue\", sans-serif; border-radius: 6px; padding: 0 12px; height: 32px; line-height: 32px; margin-left: 6px; vertical-align: middle; font-size: 13px;'>" . esc_html__('copied', 'new-photo-gallery') . "</span>";
 					echo '<script>
 						function PHOTOCopyShortcode' . esc_attr($post_id) . "() {
 							var copyText = document.getElementById('light-image-gallery-shortcode-" . esc_attr($post_id) . "');
@@ -150,12 +150,12 @@ if (!class_exists('New_Photo_Gallery')) {
 							if (navigator.clipboard && navigator.clipboard.writeText) {
 								navigator.clipboard.writeText(value).then(function() {
 									copyText.select();
-									jQuery('#copy-msg-" . esc_attr($post_id) . "').fadeIn('1000', 'linear').fadeOut(2500, 'swing');
+									jQuery('#copy-msg-" . esc_attr($post_id) . "').css('display', 'inline-block').hide().fadeIn('500', 'linear').fadeOut(2000, 'swing');
 								});
 							} else {
 								copyText.select();
 								document.execCommand('copy');
-								jQuery('#copy-msg-" . esc_attr($post_id) . "').fadeIn('1000', 'linear').fadeOut(2500, 'swing');
+								jQuery('#copy-msg-" . esc_attr($post_id) . "').css('display', 'inline-block').hide().fadeIn('500', 'linear').fadeOut(2000, 'swing');
 							}
 						}
 						</script>
@@ -501,15 +501,21 @@ if (!class_exists('New_Photo_Gallery')) {
 		// Admin scripts
 		public function npg_admin_scripts($hook)
 		{
-			global $post;
+			global $post, $typenow;
+			$current_post_type = !empty($typenow) ? $typenow : ($post ? $post->post_type : '');
+			if (empty($current_post_type) && isset($_GET['post_type'])) {
+				$current_post_type = sanitize_key($_GET['post_type']);
+			}
 
-			if ($hook == 'post-new.php' || $hook == 'post.php') {
-				if ($post && NPG_PLUGIN_SLUG === $post->post_type) {
-					wp_enqueue_script('media-upload');
-					wp_enqueue_script('awplife-npg-uploader-js', NPG_PLUGIN_URL . 'assets/js/awplife-npg-uploader.js', array('jquery'), NPG_VER, true);
-					wp_enqueue_media();
+			if ($current_post_type === NPG_PLUGIN_SLUG || $hook == 'post-new.php' || $hook == 'post.php' || $hook == 'edit.php') {
+				if ($current_post_type === NPG_PLUGIN_SLUG) {
+					if ($hook == 'post-new.php' || $hook == 'post.php') {
+						wp_enqueue_script('media-upload');
+						wp_enqueue_script('awplife-npg-uploader-js', NPG_PLUGIN_URL . 'assets/js/awplife-npg-uploader.js', array('jquery'), NPG_VER, true);
+						wp_enqueue_media();
+					}
 
-					// Admin Layout CSS
+					// Admin Layout CSS & Fonts for post edit and post list pages
 					wp_enqueue_style('npg-admin-css', NPG_PLUGIN_URL . 'assets/css/npg-admin.css', array(), NPG_VER);
 					wp_enqueue_style('npg-google-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap', array(), null);
 				}

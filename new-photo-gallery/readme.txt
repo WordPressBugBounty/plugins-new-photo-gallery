@@ -1,26 +1,26 @@
 === Photo Gallery - Image, Video & Portfolio ===
 Contributors: awordpresslife, razipathhan, hanif0991, muhammadshahid, fkfaisalkhan007, sharikkhan007, zishlife, FARAZFRANK
 Donate link: https://paypal.me/awplife
-Tags: photo gallery, video gallery, image gallery, lightbox gallery, portfolio gallery
+Tags: photo gallery, video gallery, youtube gallery, image gallery, portfolio gallery
 Requires at least: 4.0
 Tested up to: 7.0
-Stable tag: 2.0.2
+Stable tag: 2.0.3
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Create a responsive photo gallery and video gallery in seconds. Display images and videos in a clean grid with popup lightbox options. Supports block and Elementor
+Create photo gallery and video gallery in seconds. Display images and videos in a clean grid with lightbox options. Supports block and Elementor
 
 == Description ==
 
-Photo Gallery is a fast, lightweight WordPress plugin designed to help you create stunning photo galleries and video galleries. Whether you need a simple image grid, a portfolio showcase, or a mixed-media video gallery, this plugin provides a clean layout that fits any screen size.
+Photo Gallery is a fast, lightweight WordPress plugin designed to help you create stunning photo galleries and video galleries in minutes. Built with a native CSS Grid engine, it delivers high performance and mobile responsiveness across all devices and theme layouts.
 
-The plugin features a native CSS Grid layout engine to ensure fast loading times and perfect mobile responsiveness. For video galleries, you can embed YouTube and Vimeo links, fetch high-resolution poster images automatically, or revert to uploaded fallback thumbnails. The lightbox popup allows users to watch videos or view high-resolution photos without leaving the page.
+Easily add YouTube videos simply by pasting their video links—the plugin automatically fetches high-resolution cover posters for seamless video display. Include photos and videos in the same gallery, customize grid columns, adjust hover effects, and enable interactive lightbox popups. Works effortlessly with WordPress Gutenberg blocks, Elementor page builder, and traditional shortcodes.
 
-It works seamlessly with standard WordPress Gutenberg blocks, the Elementor page builder, and traditional shortcodes.
+*Its Premium Version Name is Video Gallery Premium.*
 
 [Premium Live Demo](https://awplife.com/demo/video-gallery-premium/)
-[Get Premium](https://awplife.com/wordpress-plugins/video-gallery-wordpress-plugin/)
+[Get Video Gallery Premium](https://awplife.com/wordpress-plugins/video-gallery-wordpress-plugin/)
 
 === Key Features ===
 * Native CSS Grid layout for maximum page loading speed and mobile responsiveness.
@@ -86,6 +86,12 @@ The premium version is Video Gallery Premium. It supports Masonry layout, automa
 4. Gallery frontend.
 
 == Changelog ==
+
+= 2.0.3 =
+* Date: 20 July 2026
+* Modernized the All Gallery CPT admin page (edit.php) list table styling and shortcode column layout to match Video Gallery.
+* Enqueued plugin admin CSS and Inter fonts on the All Gallery admin page.
+* Updated Live Demo and Buy Pro Version button links in the Docs page.
 
 = 2.0.2 =
 * Date: 17 July 2026
@@ -185,6 +191,9 @@ The premium version is Video Gallery Premium. It supports Masonry layout, automa
 
 == Upgrade Notice ==
 
+= 2.0.3 =
+Redesigned All Gallery page styling, improved shortcode copy UI, and updated Pro links. Recommended for all users.
+
 = 2.0.2 =
 Updated the settings panels to display correct comparison metrics and links to the premium counterpart (Video Gallery Premium). Recommended for all users.
 
@@ -193,3 +202,4 @@ Fixed Elementor widget asset dependencies, Gutenberg block selection/deletion, a
 
 = 1.5.2 =
 Tested with WordPress 6.8.3. Update recommended for compatibility.
+

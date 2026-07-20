@@ -1453,3 +1453,124 @@
     font-weight: 500;
 }
 
+/* ========================================
+   All Gallery Page (WP CPT List Table) Styles
+   ======================================== */
+.post-type-npg_gallery #wpbody-content {
+    padding-right: 20px;
+}
+
+.post-type-npg_gallery .wrap h1.wp-heading-inline {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--npg-text, #1e293b);
+    margin-right: 15px;
+}
+
+.post-type-npg_gallery .page-title-action {
+    background: var(--npg-primary, #4f46e5) !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: var(--npg-radius-sm, 8px) !important;
+    font-weight: 600 !important;
+    padding: 6px 16px !important;
+    font-size: 13px !important;
+    transition: var(--npg-transition, all 0.2s ease) !important;
+    box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2) !important;
+    line-height: 1.5 !important;
+}
+
+.post-type-npg_gallery .page-title-action:hover {
+    background: var(--npg-primary-hover, #4338ca) !important;
+    color: #ffffff !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 8px rgba(79, 70, 229, 0.3) !important;
+}
+
+.post-type-npg_gallery .wp-list-table {
+    border-radius: var(--npg-radius, 12px) !important;
+    overflow: hidden !important;
+    border: 1px solid var(--npg-border, #e2e8f0) !important;
+    box-shadow: var(--npg-shadow-sm, 0 1px 3px rgba(0,0,0,0.05)) !important;
+    background: #ffffff !important;
+    margin-top: 15px !important;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+}
+
+.post-type-npg_gallery .wp-list-table thead th,
+.post-type-npg_gallery .wp-list-table tfoot th {
+    background: #f8fafc !important;
+    color: #475569 !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    font-size: 11px !important;
+    letter-spacing: 0.5px !important;
+    border-bottom: 1px solid var(--npg-border, #e2e8f0) !important;
+    padding: 14px 16px !important;
+}
+
+.post-type-npg_gallery .wp-list-table tbody tr {
+    transition: background-color 0.15s ease !important;
+}
+
+.post-type-npg_gallery .wp-list-table tbody tr:nth-child(odd) {
+    background-color: #ffffff !important;
+}
+
+.post-type-npg_gallery .wp-list-table tbody tr:nth-child(even) {
+    background-color: #fcfdfe !important;
+}
+
+.post-type-npg_gallery .wp-list-table tbody tr:hover {
+    background-color: #f1f5f9 !important;
+}
+
+.post-type-npg_gallery .wp-list-table tbody td {
+    padding: 14px 16px !important;
+    vertical-align: middle !important;
+    color: #1e293b !important;
+    font-size: 13px !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+}
+
+.post-type-npg_gallery .wp-list-table tbody tr:last-child td {
+    border-bottom: none !important;
+}
+
+.post-type-npg_gallery .wp-list-table .row-title {
+    font-weight: 600 !important;
+    color: var(--npg-primary, #4f46e5) !important;
+    font-size: 14px !important;
+    text-decoration: none !important;
+    transition: color 0.15s ease !important;
+}
+
+.post-type-npg_gallery .wp-list-table .row-title:hover {
+    color: var(--npg-primary-hover, #4338ca) !important;
+}
+
+.post-type-npg_gallery .wp-list-table .column-npg_gallery_shortcode {
+    width: 270px;
+}
+
+.post-type-npg_gallery .tablenav .button,
+.post-type-npg_gallery .search-box input[type="submit"] {
+    border-radius: var(--npg-radius-sm, 6px) !important;
+    border: 1px solid var(--npg-border, #cbd5e1) !important;
+    background: #ffffff !important;
+    color: #475569 !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    transition: all 0.15s ease !important;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
+}
+
+.post-type-npg_gallery .tablenav .button:hover,
+.post-type-npg_gallery .search-box input[type="submit"]:hover {
+    background: #f8fafc !important;
+    border-color: #94a3b8 !important;
+    color: #1e293b !important;
+}
+
+
