@@ -3,7 +3,7 @@ Contributors: awordpresslife, razipathhan, hanif0991, muhammadshahid, fkfaisalkh
 Donate link: https://paypal.me/awplife
 Tags: photo gallery, video gallery, youtube gallery, image gallery, portfolio gallery
 Requires at least: 4.0
-Tested up to: 7.0
+Tested up to: 7.1
 Stable tag: 2.0.3
 Requires PHP: 7.0
 License: GPLv2 or later
